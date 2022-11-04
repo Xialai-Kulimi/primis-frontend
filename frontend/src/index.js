@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import NavBar from './components/NavBar';
+
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import Button from '@mui/material/Button';
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <NavBar/>
+
     <App />
       <Button>Primary</Button>
       <Button color="secondary">Secondary</Button>
