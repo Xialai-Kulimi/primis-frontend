@@ -7,15 +7,20 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Container>
 
     <App />
       <Button>Primary</Button>
       <Button color="secondary">Secondary</Button>
+    </Container>
     </ThemeProvider>
 
   </React.StrictMode>
