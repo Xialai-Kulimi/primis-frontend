@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import AppBar from './components/AppBar';
-import Caption from './components/Caption';
+import AppBar from './view/AppBar';
+import Caption from './view/Caption';
 
 import reportWebVitals from './reportWebVitals';
 
