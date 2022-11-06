@@ -2,6 +2,9 @@ import { createTheme } from '@mui/material/styles';
 
 
 const theme = createTheme({
+  typography: {
+    "fontFamily": `"微軟正黑體", "Roboto", "Helvetica", "Arial", sans-serif`
+  },
   palette: {
     mode: 'dark',
     primary: {
