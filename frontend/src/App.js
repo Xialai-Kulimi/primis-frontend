@@ -7,6 +7,18 @@ import Surrounding from './view/Surrounding';
 import Entities from './view/Entities';
 import Status from './view/Status';
 
+// let connect_url = 'ws://'+window.location.host+'/api/ws'
+let connect_url = "ws://localhost:8000/api/ws"
+console.log(connect_url)
+
+var connection = new WebSocket(connect_url);
+connection.onopen = (event) => {
+	// do something here
+  console.log(event)
+  connection.send(87)
+} 
+
+
 function App() {
   return (
     <Container>
