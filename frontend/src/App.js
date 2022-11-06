@@ -1,9 +1,17 @@
-import Container from '@mui/material/Container';
+import {Container} from '@mui/material';
+import AppBar from './view/AppBar';
+import Caption from './view/Caption';
+
+
 
 
 function App() {
   return (
-    <Container></Container >
+    <Container>
+      <AppBar username="asdf"></AppBar>
+      <Caption />
+
+    </Container >
   );
 }
 
