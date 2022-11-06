@@ -1,8 +1,38 @@
 import {Card} from '@mui/material'
+import '../css/card.css';
+
 
 function Caption(){
     return (
-        <Card>Text</Card>
+        <Card variant='outlined' className="view-card" style={{height: "100%"}}>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            Textasdfasdfasdfasdfasdf <br/>
+            
+        </Card>
     )
 }
 
