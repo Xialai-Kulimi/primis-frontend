@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import AppBar from './components/AppBar';
+import Caption from './components/Caption';
+
 import reportWebVitals from './reportWebVitals';
 
 import { ThemeProvider } from '@mui/material/styles';
@@ -18,8 +20,9 @@ root.render(
     <CssBaseline />
     <Container>
       <AppBar username="asdf"></AppBar>
+      <Caption />
       <Typography>
-        
+
       </Typography>
       <Button>Primary</Button>
       <Button color="secondary">Secondary</Button>
