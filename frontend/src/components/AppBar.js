@@ -1,7 +1,8 @@
 import {Card, Stack, Button, Typography} from '@mui/material'
 
 
-function AppBar(username){
+function AppBar(prop){
+    var username = prop.username
     var btn_text = ''
     var disable = null
     if (username !== "") {
