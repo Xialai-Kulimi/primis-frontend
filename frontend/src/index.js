@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import AppBar from './view/AppBar';
-import Caption from './view/Caption';
+
 
 import reportWebVitals from './reportWebVitals';
-
+import App from './App';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
-import {Typography} from '@mui/material';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
+
 import CssBaseline from '@mui/material/CssBaseline';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,15 +15,7 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
     <CssBaseline />
-    <Container>
-      <AppBar username="asdf"></AppBar>
-      <Caption />
-      <Typography>
-
-      </Typography>
-      <Button>Primary</Button>
-      <Button color="secondary">Secondary</Button>
-    </Container>
+    <App/>
     </ThemeProvider>
 
   </React.StrictMode>
