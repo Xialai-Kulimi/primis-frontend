@@ -1,9 +1,21 @@
 <template>
   <v-container>
-    <Caption></Caption>
-    <Surrounding></Surrounding>
-    <Entity></Entity>
-    <Status></Status>
+    <v-row>
+      <v-col cols="12" sm="6">
+        <Caption></Caption>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <Surrounding></Surrounding>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <Entity></Entity>
+      </v-col>
+      <v-col>
+        <Status></Status>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
