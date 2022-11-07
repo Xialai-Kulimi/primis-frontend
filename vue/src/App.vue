@@ -29,11 +29,11 @@ export default {
     }
   },
   mounted: async function () {
-    let res = (await api.get_data('auth/me')).data
-    if (!res.data) {
+    let res = (await api.get_data('auth/me'))
+    if (!res.username) {
       await this.$router.push('login')
     }
-    this.set_user(res.data)
+    this.set_user(res)
   },
   components: {AppBar}
 };
