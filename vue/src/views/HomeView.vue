@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row dense>
       <v-col cols="12" sm="6">
         <Caption></Caption>
       </v-col>
@@ -8,11 +8,11 @@
         <Surrounding></Surrounding>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
+    <v-row dense>
+      <v-col cols="12" sm="8">
         <Entity></Entity>
       </v-col>
-      <v-col>
+      <v-col cols="12" sm="4">
         <Status></Status>
       </v-col>
     </v-row>
