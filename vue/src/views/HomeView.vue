@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-alert type="error" outlined>{{user.id}}</v-alert>
     <v-row dense>
       <v-col cols="12" sm="6">
         <Caption></Caption>
@@ -27,7 +28,23 @@ import Status from '@/components/Status';
 
 export default {
   name: 'Home',
+  data: ()=>{
+    local_operation: {
 
+    }
+  },
+  computed: {
+    operation() {
+      return this.$store.state.operation;
+    }
+  },
+  watch: {
+    operation: {
+      handler: function () {
+        
+      },
+    },
+  },
   components: {
     Caption,
     Surrounding,
