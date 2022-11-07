@@ -1,6 +1,8 @@
 import { Card, Stack, Button, Typography } from '@mui/material'
 import React from 'react';
 
+import API from '../api';
+
 
 
 class AppBar extends React.Component {
@@ -20,16 +22,25 @@ class AppBar extends React.Component {
     // }
   }
   componentDidMount() {
-    let x = 0
-    setInterval(
-      function () {
-        x += 1
-        this.setState({
-          username: x
-        });
-      }.bind(this)
-      ,1000
-    );
+    let res_username = ''
+    const res = API.get_data('auth/me')
+    console.log(res)
+    res_username = res.username
+
+
+    this.setState({
+      username: res_username
+    });
+    // let x = 0
+    // setInterval(
+    //   function () {
+    //     x += 1
+    //     this.setState({
+    //       username: x
+    //     });
+    //   }.bind(this)
+    //   ,1000
+    // );
   };
   render() {
     return (
