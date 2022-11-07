@@ -1,5 +1,5 @@
 <template>
-    <v-card>surrounding</v-card>
+    <v-card outlined>surrounding</v-card>
 </template>
 <script>
 export default {

@@ -1,5 +1,5 @@
 <template>
-    <v-card>caption</v-card>
+    <v-card outlined>caption</v-card>
 </template>
 <script>
 export default {

@@ -1,5 +1,5 @@
 <template>
-    <v-card>Status</v-card>
+    <v-card outlined>status</v-card>
 </template>
 <script>
 export default {
