@@ -8,13 +8,24 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 
 import CssBaseline from '@mui/material/CssBaseline';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+
+} from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-        <App />
+      <BrowserRouter>
+      <Routes>
+        <Route element={<App />} path={'/primis'}></Route>
+      </Routes>
+      </BrowserRouter>
+        
     </ThemeProvider>
 
   </React.StrictMode>
