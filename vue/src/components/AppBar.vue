@@ -4,7 +4,7 @@
       <v-layout row align-center>
         <v-card-title class="primary--text">PRIMIS</v-card-title>
         <v-spacer></v-spacer>
-        <v-card-subtitle></v-card-subtitle>
+        <v-card-subtitle>{{user.username}}</v-card-subtitle>
         <v-btn text color="primary">登出</v-btn>
       </v-layout>
     </v-card>
@@ -15,7 +15,11 @@
 <script>
 export default {
   name: 'AppBar',
-
+  computed: {
+    user() {
+      return this.$store.state.user;
+    }
+  },
   data: () => ({
 
   }),
