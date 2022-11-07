@@ -1,15 +1,26 @@
 <template>
-  <hello-world />
+  <v-container>
+    <Caption></Caption>
+<Surrounding></Surrounding>
+<Entity></Entity>
+<Status></Status>
+</v-container>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+import Caption from '@/components/Caption';
+import Surrounding from '@/components/Surrounding';
+import Entity from '@/components/Entity';
+import Status from '@/components/Status';
 
-  export default {
-    name: 'Home',
+export default {
+  name: 'Home',
 
-    components: {
-      HelloWorld,
-    },
-  }
+  components: {
+    Caption,
+    Surrounding,
+    Entity,
+    Status,
+  },
+}
 </script>
