@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         user: {},
-        snackbars: []
+        snackbars: [],
+        operation: {}
     },
     getters: {},
     mutations: {
@@ -16,16 +17,19 @@ export default new Vuex.Store({
         addMessage(state, message) {
             state.snackbars.push(message)
         },
-        SetDarkmode(state, new_darkmode) {
-            state.user.darkmode = !state.user.darkmode
+        setOperation(state, operation) {
+            state.operation = operation
+        },
+        addCounter(state) {
+            state.user.id += 1
         }
     },
     actions: {
         SendMessage(context, message){
             context.commit('addMessage', message)
         },
-        setDarkmode(context, new_darkmode){
-            context.commit('SetDarkmode', new_darkmode)
+        AddCounter(context){
+            context.commit('addCounter')
         }
     },
     modules: {}
