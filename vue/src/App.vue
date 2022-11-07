@@ -1,42 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
+    <AppBar></AppBar>
     <v-main>
       <router-view/>
     </v-main>
@@ -44,6 +8,9 @@
 </template>
 
 <script>
+import AppBar from '@/components/AppBar';
+import api from '@/plugins/api';
+
 
 export default {
   name: 'App',
@@ -51,5 +18,28 @@ export default {
   data: () => ({
     //
   }),
+  computed: {
+    user() {
+      return this.$store.state.user;
+    }
+  },
+  methods: {
+    set_user(new_user) {
+      this.$store.commit("SetUser", new_user);
+    }
+  },
+  mounted: async function () {
+    let res = (await api.get_data('auth/me')).data
+    if (!res.data) {
+      await this.$router.push('login')
+    }
+    this.set_user(res.data)
+  },
+  components: {AppBar}
 };
 </script>
+<style>
+*{
+  font-family: '微軟正黑體';
+}
+</style>
