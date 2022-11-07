@@ -20,9 +20,9 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
+      <BrowserRouter basename='primis'>
       <Routes>
-        <Route element={<App />} path={'/primis'}></Route>
+        <Route element={<App />} path={'/'}></Route>
       </Routes>
       </BrowserRouter>
         
