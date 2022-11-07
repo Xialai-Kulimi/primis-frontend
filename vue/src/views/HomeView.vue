@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <Caption></Caption>
-<Surrounding></Surrounding>
-<Entity></Entity>
-<Status></Status>
-</v-container>
+    <Surrounding></Surrounding>
+    <Entity></Entity>
+    <Status></Status>
+  </v-container>
 </template>
 
 <script>
