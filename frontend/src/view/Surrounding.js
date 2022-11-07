@@ -3,7 +3,7 @@ import '../css/card.css';
 
 function Surrounding(){
     return (
-        <Card variant='outlined' className="view-card" style={{height: "100%"}}>
+        <Card variant='outlined' className="view-card" style={{height: '40vh'}}>
             Textasdfasdfasdfasdfasdf <br/>
             Textasdfasdfasdfasdfasdf <br/>
             Textasdfasdfasdfasdfasdf <br/>
