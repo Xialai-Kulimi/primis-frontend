@@ -6,8 +6,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         user: {},
-        snackbars: [],
-        operation: {}
+        
+        operation: {},
+        // {message: 'test info message', class: 'info--text'}
+        caption: [],
+        surrounding: [],
+        entity: [],
+        status: [],
+
     },
     getters: {},
     mutations: {
