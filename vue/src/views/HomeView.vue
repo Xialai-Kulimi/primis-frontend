@@ -5,11 +5,10 @@
       :type="local_operation.alert.color" 
       dismissible
       outlined
-      
       >{{local_operation.alert.text}}</v-alert>
     <v-snackbar
-      v-if="toggle.snackbar"
-      v-model="local_operation.snackbar"
+      
+      v-model="toggle.snackbar"
       :color="local_operation.snackbar.color"
     >
       {{ local_operation.snackbar.text }}
@@ -25,8 +24,8 @@
       </template>
     </v-snackbar>
     <v-dialog
-      v-if="toggle.dialog"
-      v-model="local_operation.dialog"
+      
+      v-model="toggle.dialog"
       max-width="500"
     >
       
@@ -37,13 +36,25 @@
 
     </v-dialog>
     <v-dialog
-      v-if="toggle.input"
-      v-model="local_operation.input"
+      
+      v-model="toggle.input"
+      max-width="500"
     >   
-
-      <template v-for="i in local_operation.input" >
-        <v-input :key="i">{{i}}</v-input>
-      </template>
+      <v-card outlined>
+        <v-form>
+          <template v-for="i in local_operation.input">
+            {{i.type}}
+            <v-card-title v-if="i==='title'" :key="i">{{i.label}}</v-card-title>
+            <v-input :key="i">{{i}}</v-input>
+          </template>
+        </v-form>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text color="primary">
+            送出
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-dialog>
     <v-row dense>
       <v-col cols="12" sm="6">
@@ -74,7 +85,7 @@ export default {
   name: 'HomeView',
   data: ()=>{
     return {
-      toggle: {input: false, dialog:true, alert: true},
+      toggle: {input: true},
       local_operation: {
       alert: {
         text: 'asdfas\nfd\ndfasdfasdf',
@@ -88,7 +99,10 @@ export default {
         text: 'asdfsadfasdfasdfsadf',
         color: 'success'
       },
-      input: [
+      input: {
+        title: "asdfasdfasdf",
+        inputs: [
+        
         {type: 'text', label: 'pls input text', id: 'text1'},
         {type: 'textfield', label: 'pls input text', id: 'textfield1'},
         {type: 'select', label: 'pls input text', id: 'select1', config: {options: [{label: 'label1', id: '1'}, {label: 'label2', id: '2'}]}},
@@ -98,6 +112,7 @@ export default {
         {type: 'select', label: 'pls input text', id: 'select2',  config: {min: 1, max: 1, options: [{label: 'label1', id: '1'}, {label: 'label2', id: '2'}]}},
         {type: 'number', label: 'pls input text', id: 'text2', config: {max: 100, min: 20}},
       ]
+      }
 
     }
     }
