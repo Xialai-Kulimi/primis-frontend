@@ -2,7 +2,7 @@
   <v-container>
     <v-alert v-if="toggle.alert" :type="local_operation.alert.color" dismissible outlined>{{ local_operation.alert.text }}
     </v-alert>
-    <v-snackbar v-model="toggle.snackbar" :color="local_operation.snackbar.color">
+    <v-snackbar v-if="toggle.snackbar" v-model="toggle.snackbar" :color="local_operation.snackbar.color">
       {{ local_operation.snackbar.text }}
 
       <template v-slot:action="{ attrs }">
@@ -11,7 +11,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-dialog v-model="toggle.dialog" max-width="500">
+    <v-dialog v-if="toggle.dialog" v-model="toggle.dialog" max-width="500">
 
       <v-card outlined>
         <v-card-title>{{ local_operation.dialog.title }}</v-card-title>
@@ -19,9 +19,10 @@
       </v-card>
 
     </v-dialog>
-    <v-dialog persistent v-model="toggle.input" max-width="500">
+    <v-dialog v-if="toggle.input" persistent v-model="toggle.input" max-width="500">
       <v-card outlined>
         <v-card-title>{{ local_operation.input.title }}</v-card-title>
+        <v-card-subtitle>{{ local_operation.input.subtitle }}</v-card-subtitle>
         <v-form>
           <v-container v-for="i in local_operation.input.inputs" key="i" style="padding-top: 0; padding-bottom: 0">
             <v-text-field outlined v-if="i.type === 'text'" :label="i.label" v-model="form_answer[i.id]"></v-text-field>
@@ -42,10 +43,10 @@
     </v-dialog>
     <v-row dense>
       <v-col cols="12" sm="6">
-        <CaptionView />
+        <SurroundingView />
       </v-col>
       <v-col cols="12" sm="6">
-        <SurroundingView />
+        <CaptionView />
       </v-col>
     </v-row>
     <v-row dense>
@@ -60,8 +61,8 @@
 </template>
 
 <script>
-import CaptionView from '@/components/CaptionView';
 import SurroundingView from '@/components/SurroundingView';
+import CaptionView from '@/components/CaptionView';
 import EntityView from '@/components/EntityView';
 import StatusView from '@/components/StatusView';
 
@@ -88,6 +89,7 @@ export default {
         // },
         // input: {
         //   title: "asdfasdfasdf",
+        //   subtitle: 'asdfasdf',
         //   inputs: [
 
         //     { type: 'text', label: 'pls input text', id: 'text1' },
@@ -125,8 +127,8 @@ export default {
     },
   },
   components: {
-    CaptionView,
     SurroundingView,
+    CaptionView,
     EntityView,
     StatusView,
   },
