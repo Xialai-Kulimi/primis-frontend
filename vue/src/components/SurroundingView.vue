@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'Surrounding',
+  name: 'SurroundingView',
 
 };
 </script>

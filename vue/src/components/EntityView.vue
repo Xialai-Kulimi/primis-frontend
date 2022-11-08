@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'Entity',
+  name: 'EntityView',
 
 };
 </script>
