@@ -1,56 +1,40 @@
 <template>
   <v-container>
-    <v-alert 
-      v-if="toggle.alert"
-      :type="local_operation.alert.color" 
-      dismissible
-      outlined
-      >{{local_operation.alert.text}}</v-alert>
-    <v-snackbar
-      
-      v-model="toggle.snackbar"
-      :color="local_operation.snackbar.color"
-    >
+    <v-alert v-if="toggle.alert" :type="local_operation.alert.color" dismissible outlined>{{ local_operation.alert.text }}
+    </v-alert>
+    <v-snackbar v-model="toggle.snackbar" :color="local_operation.snackbar.color">
       {{ local_operation.snackbar.text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          @click="local_operation.snackbar = false"
-        >
+        <v-btn text v-bind="attrs" @click="local_operation.snackbar = false">
           關閉
         </v-btn>
       </template>
     </v-snackbar>
-    <v-dialog
-      
-      v-model="toggle.dialog"
-      max-width="500"
-    >
-      
+    <v-dialog v-model="toggle.dialog" max-width="500">
+
       <v-card outlined>
-        <v-card-title>{{local_operation.dialog.title}}</v-card-title>
-        <v-card-text>{{local_operation.dialog.text}}</v-card-text>
+        <v-card-title>{{ local_operation.dialog.title }}</v-card-title>
+        <v-card-text>{{ local_operation.dialog.text }}</v-card-text>
       </v-card>
 
     </v-dialog>
-    <v-dialog
-      
-      v-model="toggle.input"
-      max-width="500"
-    >   
+    <v-dialog persistent v-model="toggle.input" max-width="500">
       <v-card outlined>
+        <v-card-title>{{ local_operation.input.title }}</v-card-title>
         <v-form>
-          <template v-for="i in local_operation.input">
-            {{i.type}}
-            <v-card-title v-if="i==='title'" :key="i">{{i.label}}</v-card-title>
-            <v-input :key="i">{{i}}</v-input>
-          </template>
+          <v-container v-for="i in local_operation.input.inputs" key="i" style="padding-top: 0; padding-bottom: 0">
+            <v-text-field outlined v-if="i.type === 'text'" :label="i.label" v-model="form_answer[i.id]"></v-text-field>
+            <v-textarea outlined v-if="i.type === 'textfield'" :label="i.label" v-model="form_answer[i.id]"></v-textarea>
+            <v-select outlined v-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
+              :items="i.config.options"></v-select>
+            <v-slider outlined v-if="i.type === 'slider'" :label="i.label" v-model="form_answer[i.id]" :min="i.config.min"
+              :max="i.config.max" thumb-label></v-slider>
+          </v-container>
         </v-form>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text color="primary">
+          <v-btn text color="primary" @click="formSubmit">
             送出
           </v-btn>
         </v-card-actions>
@@ -58,18 +42,18 @@
     </v-dialog>
     <v-row dense>
       <v-col cols="12" sm="6">
-        <CaptionView/>
+        <CaptionView />
       </v-col>
       <v-col cols="12" sm="6">
-        <SurroundingView/>
+        <SurroundingView />
       </v-col>
     </v-row>
     <v-row dense>
       <v-col cols="12" sm="8">
-        <EntityView/>
+        <EntityView />
       </v-col>
       <v-col cols="12" sm="4">
-        <StatusView/>
+        <StatusView />
       </v-col>
     </v-row>
   </v-container>
@@ -83,38 +67,43 @@ import StatusView from '@/components/StatusView';
 
 export default {
   name: 'HomeView',
-  data: ()=>{
+  data: () => {
     return {
-      toggle: {input: true},
+      form_answer: {},
+      toggle: {
+        //  input: true 
+        },
       local_operation: {
-      alert: {
-        text: 'asdfas\nfd\ndfasdfasdf',
-        color: 'error'
-      },
-      dialog: {
-        title: 'asdfas',
-        text: 'asdfaasl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndfasdf'
-      },
-      snackbar: {
-        text: 'asdfsadfasdfasdfsadf',
-        color: 'success'
-      },
-      input: {
-        title: "asdfasdfasdf",
-        inputs: [
-        
-        {type: 'text', label: 'pls input text', id: 'text1'},
-        {type: 'textfield', label: 'pls input text', id: 'textfield1'},
-        {type: 'select', label: 'pls input text', id: 'select1', config: {options: [{label: 'label1', id: '1'}, {label: 'label2', id: '2'}]}},
-        {type: 'number', label: 'pls input text', id: 'text1'},
-        {type: 'text', label: 'pls input text', id: 'text2', config: {max: 100, min: 20}},
-        {type: 'textfield', label: 'pls input text', id: 'textfield2', config: {max: 100, min: 20}},
-        {type: 'select', label: 'pls input text', id: 'select2',  config: {min: 1, max: 1, options: [{label: 'label1', id: '1'}, {label: 'label2', id: '2'}]}},
-        {type: 'number', label: 'pls input text', id: 'text2', config: {max: 100, min: 20}},
-      ]
-      }
+        // alert: {
+        //   text: 'asdfas\nfd\ndfasdfasdf',
+        //   color: 'error'
+        // },
+        // dialog: {
+        //   title: 'asdfas',
+        //   text: 'asdfaasl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndfasdf'
+        // },
+        // snackbar: {
+        //   text: 'asdfsadfasdfasdfsadf',
+        //   color: 'success'
+        // },
+        // input: {
+        //   title: "asdfasdfasdf",
+        //   inputs: [
 
+        //     { type: 'text', label: 'pls input text', id: 'text1' },
+        //     { type: 'textfield', label: 'pls input text', id: 'textfield1' },
+        //     { type: 'select', label: 'pls input text', id: 'select1', config: { options: [{ text: 'label1', value: '1' }, { text: 'label2', value: '2' }] } },
+        //     { type: 'slider', label: 'pls input text', id: 'slider1', config: { min: 0, max: 10 } },
+        //   ]
+        // }
+
+      }
     }
+  },
+  methods: {
+    formSubmit() {
+      console.log(JSON.stringify(this.form_answer))
+      this.toggle.input = false
     }
   },
   computed: {
@@ -125,8 +114,11 @@ export default {
   watch: {
     operation: {
       handler: function () {
-        for (let key in this.operation){
+        for (let key in this.operation) {
           this.toggle[key] = true
+          if (key === 'input') {
+            this.form_answer = {}
+          }
           this.local_operation[key] = this.operation[key]
         }
       },
