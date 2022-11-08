@@ -1,9 +1,14 @@
 <template>
   <v-container>
     <v-alert 
+      v-if="toggle.alert"
       :type="local_operation.alert.color" 
-      dismissible outlined>{{local_operation.alert.text}}</v-alert>
+      dismissible
+      outlined
+      
+      >{{local_operation.alert.text}}</v-alert>
     <v-snackbar
+      v-if="toggle.snackbar"
       v-model="local_operation.snackbar"
       :color="local_operation.snackbar.color"
     >
@@ -11,7 +16,6 @@
 
       <template v-slot:action="{ attrs }">
         <v-btn
-          color="primary"
           text
           v-bind="attrs"
           @click="local_operation.snackbar = false"
@@ -21,14 +25,19 @@
       </template>
     </v-snackbar>
     <v-dialog
+      v-if="toggle.dialog"
       v-model="local_operation.dialog"
+      max-width="500"
     >
+      
       <v-card outlined>
         <v-card-title>{{local_operation.dialog.title}}</v-card-title>
         <v-card-text>{{local_operation.dialog.text}}</v-card-text>
       </v-card>
+
     </v-dialog>
     <v-dialog
+      v-if="toggle.input"
       v-model="local_operation.input"
     >   
 
@@ -38,47 +47,57 @@
     </v-dialog>
     <v-row dense>
       <v-col cols="12" sm="6">
-        <Caption></Caption>
+        <CaptionView/>
       </v-col>
       <v-col cols="12" sm="6">
-        <Surrounding></Surrounding>
+        <SurroundingView/>
       </v-col>
     </v-row>
     <v-row dense>
       <v-col cols="12" sm="8">
-        <Entity></Entity>
+        <EntityView/>
       </v-col>
       <v-col cols="12" sm="4">
-        <Status></Status>
+        <StatusView/>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import Caption from '@/components/Caption';
-import Surrounding from '@/components/Surrounding';
-import Entity from '@/components/Entity';
-import Status from '@/components/Status';
+import CaptionView from '@/components/CaptionView';
+import SurroundingView from '@/components/SurroundingView';
+import EntityView from '@/components/EntityView';
+import StatusView from '@/components/StatusView';
 
 export default {
-  name: 'Home',
+  name: 'HomeView',
   data: ()=>{
     return {
+      toggle: {input: false, dialog:true, alert: true},
       local_operation: {
       alert: {
-        text: '',
-        color: ''
+        text: 'asdfas\nfd\ndfasdfasdf',
+        color: 'error'
       },
       dialog: {
-        title: '',
-        text: ''
+        title: 'asdfas',
+        text: 'asdfaasl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndfasdf'
       },
       snackbar: {
-        text: '',
-        color: ''
+        text: 'asdfsadfasdfasdfsadf',
+        color: 'success'
       },
-      input: []
+      input: [
+        {type: 'text', label: 'pls input text', id: 'text1'},
+        {type: 'textfield', label: 'pls input text', id: 'textfield1'},
+        {type: 'select', label: 'pls input text', id: 'select1', config: {options: [{label: 'label1', id: '1'}, {label: 'label2', id: '2'}]}},
+        {type: 'number', label: 'pls input text', id: 'text1'},
+        {type: 'text', label: 'pls input text', id: 'text2', config: {max: 100, min: 20}},
+        {type: 'textfield', label: 'pls input text', id: 'textfield2', config: {max: 100, min: 20}},
+        {type: 'select', label: 'pls input text', id: 'select2',  config: {min: 1, max: 1, options: [{label: 'label1', id: '1'}, {label: 'label2', id: '2'}]}},
+        {type: 'number', label: 'pls input text', id: 'text2', config: {max: 100, min: 20}},
+      ]
 
     }
     }
@@ -92,16 +111,17 @@ export default {
     operation: {
       handler: function () {
         for (let key in this.operation){
+          this.toggle[key] = true
           this.local_operation[key] = this.operation[key]
         }
       },
     },
   },
   components: {
-    Caption,
-    Surrounding,
-    Entity,
-    Status,
+    CaptionView,
+    SurroundingView,
+    EntityView,
+    StatusView,
   },
 }
 </script>
