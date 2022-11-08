@@ -8,7 +8,7 @@ export default new Vuex.Store({
         user: {},
         
         operation: {},
-        // {message: 'test info message', class: 'info--text'}
+        // {message: 'test info message', class: 'info--text'},
         caption: [],
         surrounding: [],
         entity: [],
