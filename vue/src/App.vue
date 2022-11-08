@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="display: fixed">
     <AppBar></AppBar>
     <v-main>
       <router-view/>
@@ -31,7 +31,7 @@ export default {
   mounted: async function () {
     let res = (await api.get_data('auth/me'))
     if (!res.username) {
-      await this.$router.push('/api/auth/login')
+      window.location.replace('/api/auth/login')
     }
     this.set_user(res)
   },
@@ -41,5 +41,9 @@ export default {
 <style>
 *{
   font-family: '微軟正黑體';
+}
+html {
+  height: 2vh;
+  background-color: #121212;
 }
 </style>
