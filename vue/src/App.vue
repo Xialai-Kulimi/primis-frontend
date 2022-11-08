@@ -41,9 +41,17 @@ export default {
 <style>
 *{
   font-family: '微軟正黑體';
+  white-space: pre-line;
 }
 html {
   height: 2vh;
   background-color: #121212;
+}
+.CloisterBlack{
+  font-family: 'CloisterBlack';
+}
+@font-face {
+  font-family: 'CloisterBlack';
+  src: url('./assets/CloisterBlack.ttf');
 }
 </style>
