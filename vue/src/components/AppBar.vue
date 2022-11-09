@@ -5,7 +5,7 @@
         <v-card-title class="primary--text"><pre>PRIMIS</pre></v-card-title>
         <v-spacer></v-spacer>
         <v-card-subtitle>{{user.username}}</v-card-subtitle>
-        <v-btn text color="primary">登出</v-btn>
+        <v-btn text color="primary" href="/api/auth/login">{{(user.username) ? '登出' : '登入' }}</v-btn>
       </v-layout>
     </v-card>
 
