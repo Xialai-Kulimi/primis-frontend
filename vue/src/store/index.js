@@ -18,21 +18,29 @@ export default new Vuex.Store({
             reachable: [],
             target: [],
         },
-
+        config: {
+            max_line: 130,
+            shift_number: 10,
+        },
     },
     getters: {},
     mutations: {
         SetUser(state, user) {
             state.user = user
         },
-        addMessage(state, message) {
-            state.snackbars.push(message)
-        },
         setOperation(state, operation) {
             state.operation = operation
         },
-        addCounter(state) {
-            state.user.id += 1
+        pushTexts(state, type, message) {
+            state.texts[type].push(message)
+            if (state.texts[type].length > state.config.max_line) {
+                for (let i = 0; i < state.config.max_line; i++) {
+                    state.texts[type].shift()
+                }
+            }
+        },
+        setButtons(state, type, buttons) {
+            state.buttons[type] = buttons
         }
     },
     actions: {
