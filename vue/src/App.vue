@@ -2,7 +2,7 @@
   <v-app style="display: fixed">
     <AppBar></AppBar>
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
@@ -36,21 +36,24 @@ export default {
     }
     this.set_user(res.data)
   },
-  components: {AppBar}
+  components: { AppBar }
 };
 </script>
 <style>
-*{
+* {
   font-family: '微軟正黑體';
   white-space: pre-line;
 }
+
 html {
   height: 2vh;
   background-color: #121212;
 }
-.CloisterBlack{
+
+.CloisterBlack {
   font-family: 'CloisterBlack';
 }
+
 @font-face {
   font-family: 'CloisterBlack';
   src: url('./assets/CloisterBlack.ttf');
