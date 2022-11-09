@@ -32,15 +32,21 @@ export default new Vuex.Store({
         setOperation(state, operation) {
             state.operation = operation
         },
-        pushTexts(state, type, message) {
-            state.texts[type].push(message)
+        pushTexts(state, payload) {
+            let type = payload.type
+            let message = payload.message
+            message.forEach(element => {
+                state.texts[type].push(element)
+            });
             if (state.texts[type].length > state.config.max_line) {
-                for (let i = 0; i < state.config.max_line; i++) {
+                for (let i = 0; i < state.config.shift_number; i++) {
                     state.texts[type].shift()
                 }
             }
         },
-        setButtons(state, type, buttons) {
+        setButtons(state, payload) {
+            let type = payload.type
+            let buttons = payload.buttons
             state.buttons[type] = buttons
         },
         pushMessage(state, message) {
