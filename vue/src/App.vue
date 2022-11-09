@@ -30,10 +30,11 @@ export default {
   },
   mounted: async function () {
     let res = (await api.get_data('auth/me'))
-    if (!res.username) {
+    // console.log(res.status)
+    if (!res.data) {
       window.location.replace('/api/auth/login')
     }
-    this.set_user(res)
+    this.set_user(res.data)
   },
   components: {AppBar}
 };
