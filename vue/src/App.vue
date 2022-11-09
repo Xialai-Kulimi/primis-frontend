@@ -61,11 +61,11 @@ export default {
 
   },
   mounted: async function () {
-    let res = (await api.request('auth/me'))
-    console.log(res.status)
-    if (!res.data) {
+    let res = await api.request('auth/me')
+    console.log(res)
+    /*if (!res.data) {
       window.location.replace('/api/auth/login')
-    }
+    }*/
     this.set_user(res.data)
     this.initWebsocket()
   },

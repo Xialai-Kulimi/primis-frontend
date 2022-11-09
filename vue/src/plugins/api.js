@@ -1,6 +1,7 @@
-const jsonify = res => {
+
+const jsonify = async res => {
     try{
-        return {data: res.json(), status: res.status}
+        return {data:await res.json(), status: res.status}
     }
     catch (e) {
         console.log(e)
@@ -13,12 +14,14 @@ export default {
 }
 
 function request(url, data) {
-    return fetch(`/api/${url}`, {
-        method: data?"POST":"GET",
-        credentials: 'include',
-        headers: {
-            'content-type': data?'application/json':undefined,
-        },
-        body: JSON.stringify(data)
-    }).then(jsonify)
+    return new Promise((resolve,reject)=>{
+        fetch(`/api/${url}`, {
+            method: data?"POST":"GET",
+            credentials: 'include',
+            headers: {
+                'content-type': data?'application/json':undefined,
+            },
+            body: JSON.stringify(data)
+        }).then(jsonify).then(resolve).catch(reject)
+    })
 }
