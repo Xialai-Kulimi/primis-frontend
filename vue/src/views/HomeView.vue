@@ -48,14 +48,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-row dense>
-      <v-col cols="12" sm="6">
-        <SurroundingView />
-      </v-col>
-      <v-col cols="12" sm="6">
-        <CaptionView />
-      </v-col>
-    </v-row>
+    
     <v-row dense>
       <v-col cols="12">
         <ReachableView />
@@ -67,6 +60,14 @@
       </v-col>
       <v-col cols="12" sm="4">
         <StatusView />
+      </v-col>
+    </v-row>
+    <v-row dense>
+      <v-col cols="12" sm="6">
+        <SurroundingView />
+      </v-col>
+      <v-col cols="12" sm="6">
+        <CaptionView />
       </v-col>
     </v-row>
   </v-container>
