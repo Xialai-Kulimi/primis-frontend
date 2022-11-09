@@ -32,8 +32,7 @@ export default {
   methods: {
     SubmitMesssage() {
       if (this.input_message != ''){
-
-        console.log(this.input_message)
+        this.$store.commit("pushMessage", JSON.stringify({type: 'chat', content: this.input_message}))
         this.input_message = ''
       }
     }
