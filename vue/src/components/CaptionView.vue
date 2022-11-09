@@ -6,7 +6,10 @@
           dense 
           solo 
           hide-details
-          label="說些什麼吧"></v-text-field>
+          label="說些什麼吧"
+          v-model="input_message"
+          @change="SubmitMesssage"
+        ></v-text-field>
       </v-container>
 
       <v-card-text style="padding-bottom: 0;overflow: auto;">
@@ -26,9 +29,18 @@ export default {
       return this.$store.state.caption;
     }
   },
+  methods: {
+    SubmitMesssage() {
+      if (this.input_message != ''){
+
+        console.log(this.input_message)
+        this.input_message = ''
+      }
+    }
+  },
   data: () => {
     return {
-
+      input_message: ''
     }
   },
   mounted: () => {
