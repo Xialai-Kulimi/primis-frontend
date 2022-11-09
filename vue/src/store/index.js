@@ -11,7 +11,8 @@ export default new Vuex.Store({
         // {message: 'test info message', class: 'info--text'},
         caption: [],
         surrounding: [],
-        entity: [],
+        target: [],
+        reachable: [],
         status: [],
 
     },
