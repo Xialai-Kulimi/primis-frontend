@@ -3,7 +3,7 @@
     <v-card-text>
       <v-layout row>
         <v-form v-for="(button, index) in target" :key="index" style="padding: 2px">
-          <v-btn :color="button.color" @click="SubmitClick(button.id, 'default')">{{ button.text }}</v-btn>
+          <v-btn outlined :color="button.color" @click="SubmitClick(button.id, 'default')">{{ button.text }}</v-btn>
           <v-menu>
             <template v-slot:activator="{ on, attrs }">
               <v-btn :color="button.color" v-bind="attrs" v-on="on" icon>
@@ -31,7 +31,8 @@ export default {
   },
   methods: {
     SubmitClick(id, value) {
-      console.log(id, value)
+      this.$store.commit("pushMessage", JSON.stringify({ type: 'click', payload: {id: id, value: value} }))
+      // console.log(id, value)
     }
   },
   data: () => {
