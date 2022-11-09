@@ -46,7 +46,8 @@ async def websocket_endpoint(websocket: WebSocket):
 
             data = await websocket.receive_json()
             console.log(data)
-            await websocket.send_json({'type': 'caption', 'message': [{'class': '', 'message': f'你說：「{data["content"]}」'}, ]})
+            if data.get('content'):
+                await websocket.send_json({'type': 'caption', 'message': [{'class': '', 'message': f'你說：「{data["content"]}」'}, ]})
             await websocket.send_json({'type': 'caption', 'message': [{'class': 'primary--text', 'message': 'primary color test'}, ]})
             await websocket.send_json({'type': 'surrounding', 'message': [{'class': 'primary--text', 'message': 'primary color test'}, ]})
             await websocket.send_json({'type': 'status', 'message': [{'class': 'primary--text', 'message': 'primary color test'}, ]})
