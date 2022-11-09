@@ -53,5 +53,62 @@
     ]
 }
 ```
+
+reachable
+```js
+{
+    type: 'reachable',
+    buttons: [
+        {
+            text: 'text1',
+            id: 'btn1',
+            list: [
+                {text: 'text', value: 'value'},
+                {text: 'text2', value: 'value2'},
+                {text: 'text3', value: 'value3'},
+            ]
+        },
+        {
+            text: 'text2',
+            id: 'btn2'
+            list: [
+                {text: 'text', value: 'value'},
+                {text: 'text2', value: 'value2'},
+                {text: 'text3', value: 'value3'},
+            ]
+        },
+    ]
+}
+```
+
 ## 發送
-還沒想好
+
+chat
+```js
+{
+    type: 'chat',
+    content: 'text'
+}
+```
+
+click
+```js
+{
+    type: 'click',
+    payload: {
+        id: '',
+        value: ''
+    }
+}
+```
+
+answer (form)
+```js
+{
+    type: 'answer',
+    payload: {
+        // some form answer here
+    }
+}
+```
+
