@@ -26,7 +26,7 @@
         <v-card-title>{{ local_operation.input.title }}</v-card-title>
         <v-card-subtitle>{{ local_operation.input.subtitle }}</v-card-subtitle>
         <v-form>
-          <v-container v-for="i in local_operation.input.inputs" key="i" style="padding-top: 0; padding-bottom: 0">
+          <v-container v-for="i in local_operation.input.inputs" :key="i" style="padding-top: 0; padding-bottom: 0">
             <v-text-field outlined v-if="i.type === 'text'" :label="i.label" v-model="form_answer[i.id]"></v-text-field>
             <v-textarea outlined v-if="i.type === 'textfield'" :label="i.label" v-model="form_answer[i.id]">
             </v-textarea>
@@ -126,7 +126,7 @@ export default {
   },
   computed: {
     operation() {
-      return this.$store.state.operation;
+      return this.$store.state.userStore.operation;
     }
   },
   watch: {

@@ -1,6 +1,6 @@
-var jsonify = async res => {
+const jsonify = res => {
     try{
-        return {data: await res.json(), status: res.status}
+        return {data: res.json(), status: res.status}
     }
     catch (e) {
         console.log(e)
@@ -9,23 +9,16 @@ var jsonify = async res => {
 };
 
 export default {
-    get_data(url) {
-        return new Promise((resolve, reject) => {
-            fetch(`/api/${url}`, {
-                credentials: 'include',
-            }).then(jsonify).then(resolve).catch(reject)
-        })
-    },
-    post_data(url, data) {
-        return new Promise((resolve, reject) => {
-            fetch(`/api/${url}`, {
-                method: "POST",
-                credentials: 'include',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            }).then(jsonify).then(resolve).catch(reject)
-        })
-    },
+    request
+}
+
+function request(url, data) {
+    fetch(`/api/${url}`, {
+        method: data?"POST":"GET",
+        credentials: 'include',
+        headers: {
+            'content-type': data?'application/json':undefined,
+        },
+        body: JSON.stringify(data)
+    }).then(jsonify)
 }
