@@ -61,7 +61,7 @@ export default {
 
   },
   mounted: async function () {
-    let res = (await api.get_data('auth/me'))
+    let res = (await api.request('auth/me'))
     console.log(res.status)
     if (!res.data) {
       window.location.replace('/api/auth/login')

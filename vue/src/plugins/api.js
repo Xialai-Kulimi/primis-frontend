@@ -13,7 +13,7 @@ export default {
 }
 
 function request(url, data) {
-    fetch(`/api/${url}`, {
+    return fetch(`/api/${url}`, {
         method: data?"POST":"GET",
         credentials: 'include',
         headers: {
