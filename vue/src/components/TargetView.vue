@@ -26,7 +26,7 @@ export default {
   name: 'TargetView',
   computed: {
     target() {
-      return this.$store.state.buttons.target;
+      return this.$store.state.userStore.buttons.target;
     }
   },
   methods: {

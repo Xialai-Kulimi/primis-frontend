@@ -17,7 +17,7 @@ export default {
   name: 'AppBar',
   computed: {
     user() {
-      return this.$store.state.user;
+      return this.$store.state.userStore.user;
     }
   },
   data: () => ({

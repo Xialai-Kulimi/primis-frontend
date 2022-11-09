@@ -10,28 +10,29 @@
 <script>
 import AppBar from '@/components/AppBar';
 import api from '@/plugins/api';
+import {WS} from "@/plugins/ws";
 
 
 export default {
   name: 'App',
-
+  mixins:[WS],
   data: () => ({
     ws: null
   }),
   computed: {
     user() {
-      return this.$store.state.user;
+      return this.$store.state.userStore.user;
     },
     messages() {
-      return this.$store.state.messages;
+      return this.$store.state.userStore.messages;
     }
   },
   methods: {
     set_user(new_user) {
       this.$store.commit("setUser", new_user)
     },
-    ws_recv(data) {
-      let recv = JSON.parse(data.data)
+    wsRecv(data) {
+      let recv = JSON.parse(data)
       console.log(recv)
       if (recv.type === 'operation') {
         this.$store.commit("setOperation", recv)
@@ -42,15 +43,6 @@ export default {
       else if (['target', 'reachable'].includes(recv.type)) {
         this.$store.commit("setButtons", recv)
       }
-      else {
-      }
-    },
-    ws_send(data) {
-      // console.log('send: ', data)
-      this.ws.send(data)
-    },
-    ws_connect() {
-      this.ws = new WebSocket('ws://' + window.location.host + '/api/ws')
     }
   },
   watch: {
@@ -59,30 +51,23 @@ export default {
         if (this.messages.length > 0) {
           let message = this.messages.shift()
           this.$store.commit("shiftMessage")
-          this.ws_send(message)
+          this.wsSend(message)
         }
       }
+    },
+    '$store.state.wsStore.wsData':function (newValue){
+      this.wsRecv(newValue)
     }
+
   },
   mounted: async function () {
     let res = (await api.get_data('auth/me'))
-    // console.log(res.status)
+    console.log(res.status)
     if (!res.data) {
       window.location.replace('/api/auth/login')
     }
     this.set_user(res.data)
-
-    this.ws_connect()
-    this.ws.addEventListener('open',
-      (e) => {
-        // console.log('ws open', e)
-        // this.ws_send('tewtset')
-      })
-    this.ws.addEventListener('close', { handleEvent: (e) => { console.log('ws close', e); this.ws_connect() } })
-    // this.ws.addEventListener('message', { handleEvent: (res) => { console.log('recv: ', res) } })
-    this.ws.addEventListener('message', this.ws_recv)
-
-
+    this.initWebsocket()
   },
   components: { AppBar }
 };
