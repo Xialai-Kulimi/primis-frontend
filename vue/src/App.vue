@@ -31,23 +31,27 @@ export default {
       this.$store.commit("setUser", new_user)
     },
     ws_recv(data) {
-      recv = JSON.parse(data.data)
+      let recv = JSON.parse(data.data)
+      console.log(recv)
       if (recv.type === 'operation') {
         this.$store.commit("setOperation", recv)
       }
       else if (['caption', 'surrounding', 'status'].includes(recv.type)) {
-        for (const key in recv.message) {
-          this.$store.commit("pushTexts", recv.type, key)
-        }
+        this.$store.commit("pushTexts", recv)
       }
       else if (['target', 'reachable'].includes(recv.type)) {
-        this.$store.commit("setButtons", recv.type, recv.buttons)
+        this.$store.commit("setButtons", recv)
+      }
+      else {
       }
     },
     ws_send(data) {
       // console.log('send: ', data)
       this.ws.send(data)
     },
+    ws_connect() {
+      this.ws = new WebSocket('ws://' + window.location.host + '/api/ws')
+    }
   },
   watch: {
     messages: {
@@ -68,13 +72,13 @@ export default {
     }
     this.set_user(res.data)
 
-    this.ws = new WebSocket('ws://' + window.location.host + '/api/ws')
+    this.ws_connect()
     this.ws.addEventListener('open',
       (e) => {
         // console.log('ws open', e)
         // this.ws_send('tewtset')
       })
-    this.ws.addEventListener('close', { handleEvent: (e) => { console.log('ws close', e) } })
+    this.ws.addEventListener('close', { handleEvent: (e) => { console.log('ws close', e); this.ws_connect() } })
     // this.ws.addEventListener('message', { handleEvent: (res) => { console.log('recv: ', res) } })
     this.ws.addEventListener('message', this.ws_recv)
 
