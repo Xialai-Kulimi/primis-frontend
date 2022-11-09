@@ -3,7 +3,7 @@
     <v-card-text>
       <v-layout row>
         <v-form v-for="(button, index) in target" :key="index" style="padding: 2px">
-          <v-btn :color="button.color">{{ button.text }}</v-btn>
+          <v-btn :color="button.color" @click="SubmitClick(button.id, 'default')">{{ button.text }}</v-btn>
           <v-menu>
             <template v-slot:activator="{ on, attrs }">
               <v-btn :color="button.color" v-bind="attrs" v-on="on" icon>
@@ -12,7 +12,7 @@
             </template>
             <v-list>
               <v-list-item v-for="(item, index) in button.list" :key="index">
-                <v-list-item-title>{{ item.text }}</v-list-item-title>
+                <v-list-item-title @click="SubmitClick(button.id, item.value)">{{ item.text }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -27,6 +27,11 @@ export default {
   computed: {
     target() {
       return this.$store.state.target;
+    }
+  },
+  methods: {
+    SubmitClick(id, value) {
+      console.log(id, value)
     }
   },
   data: () => {
