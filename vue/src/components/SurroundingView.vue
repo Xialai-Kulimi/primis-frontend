@@ -15,7 +15,7 @@ export default {
   name: 'SurroundingView',
   computed: {
     surrounding() {
-      return this.$store.state.surrounding;
+      return this.$store.state.texts.surrounding;
     }
   },
 

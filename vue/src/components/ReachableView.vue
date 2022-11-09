@@ -49,7 +49,7 @@ export default {
       //   },
 
       // ]
-      return this.$store.state.reachable;
+      return this.$store.state.buttons.reachable;
     }
   },
   methods: {

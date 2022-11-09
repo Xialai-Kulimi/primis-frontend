@@ -26,7 +26,7 @@ export default {
   name: 'CaptionView',
   computed: {
     caption() {
-      return this.$store.state.caption;
+      return this.$store.state.texts.caption;
     }
   },
   methods: {

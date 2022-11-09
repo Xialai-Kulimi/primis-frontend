@@ -1,5 +1,5 @@
 <template>
-  <v-card outlined height="20vh">
+  <v-card outlined height="20vh" style="overflow-x: auto; flex-wrap: wrap;">
     <v-card-text>
       <v-layout row>
         <v-form v-for="(button, index) in target" :key="index" style="padding: 2px">
@@ -26,7 +26,7 @@ export default {
   name: 'TargetView',
   computed: {
     target() {
-      return this.$store.state.target;
+      return this.$store.state.buttons.target;
     }
   },
   methods: {

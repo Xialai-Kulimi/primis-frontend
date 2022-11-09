@@ -16,7 +16,7 @@ export default {
   name: 'StatusView',
   computed: {
     status() {
-      return this.$store.state.status;
+      return this.$store.state.texts.status;
     }
   },
 
