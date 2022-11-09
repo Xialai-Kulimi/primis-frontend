@@ -30,9 +30,31 @@
 }
 ```
 
-接收實體變動
-```
-還沒想好
+接收target變動
+```js
+{
+    type: 'target',
+    buttons: [
+        {
+            text: 'text1',
+            id: 'btn1',
+            list: [
+                {text: 'text', value: 'value'},
+                {text: 'text2', value: 'value2'},
+                {text: 'text3', value: 'value3'},
+            ]
+        },
+        {
+            text: 'text2',
+            id: 'btn2'
+            list: [
+                {text: 'text', value: 'value'},
+                {text: 'text2', value: 'value2'},
+                {text: 'text3', value: 'value3'},
+            ]
+        },
+    ]
+}
 ```
 ## 發送
 還沒想好
