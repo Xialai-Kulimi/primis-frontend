@@ -8,6 +8,8 @@
 * 在某處建立一個WS連線 `/api/ws` 並且更新store
 * 把API接起來
 
+* 增加一個list的operation
+
 # API
 這邊只列出ws內的
 ## 接收
