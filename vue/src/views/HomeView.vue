@@ -1,6 +1,7 @@
 <template>
   <v-container>
-    <v-alert v-if="toggle.alert" :type="local_operation.alert.color" dismissible outlined>{{ local_operation.alert.text }}
+    <v-alert v-if="toggle.alert" :type="local_operation.alert.color" dismissible outlined>
+      {{ local_operation.alert.text }}
     </v-alert>
     <v-snackbar v-if="toggle.snackbar" v-model="toggle.snackbar" :color="local_operation.snackbar.color">
       {{ local_operation.snackbar.text }}
@@ -19,18 +20,24 @@
       </v-card>
 
     </v-dialog>
-    <v-dialog v-if="toggle.input" persistent v-model="toggle.input" max-width="500">
+    <v-dialog v-if="toggle.input" :persistent="local_operation.input.persistent" v-model="toggle.input" max-width="500">
       <v-card outlined>
+        {{ form_answer }}}
         <v-card-title>{{ local_operation.input.title }}</v-card-title>
         <v-card-subtitle>{{ local_operation.input.subtitle }}</v-card-subtitle>
         <v-form>
           <v-container v-for="i in local_operation.input.inputs" key="i" style="padding-top: 0; padding-bottom: 0">
             <v-text-field outlined v-if="i.type === 'text'" :label="i.label" v-model="form_answer[i.id]"></v-text-field>
-            <v-textarea outlined v-if="i.type === 'textfield'" :label="i.label" v-model="form_answer[i.id]"></v-textarea>
+            <v-textarea outlined v-if="i.type === 'textfield'" :label="i.label" v-model="form_answer[i.id]">
+            </v-textarea>
             <v-select outlined v-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
               :items="i.config.options"></v-select>
-            <v-slider outlined v-if="i.type === 'slider'" :label="i.label" v-model="form_answer[i.id]" :min="i.config.min"
-              :max="i.config.max" thumb-label></v-slider>
+            <v-slider outlined v-if="i.type === 'slider'" :label="i.label" v-model="form_answer[i.id]"
+              :min="i.config.min" :max="i.config.max" thumb-label></v-slider>
+            <v-radio-group v-if="i.type === 'radio'" v-model="form_answer[i.id]">
+              <v-radio v-for="radio in i.config.options" :key="radio" :label="radio.text" :value="radio.value">
+              </v-radio>
+            </v-radio-group>
           </v-container>
         </v-form>
         <v-card-actions>
@@ -72,8 +79,8 @@ export default {
     return {
       form_answer: {},
       toggle: {
-        //  input: true 
-        },
+        input: true
+      },
       local_operation: {
         // alert: {
         //   text: 'asdfas\nfd\ndfasdfasdf',
@@ -87,17 +94,19 @@ export default {
         //   text: 'asdfsadfasdfasdfsadf',
         //   color: 'success'
         // },
-        // input: {
-        //   title: "asdfasdfasdf",
-        //   subtitle: 'asdfasdf',
-        //   inputs: [
+        input: {
+          title: "asdfasdfasdf",
+          subtitle: 'asdfasdf',
+          persistent: true,
+          inputs: [
 
-        //     { type: 'text', label: 'pls input text', id: 'text1' },
-        //     { type: 'textfield', label: 'pls input text', id: 'textfield1' },
-        //     { type: 'select', label: 'pls input text', id: 'select1', config: { options: [{ text: 'label1', value: '1' }, { text: 'label2', value: '2' }] } },
-        //     { type: 'slider', label: 'pls input text', id: 'slider1', config: { min: 0, max: 10 } },
-        //   ]
-        // }
+            { type: 'text', label: 'pls input text', id: 'text1' },
+            { type: 'textfield', label: 'pls input text', id: 'textfield1' },
+            { type: 'select', label: 'pls input text', id: 'select1', config: { options: [{ text: 'label1', value: '1' }, { text: 'label2', value: '2' }] } },
+            { type: 'slider', label: 'pls input text', id: 'slider1', config: { min: 0, max: 10 } },
+            { type: "radio", label: "label", id: "radio_id", config: { options: [{ text: 'label1', value: '1' }, { text: 'label2', value: '2' }] } },
+          ]
+        }
 
       }
     }
