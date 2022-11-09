@@ -4,6 +4,18 @@
 <script>
 export default {
   name: 'TargetView',
+  computed: {
+    caption() {
+      return this.$store.state.target;
+    }
+  },
+  data: () => {
+    return {
 
+    }
+  },
+  mounted: () => {
+
+  }
 };
 </script>
