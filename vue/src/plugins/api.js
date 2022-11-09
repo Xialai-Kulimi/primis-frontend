@@ -1,4 +1,12 @@
-var jsonify = async res => (await res.json());
+var jsonify = async res => {
+    try{
+        return {data: await res.json(), status: res.status}
+    }
+    catch (e) {
+        console.log(e)
+        return {data: null, status: res.status}
+    }
+};
 
 export default {
     get_data(url) {
