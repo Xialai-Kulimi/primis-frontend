@@ -9,6 +9,7 @@ export default new Vuex.Store({
 
         operation: {},
         // {message: 'test info message', class: 'info--text'},
+        messages: [],
         texts: {
             caption: [], 
             surrounding: [],
@@ -25,7 +26,7 @@ export default new Vuex.Store({
     },
     getters: {},
     mutations: {
-        SetUser(state, user) {
+        setUser(state, user) {
             state.user = user
         },
         setOperation(state, operation) {
@@ -41,15 +42,21 @@ export default new Vuex.Store({
         },
         setButtons(state, type, buttons) {
             state.buttons[type] = buttons
-        }
-    },
-    actions: {
-        SendMessage(context, message) {
-            context.commit('addMessage', message)
         },
-        AddCounter(context) {
-            context.commit('addCounter')
+        pushMessage(state, message) {
+            state.messages.push(message)
+        },
+        shiftMessage(state) {
+            state.messages.shift()
         }
     },
+    // actions: {
+    //     PushMessage(context, message) {
+    //         context.commit('pushMessage', message)
+    //     },
+    //     ShiftMessage(context) {
+    //         context.commit('shiftMessage')
+    //     }
+    // },
     modules: {}
 })
