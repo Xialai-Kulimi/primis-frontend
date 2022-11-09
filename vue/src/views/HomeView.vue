@@ -57,8 +57,13 @@
       </v-col>
     </v-row>
     <v-row dense>
+      <v-col cols="12">
+        <ReachableView />
+      </v-col>
+    </v-row>
+    <v-row dense>
       <v-col cols="12" sm="8">
-        <EntityView />
+        <TargetView />
       </v-col>
       <v-col cols="12" sm="4">
         <StatusView />
@@ -70,8 +75,9 @@
 <script>
 import SurroundingView from '@/components/SurroundingView';
 import CaptionView from '@/components/CaptionView';
-import EntityView from '@/components/EntityView';
+import TargetView from '@/components/TargetView';
 import StatusView from '@/components/StatusView';
+import ReachableView from '@/components/ReachableView';
 
 export default {
   name: 'HomeView',
@@ -79,7 +85,7 @@ export default {
     return {
       form_answer: {},
       toggle: {
-        input: true
+        // input: true
       },
       local_operation: {
         // alert: {
@@ -94,19 +100,19 @@ export default {
         //   text: 'asdfsadfasdfasdfsadf',
         //   color: 'success'
         // },
-        input: {
-          title: "asdfasdfasdf",
-          subtitle: 'asdfasdf',
-          persistent: true,
-          inputs: [
+        // input: {
+        //   title: "asdfasdfasdf",
+        //   subtitle: 'asdfasdf',
+        //   persistent: true,
+        //   inputs: [
 
-            { type: 'text', label: 'pls input text', id: 'text1' },
-            { type: 'textfield', label: 'pls input text', id: 'textfield1' },
-            { type: 'select', label: 'pls input text', id: 'select1', config: { options: [{ text: 'label1', value: '1' }, { text: 'label2', value: '2' }] } },
-            { type: 'slider', label: 'pls input text', id: 'slider1', config: { min: 0, max: 10 } },
-            { type: "radio", label: "label", id: "radio_id", config: { options: [{ text: 'label1', value: '1' }, { text: 'label2', value: '2' }] } },
-          ]
-        }
+        //     { type: 'text', label: 'pls input text', id: 'text1' },
+        //     { type: 'textfield', label: 'pls input text', id: 'textfield1' },
+        //     { type: 'select', label: 'pls input text', id: 'select1', config: { options: [{ text: 'label1', value: '1' }, { text: 'label2', value: '2' }] } },
+        //     { type: 'slider', label: 'pls input text', id: 'slider1', config: { min: 0, max: 10 } },
+        //     { type: "radio", label: "label", id: "radio_id", config: { options: [{ text: 'label1', value: '1' }, { text: 'label2', value: '2' }] } },
+        //   ]
+        // }
 
       }
     }
@@ -138,8 +144,9 @@ export default {
   components: {
     SurroundingView,
     CaptionView,
-    EntityView,
+    TargetView,
     StatusView,
+    ReachableView
   },
 }
 </script>
