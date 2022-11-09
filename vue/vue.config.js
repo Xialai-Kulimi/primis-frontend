@@ -9,7 +9,10 @@ module.exports = defineConfig({
     proxy: {
       '/api/auth': {
         target: 'http://localhost:9002/'
-      }
+      },
+      '/api': {
+        target: 'http://localhost:8000/'
+      },
     }
   },
 })

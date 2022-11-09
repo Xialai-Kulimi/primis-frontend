@@ -1,9 +1,9 @@
 
 # todo
 
-
-* 在某處建立一個WS連線 `/api/ws` 並且更新store
-* 把API接起來
+* 聊天的訊息如果輸入重複內容有機會卡住
+* 新增的訊息會出現在視線外
+* 更好的重新連接
 
 
 # API
@@ -53,5 +53,62 @@
     ]
 }
 ```
+
+reachable
+```js
+{
+    type: 'reachable',
+    buttons: [
+        {
+            text: 'text1',
+            id: 'btn1',
+            list: [
+                {text: 'text', value: 'value'},
+                {text: 'text2', value: 'value2'},
+                {text: 'text3', value: 'value3'},
+            ]
+        },
+        {
+            text: 'text2',
+            id: 'btn2'
+            list: [
+                {text: 'text', value: 'value'},
+                {text: 'text2', value: 'value2'},
+                {text: 'text3', value: 'value3'},
+            ]
+        },
+    ]
+}
+```
+
 ## 發送
-還沒想好
+
+chat
+```js
+{
+    type: 'chat',
+    content: 'text'
+}
+```
+
+click
+```js
+{
+    type: 'click',
+    payload: {
+        id: '',
+        value: ''
+    }
+}
+```
+
+answer (form)
+```js
+{
+    type: 'answer',
+    payload: {
+        // some form answer here
+    }
+}
+```
+

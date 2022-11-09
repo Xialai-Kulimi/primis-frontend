@@ -6,38 +6,63 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         user: {},
-        
+
         operation: {},
         // {message: 'test info message', class: 'info--text'},
-        caption: [],
-        surrounding: [],
-        target: [],
-        reachable: [],
-        status: [],
-
+        messages: [],
+        texts: {
+            caption: [], 
+            surrounding: [],
+            status: [], 
+        },
+        buttons: {
+            reachable: [],
+            target: [],
+        },
+        config: {
+            max_line: 130,
+            shift_number: 10,
+        },
     },
     getters: {},
     mutations: {
-        SetUser(state, user) {
+        setUser(state, user) {
             state.user = user
-        },
-        addMessage(state, message) {
-            state.snackbars.push(message)
         },
         setOperation(state, operation) {
             state.operation = operation
         },
-        addCounter(state) {
-            state.user.id += 1
-        }
-    },
-    actions: {
-        SendMessage(context, message){
-            context.commit('addMessage', message)
+        pushTexts(state, payload) {
+            let type = payload.type
+            let message = payload.message
+            message.forEach(element => {
+                state.texts[type].push(element)
+            });
+            if (state.texts[type].length > state.config.max_line) {
+                for (let i = 0; i < state.config.shift_number; i++) {
+                    state.texts[type].shift()
+                }
+            }
         },
-        AddCounter(context){
-            context.commit('addCounter')
+        setButtons(state, payload) {
+            let type = payload.type
+            let buttons = payload.buttons
+            state.buttons[type] = buttons
+        },
+        pushMessage(state, message) {
+            state.messages.push(message)
+        },
+        shiftMessage(state) {
+            state.messages.shift()
         }
     },
+    // actions: {
+    //     PushMessage(context, message) {
+    //         context.commit('pushMessage', message)
+    //     },
+    //     ShiftMessage(context) {
+    //         context.commit('shiftMessage')
+    //     }
+    // },
     modules: {}
 })
