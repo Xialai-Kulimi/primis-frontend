@@ -6,14 +6,18 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         user: {},
-        
+
         operation: {},
         // {message: 'test info message', class: 'info--text'},
-        caption: [],
-        surrounding: [],
-        target: [],
-        reachable: [],
-        status: [],
+        texts: {
+            caption: [], 
+            surrounding: [],
+            status: [], 
+        },
+        buttons: {
+            reachable: [],
+            target: [],
+        },
 
     },
     getters: {},
@@ -32,10 +36,10 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        SendMessage(context, message){
+        SendMessage(context, message) {
             context.commit('addMessage', message)
         },
-        AddCounter(context){
+        AddCounter(context) {
             context.commit('addCounter')
         }
     },
