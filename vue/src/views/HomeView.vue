@@ -48,37 +48,41 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    
+
     <v-row dense>
       <v-col cols="12">
-        <ReachableView />
+
+        <BtnsView type="reachable" />
       </v-col>
     </v-row>
     <v-row dense>
       <v-col cols="12" sm="8">
-        <TargetView />
+        <BtnsView type="target" />
       </v-col>
       <v-col cols="12" sm="4">
-        <StatusView />
+        <TextsView height="20vh" type="status" />
       </v-col>
     </v-row>
     <v-row dense>
       <v-col cols="12" sm="6">
-        <SurroundingView />
+        <TextsView height="40vh" type="surrounding" />
       </v-col>
       <v-col cols="12" sm="6">
-        <CaptionView />
+        <TextsView height="40vh" type="caption" :input="true" />
       </v-col>
     </v-row>
+    <!-- <v-row dense>
+      <v-col cols="12">
+        <TextsView height="40vh" type="caption" :input="true" />
+      </v-col>
+    </v-row> -->
   </v-container>
 </template>
 
 <script>
-import SurroundingView from '@/components/SurroundingView';
-import CaptionView from '@/components/CaptionView';
-import TargetView from '@/components/TargetView';
-import StatusView from '@/components/StatusView';
-import ReachableView from '@/components/ReachableView';
+
+import TextsView from '@/components/TextsView';
+import BtnsView from '@/components/BtnsView';
 
 export default {
   name: 'HomeView',
@@ -143,11 +147,8 @@ export default {
     },
   },
   components: {
-    SurroundingView,
-    CaptionView,
-    TargetView,
-    StatusView,
-    ReachableView
+    TextsView,
+    BtnsView
   },
 }
 </script>
