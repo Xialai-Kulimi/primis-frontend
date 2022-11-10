@@ -5,7 +5,7 @@
                 <v-text-field dense solo hide-details label="說些什麼吧" v-model="input_message" @change="SubmitMesssage">
                 </v-text-field>
             </v-container>
-            <v-card-text style="padding-bottom: 0;overflow: auto;">
+            <v-card-text style="padding-bottom: 0;overflow: auto;" ref="view">
                 <div v-for="item in messages" :key="item.class" :class="item.class">{{ item.message }}</div>
             </v-card-text>
 
@@ -20,6 +20,16 @@ export default {
     computed: {
         messages() {
             return this.$store.state.userStore.texts[this.type];
+        }
+    },
+    watch: {
+        messages: {
+            handler: function () {
+                this.$nextTick(function () {
+                    let dom = this.$refs.view
+                    dom.scrollTop = dom.scrollHeight
+                })
+            }
         }
     },
     methods: {
