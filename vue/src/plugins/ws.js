@@ -9,7 +9,7 @@ export const WS = {
     methods:{
         ...mapMutations(['setWsData']),
         initWebsocket(){
-            let url = `ws://${window.location.host}/api/ws`
+            let url = `wss://${window.location.host}/api/ws`
             this.ws = new WebSocket(url)
             this.ws.onopen = ()=>console.log("ws connected")
             this.ws.onerror = (e)=>console.error("ws connection fail",e)
