@@ -2,7 +2,7 @@
     <v-card outlined :height="height">
         <v-layout column reverse fill-height>
             <v-container style="padding: 0" v-if="input">
-                <v-text-field dense solo hide-details label="說些什麼吧" v-model="input_message" @change="SubmitMesssage">
+                <v-text-field dense solo hide-details label="說些什麼吧" v-model="input_message" @keyup.enter="SubmitMesssage">
                 </v-text-field>
             </v-container>
             <v-card-text style="padding-bottom: 0;overflow: auto;" ref="view">
