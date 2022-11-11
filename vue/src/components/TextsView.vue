@@ -6,7 +6,7 @@
                 </v-text-field>
             </v-container>
             <v-card-text style="padding-bottom: 0;overflow: auto;" ref="view">
-                <div v-for="item in messages" :key="item.class" :class="item.class">{{ item.message }}</div>
+                <div v-for="(item,i) in messages" :key="i" :class="item.class">{{ item.message }}</div>
             </v-card-text>
 
         </v-layout>
