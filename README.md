@@ -1,6 +1,37 @@
 
 # todo
 
+# functions
+
+應該要提供的功能：
+
+- 自訂義顏色訊息 
+- 自訂義裝飾訊息
+- snackbar
+- alert
+- switch
+- slider
+- modal
+- button
+- text field
+- number input
+- text
+
+應該呈現的資訊：
+
+- 環境
+    - 區域名稱
+    - 區域描述
+    - 可見目標
+    - 可及目標
+- 玩家
+    - 角色狀態
+    - 可做動作
+    - 包包？
+    - 裝備欄？
+- 實況
+    - 環境實況 (可能之後可以做玩家自定義分類)
+
 # API
 這邊只列出ws內的
 ## 接收
@@ -25,11 +56,13 @@
 接收target變動
 ```js
 {
-    type: 'target',
+    type: 'target', // type in targe, reachable
     buttons: [
         {
             text: 'text1',
+			description: 'description',
             id: 'btn1',
+            color: 'primary',
             list: [
                 {text: 'text', value: 'value'},
                 {text: 'text2', value: 'value2'},
@@ -38,7 +71,8 @@
         },
         {
             text: 'text2',
-            id: 'btn2'
+            id: 'btn2',
+            color: 'error',
             list: [
                 {text: 'text', value: 'value'},
                 {text: 'text2', value: 'value2'},
@@ -52,11 +86,14 @@
 reachable
 ```js
 {
-    type: 'reachable',
+    type: 'reachable', // type in targe, reachable
+    
     buttons: [
         {
             text: 'text1',
+			description: 'description',
             id: 'btn1',
+            color: 'primary',
             list: [
                 {text: 'text', value: 'value'},
                 {text: 'text2', value: 'value2'},
@@ -65,7 +102,8 @@ reachable
         },
         {
             text: 'text2',
-            id: 'btn2'
+            id: 'btn2',
+            color: 'error',
             list: [
                 {text: 'text', value: 'value'},
                 {text: 'text2', value: 'value2'},
