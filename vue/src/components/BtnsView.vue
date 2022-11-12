@@ -1,5 +1,5 @@
 <template>
-    <v-card outlined height="20vh" style="overflow-x: auto; flex-wrap: wrap;">
+    <v-card elevation="0" :height="height" style="overflow-x: auto; flex-wrap: wrap;">
         <v-card-text>
             <v-layout row>
                 <v-form v-for="(button, index) in buttons" :key="index" style="padding: 2px">
@@ -26,7 +26,7 @@
 <script>
 export default {
     name: 'BtnsView',
-    props: ['type'],
+    props: ['type', 'height'],
     computed: {
         buttons() {
             return this.$store.state.userStore.buttons[this.type];
