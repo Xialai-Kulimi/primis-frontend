@@ -34,7 +34,6 @@
       max-width="500"
     >
       <v-card outlined>
-        {{ form_answer }}}
         <v-card-title>{{ local_operation.input.title }}</v-card-title>
         <v-card-subtitle>{{ local_operation.input.subtitle }}</v-card-subtitle>
         <v-form>
@@ -93,22 +92,29 @@
       </v-card>
     </v-dialog>
     <v-card outlined>
-      <v-card-title>廁所</v-card-title>
-      <v-card-subtitle>你感覺有一點頭痛</v-card-subtitle>
+      <v-card-title v-if="local_operation.text">
+        {{ local_operation.text.title }}
+      </v-card-title>
+      <v-card-subtitle v-if="local_operation.text">
+        {{ local_operation.text.subtitle }}
+      </v-card-subtitle>
       <v-card-text>
         <v-row dense>
-          <v-col cols=12>
-            <ListView type="target"/>
+          <v-col cols="12" sm="6">
+            <ListView height="20vh" type="target" />
+          </v-col>
+          <v-col cols="12" sm="6">
+            <ListView height="20vh" type="reachable" />
           </v-col>
         </v-row>
-        <v-row dense>
+        <!-- <v-row dense>
           <v-col cols="12">
             <BtnsView height="20vh" type="reachable" />
           </v-col>
-        </v-row>
+        </v-row> -->
         <v-row dense>
           <v-col cols="12" sm="8">
-            <BtnsView height="20vh" type="target" />
+            <BtnsView height="20vh" type="inventory" />
           </v-col>
           <v-col cols="12" sm="4">
             <TextsView height="20vh" type="status" />
@@ -141,8 +147,6 @@ export default {
   name: "HomeView",
   data: () => {
     return {
-      chunk_name: "",
-      chunk_description: "",
       form_answer: {},
       toggle: {
         // input: true
@@ -172,6 +176,7 @@ export default {
         //     { type: "radio", label: "label", id: "radio_id", config: { options: [{ text: 'label1', value: '1' }, { text: 'label2', value: '2' }] } },
         //   ]
         // }
+        // text: {title: '123123123', subtitle: 'asdfasdf'}
       },
     };
   },
@@ -202,7 +207,7 @@ export default {
   components: {
     TextsView,
     BtnsView,
-    ListView
+    ListView,
   },
 };
 </script>
