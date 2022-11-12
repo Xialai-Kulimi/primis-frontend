@@ -16,6 +16,8 @@
 - text field
 - number input
 - text
+- title
+- subtitle
 
 應該呈現的資訊：
 
@@ -53,41 +55,12 @@
 }
 ```
 
-接收target變動
-```js
-{
-    type: 'target', // type in targe, reachable
-    buttons: [
-        {
-            text: 'text1',
-			description: 'description',
-            id: 'btn1',
-            color: 'primary',
-            list: [
-                {text: 'text', value: 'value'},
-                {text: 'text2', value: 'value2'},
-                {text: 'text3', value: 'value3'},
-            ]
-        },
-        {
-            text: 'text2',
-            id: 'btn2',
-            color: 'error',
-            list: [
-                {text: 'text', value: 'value'},
-                {text: 'text2', value: 'value2'},
-                {text: 'text3', value: 'value3'},
-            ]
-        },
-    ]
-}
-```
+接收按鈕變動
 
-reachable
+可以透過BtnsView或是ListView輸出
 ```js
 {
-    type: 'reachable', // type in targe, reachable
-    
+    type: 'target', // type in targe, reachable, action
     buttons: [
         {
             text: 'text1',
