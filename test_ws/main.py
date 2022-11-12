@@ -105,7 +105,7 @@ async def websocket_endpoint(websocket: WebSocket):
                             {'text': 'text3', 'value': 'value37878'},
                         ]
                     },
-                ]
+                ]*20
             })
             # await manager.send_personal_message(f"You wrote: {data}", websocket)
             # await manager.broadcast(f"Client #{client_id} says: {data}")
