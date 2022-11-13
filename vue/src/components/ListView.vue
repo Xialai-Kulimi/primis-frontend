@@ -31,7 +31,7 @@
 
               <v-list-item-action>
                 <v-btn icon @click.stop.prevent="SubmitClick(button.id, 'default')">
-                  <v-icon color="grey lighten-1">mdi-walk</v-icon>
+                  <v-icon color="grey lighten-1">{{icon}}</v-icon>
                 </v-btn>
               </v-list-item-action>
             </v-list-item>
@@ -62,7 +62,7 @@
 <script>
 export default {
   name: "ListView",
-  props: ["type", "height"],
+  props: ["type", "height", "icon"],
   computed: {
     buttons() {
       return this.$store.state.userStore.buttons[this.type];
