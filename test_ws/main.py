@@ -25,9 +25,11 @@ manager = ConnectionManager()
 
 
 async def main():
+    status = console.status("starting")
+    status.start()
     while True:
         await asyncio.sleep(1)
-        console.log(manager.active_connections)
+        status.update(f'connect: {len(manager.active_connections)}')
         for i in manager.active_connections:
             await i.send_json({'type': 'surrounding', 'message': [{'class': 'info--text', 'message': '又一秒過去了'}, ]})
             await i.send_json({'type': 'status', 'message': [{'class': 'info--text', 'message': str(datetime.now())}, ]})
@@ -58,6 +60,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         'text': 'text1',
                         'id': 'btn1',
                         'color': 'primary',
+                        'description': '這個東西，大概是拿來測試用的',
                         'list': [
                             {'text': 'text', 'value': 'value'},
                             {'text': 'text2', 'value': 'value2'},
@@ -68,11 +71,12 @@ async def websocket_endpoint(websocket: WebSocket):
                         'text': 'text2',
                         'id': 'btn2',
                         'color': 'error',
-                        'list': [
-                            {'text': 'text', 'value': 'value'},
-                            {'text': 'text2', 'value': 'value2'},
-                            {'text': 'text3', 'value': 'value3'},
-                        ]
+                        'description': '這個東西，可能只是拿來測試不同的顏色用的',
+                        # 'list': [
+                        #     {'text': 'text', 'value': 'value'},
+                        #     {'text': 'text2', 'value': 'value2'},
+                        #     {'text': 'text3', 'value': 'value3'},
+                        # ]
                     },
                 ]
             })
@@ -83,6 +87,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         'text': 'text1',
                         'id': 'btn3231',
                         'color': 'primary',
+                        'description': '這是測試敘述',
                         'list': [
                             {'text': 'text', 'value': 'value'},
                             {'text': 'text2', 'value': 'value2'},
@@ -93,13 +98,41 @@ async def websocket_endpoint(websocket: WebSocket):
                         'text': 'text2',
                         'id': 'btn22323',
                         'color': 'info',
+                        'description': '對，應該是測試敘述',
                         'list': [
                             {'text': 'text', 'value': 'value78'},
                             {'text': 'text2', 'value': 'value27878'},
                             {'text': 'text3', 'value': 'value37878'},
                         ]
                     },
-                ]
+                ]*20
+            })
+            await websocket.send_json({
+                'type': 'inventory',
+                'buttons': [
+                    {
+                        'text': 'text1',
+                        'id': 'btn3231',
+                        'color': 'primary',
+                        'description': '這是測試敘述',
+                        'list': [
+                            {'text': 'text', 'value': 'value'},
+                            {'text': 'text2', 'value': 'value2'},
+                            {'text': 'text3', 'value': 'value3'},
+                        ]
+                    },
+                    {
+                        'text': 'text2',
+                        'id': 'btn22323',
+                        'color': 'info',
+                        'description': '對，應該是測試敘述',
+                        'list': [
+                            {'text': 'text', 'value': 'value78'},
+                            {'text': 'text2', 'value': 'value27878'},
+                            {'text': 'text3', 'value': 'value37878'},
+                        ]
+                    },
+                ]*20
             })
             # await manager.send_personal_message(f"You wrote: {data}", websocket)
             # await manager.broadcast(f"Client #{client_id} says: {data}")
