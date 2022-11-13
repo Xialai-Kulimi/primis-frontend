@@ -2,7 +2,7 @@
   <v-container>
     <v-alert
       v-if="toggle.alert"
-      :type="local_operation.alert.color"
+      :type="local_operation.alert.style"
       dismissible
       outlined
     >
@@ -11,7 +11,7 @@
     <v-snackbar
       v-if="toggle.snackbar"
       v-model="toggle.snackbar"
-      :color="local_operation.snackbar.color"
+      :color="local_operation.snackbar.style"
     >
       {{ local_operation.snackbar.text }}
 
@@ -111,7 +111,7 @@
               :key="index"
               @click="SubmitClick(local_operation.list.id, item.id)"
             >
-              <v-list-item-title :class="item.class"
+              <v-list-item-title :class="item.style"
                 >{{ item.text }}
               </v-list-item-title>
             </v-list-item>
@@ -177,21 +177,23 @@ export default {
     return {
       form_answer: {},
       toggle: {
-        // input: true
-        // list: true
+        // alert: true,
+        // snackbar: true,
+        // input: true,
+        // list: true,
       },
       local_operation: {
-        // alert: {
-        //   text: 'asdfas\nfd\ndfasdfasdf',
-        //   color: 'error'
-        // },
+        alert: {
+          text: 'asdfas\nfd\ndfasdfasdf',
+          style: 'error'
+        },
         // dialog: {
         //   title: 'asdfas',
         //   text: 'asdfaasl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndfasdf'
         // },
         // snackbar: {
         //   text: 'asdfsadfasdfasdfsadf',
-        //   color: 'success'
+        //   style: 'success'
         // },
         // input: {
         //   title: "asdfasdfasdf",
@@ -210,7 +212,7 @@ export default {
         //   title: "asdfasdf",
         //   subtitle: "asdfasdf",
         //   id: "asdfasdfasdfasdfasd f",
-        //   list: [{ text: "123123123", class: "primary--text", id: "123123123" },{ text: "123123123", class: "primary--text", id: "123123123" },{ text: "關閉", class: "error--text", id: "123123123" }],
+        //   list: [{ text: "123123123", style: "primary--text", id: "123123123" },{ text: "123123123", style: "primary--text", id: "123123123" },{ text: "關閉", style: "error--text", id: "123123123" }],
         // },
       },
     };

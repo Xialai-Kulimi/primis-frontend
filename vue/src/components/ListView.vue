@@ -20,7 +20,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-list-item v-bind="attrs" v-on="on">
               <v-list-item-content>
-                <v-list-item-title :class="button.color + '--text'">{{
+                <v-list-item-title :class="button.style">{{
                   button.text
                 }}</v-list-item-title>
                 <v-list-item-subtitle>
@@ -38,7 +38,7 @@
           </template>
 
           <v-card outlined>
-            <v-card-title :class="button.color + '--text'">
+            <v-card-title :class="button.style">
               {{ button.text }}
             </v-card-title>
             <v-card-subtitle>{{ button.description }}</v-card-subtitle>

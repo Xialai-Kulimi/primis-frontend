@@ -3,11 +3,11 @@
         <v-card-text>
             <v-layout row>
                 <v-form v-for="(button, index) in buttons" :key="index" style="padding: 2px">
-                    <v-btn outlined :color="button.color" @click="SubmitClick(button.id, 'default')">{{ button.text }}
+                    <v-btn outlined :color="button.style" @click="SubmitClick(button.id, 'default')">{{ button.text }}
                     </v-btn>
                     <v-menu>
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn :color="button.color" v-bind="attrs" v-on="on" icon>
+                            <v-btn :color="button.style" v-bind="attrs" v-on="on" icon>
                                 <v-icon>mdi-dots-vertical</v-icon>
                             </v-btn>
                         </template>
