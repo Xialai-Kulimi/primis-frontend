@@ -91,6 +91,34 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog
+      v-if="toggle.list"
+      :persistent="local_operation.list.persistent"
+      v-model="toggle.list"
+      max-width="500"
+    >
+      <v-card outlined>
+        <v-card-title>
+          {{ local_operation.list.title }}
+        </v-card-title>
+        <v-card-subtitle>
+          {{ local_operation.list.subtitle }}
+        </v-card-subtitle>
+        <v-card-text>
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in local_operation.list.list"
+              :key="index"
+              @click="SubmitClick(local_operation.list.id, item.id)"
+            >
+              <v-list-item-title :class="item.class"
+                >{{ item.text }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <v-card outlined>
       <v-card-title v-if="local_operation.text">
         {{ local_operation.text.title }}
@@ -101,7 +129,7 @@
       <v-card-text>
         <v-row dense>
           <v-col cols="12" sm="6">
-            <ListView height="20vh" type="target" />
+            <ListView height="20vh" type="target" icon="mdi-walk" />
           </v-col>
           <v-col cols="12" sm="6">
             <ListView height="20vh" type="reachable" />
@@ -150,6 +178,7 @@ export default {
       form_answer: {},
       toggle: {
         // input: true
+        // list: true
       },
       local_operation: {
         // alert: {
@@ -177,6 +206,12 @@ export default {
         //   ]
         // }
         // text: {title: '123123123', subtitle: 'asdfasdf'}
+        // list: {
+        //   title: "asdfasdf",
+        //   subtitle: "asdfasdf",
+        //   id: "asdfasdfasdfasdfasd f",
+        //   list: [{ text: "123123123", class: "primary--text", id: "123123123" },{ text: "123123123", class: "primary--text", id: "123123123" },{ text: "關閉", class: "error--text", id: "123123123" }],
+        // },
       },
     };
   },
@@ -184,6 +219,13 @@ export default {
     formSubmit() {
       console.log(JSON.stringify(this.form_answer));
       this.toggle.input = false;
+    },
+    SubmitClick(id, value) {
+      this.$store.commit(
+        "pushMessage",
+        JSON.stringify({ type: "click", payload: { id: id, value: value } })
+      );
+      this.toggle.list = false;
     },
   },
   computed: {
