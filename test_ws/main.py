@@ -72,11 +72,11 @@ async def websocket_endpoint(websocket: WebSocket):
                         'id': 'btn2',
                         'color': 'error',
                         'description': '這個東西，可能只是拿來測試不同的顏色用的',
-                        'list': [
-                            {'text': 'text', 'value': 'value'},
-                            {'text': 'text2', 'value': 'value2'},
-                            {'text': 'text3', 'value': 'value3'},
-                        ]
+                        # 'list': [
+                        #     {'text': 'text', 'value': 'value'},
+                        #     {'text': 'text2', 'value': 'value2'},
+                        #     {'text': 'text3', 'value': 'value3'},
+                        # ]
                     },
                 ]
             })
