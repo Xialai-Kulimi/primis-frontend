@@ -183,10 +183,10 @@ export default {
         // list: true,
       },
       local_operation: {
-        alert: {
-          text: 'asdfas\nfd\ndfasdfasdf',
-          style: 'error'
-        },
+        // alert: {
+        //   text: 'asdfas\nfd\ndfasdfasdf',
+        //   style: 'error'
+        // },
         // dialog: {
         //   title: 'asdfas',
         //   text: 'asdfaasl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndfasdf'
