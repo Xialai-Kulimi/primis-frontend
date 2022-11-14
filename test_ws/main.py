@@ -162,7 +162,8 @@ async def websocket_endpoint(websocket: WebSocket):
                 ]*20
             })
             if data.get('content') == 'operation':
-                await websocket.send_json({ 
+                await websocket.send_json({
+                    'type': 'operation',
                     'alert': {
                         'text': 'asdfas\nfd\ndfasdfasdf',
                         'style': 'error'
