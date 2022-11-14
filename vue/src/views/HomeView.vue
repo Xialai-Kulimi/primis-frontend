@@ -9,7 +9,6 @@
       {{ local_operation.alert.text }}
     </v-alert>
     <v-snackbar
-      v-if="toggle.snackbar"
       v-model="toggle.snackbar"
       :color="local_operation.snackbar.style"
     >
@@ -21,14 +20,14 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-dialog v-if="toggle.dialog" v-model="toggle.dialog" max-width="500">
+    <v-dialog v-model="toggle.dialog" max-width="500">
       <v-card outlined>
         <v-card-title>{{ local_operation.dialog.title }}</v-card-title>
         <v-card-text>{{ local_operation.dialog.text }}</v-card-text>
       </v-card>
     </v-dialog>
     <v-dialog
-      v-if="toggle.input"
+      :retain-focus="false"
       :persistent="local_operation.input.persistent"
       v-model="toggle.input"
       max-width="500"
@@ -38,8 +37,8 @@
         <v-card-subtitle>{{ local_operation.input.subtitle }}</v-card-subtitle>
         <v-form>
           <v-container
-            v-for="i in local_operation.input.inputs"
-            :key="i"
+            v-for="(i, index) in local_operation.input.inputs"
+            :key="index"
             style="padding-top: 0; padding-bottom: 0"
           >
             <v-text-field
@@ -76,8 +75,8 @@
               v-model="form_answer[i.id]"
             >
               <v-radio
-                v-for="radio in i.config.options"
-                :key="radio"
+                v-for="(radio, index2) in i.config.options"
+                :key="index2"
                 :label="radio.text"
                 :value="radio.value"
               >
@@ -92,7 +91,7 @@
       </v-card>
     </v-dialog>
     <v-dialog
-      v-if="toggle.list"
+      :retain-focus="false"
       :persistent="local_operation.list.persistent"
       v-model="toggle.list"
       max-width="500"
@@ -177,12 +176,40 @@ export default {
     return {
       form_answer: {},
       toggle: {
-        // alert: true,
-        // snackbar: true,
-        // input: true,
-        // list: true,
+        dialog: false,
+        alert: false,
+        snackbar: false,
+        input: false,
+        list: false,
       },
       local_operation: {
+        alert: {
+          text: '',
+          style: ''
+        },
+        dialog: {
+          title: '',
+          text: ''
+        },
+        snackbar: {
+          text: '',
+          style: ''
+        },
+        input: {
+          title: "",
+          subtitle: '',
+          persistent: false,
+          inputs: [
+            
+          ]
+        },
+        text: false,
+        list: {
+          title: "",
+          subtitle: "",
+          id: "",
+          list: [],
+        },
         // alert: {
         //   text: 'asdfas\nfd\ndfasdfasdf',
         //   style: 'error'
@@ -219,15 +246,18 @@ export default {
   },
   methods: {
     formSubmit() {
-      console.log(JSON.stringify(this.form_answer));
-      this.toggle.input = false;
+      this.toggle.input = false
+      this.$store.commit(
+        "pushMessage",
+        JSON.stringify({ type: "form", payload: this.form_answer })
+      );
     },
     SubmitClick(id, value) {
+      this.toggle.list = false
       this.$store.commit(
         "pushMessage",
         JSON.stringify({ type: "click", payload: { id: id, value: value } })
       );
-      this.toggle.list = false;
     },
   },
   computed: {
@@ -239,9 +269,9 @@ export default {
     operation: {
       handler: function () {
         for (let key in this.operation) {
-          this.toggle[key] = true;
+          this.toggle[key] = true
           if (key === "input") {
-            this.form_answer = {};
+            this.form_answer = {}
           }
           this.local_operation[key] = this.operation[key];
         }
