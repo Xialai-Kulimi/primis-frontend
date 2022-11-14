@@ -95,6 +95,7 @@ async def websocket_endpoint(websocket: WebSocket):
             await websocket.send_json({
                 'type': 'reachable',
                 'buttons': [
+                    
                     {
                         'text': 'text1',
                         'id': 'btn3231',
@@ -122,6 +123,18 @@ async def websocket_endpoint(websocket: WebSocket):
             await websocket.send_json({
                 'type': 'inventory',
                 'buttons': [
+                    {
+                        'text': '上鎖的箱子',
+                        'id': 'btn2',
+                        'style': 'info--text',
+                        'disabled': True,
+                        'description': '順便測試個disabled',
+                        'list': [
+                            {'text': '開啟', 'value': 'value', 'disabled': True},
+                            {'text': 'text2', 'value': 'value2'},
+                            {'text': 'text3', 'value': 'value3'},
+                        ]
+                    },
                     {
                         'text': 'text1',
                         'id': 'btn3231',
