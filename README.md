@@ -66,6 +66,8 @@
             text: 'text1',
 			description: 'description',
             disabled: false, //optional
+            action: '', //optional
+            icon: '', //optional
             id: 'btn1',
             color: 'primary',
             list: [
