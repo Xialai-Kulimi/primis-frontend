@@ -18,9 +18,9 @@
           width="500"
         >
           <template v-slot:activator="{ on, attrs }">
-            <v-list-item v-bind="attrs" v-on="on">
+            <v-list-item v-bind="attrs" v-on="on" :disabled="buttons.disabled">
               <v-list-item-content>
-                <v-list-item-title :class="button.color + '--text'">{{
+                <v-list-item-title :class="button.style">{{
                   button.text
                 }}</v-list-item-title>
                 <v-list-item-subtitle>
@@ -28,17 +28,18 @@
                 </v-list-item-subtitle>
               </v-list-item-content>
               <v-spacer></v-spacer>
-
+              <v-list-item-action-text v-text="button.action"></v-list-item-action-text>
               <v-list-item-action>
                 <v-btn icon @click.stop.prevent="SubmitClick(button.id, 'default')">
-                  <v-icon color="grey lighten-1">{{icon}}</v-icon>
+                  <v-icon color="grey lighten-1">{{button.icon}}</v-icon>
                 </v-btn>
+                
               </v-list-item-action>
             </v-list-item>
           </template>
 
           <v-card outlined>
-            <v-card-title :class="button.color + '--text'">
+            <v-card-title :class="button.style">
               {{ button.text }}
             </v-card-title>
             <v-card-subtitle>{{ button.description }}</v-card-subtitle>
@@ -48,6 +49,7 @@
                   v-for="(item, index) in button.list"
                   :key="index"
                   @click="SubmitClick(button.id, item.value)"
+                  :disabled="item.disabled"
                 >
                   <v-list-item-title>{{ item.text }} </v-list-item-title>
                 </v-list-item>
@@ -62,7 +64,7 @@
 <script>
 export default {
   name: "ListView",
-  props: ["type", "height", "icon"],
+  props: ["type", "height"],
   computed: {
     buttons() {
       return this.$store.state.userStore.buttons[this.type];

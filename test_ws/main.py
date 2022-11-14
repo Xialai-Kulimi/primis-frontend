@@ -31,8 +31,8 @@ async def main():
         await asyncio.sleep(1)
         status.update(f'connect: {len(manager.active_connections)}')
         for i in manager.active_connections:
-            await i.send_json({'type': 'surrounding', 'message': [{'class': 'info--text', 'message': '又一秒過去了'}, ]})
-            await i.send_json({'type': 'status', 'message': [{'class': 'info--text', 'message': str(datetime.now())}, ]})
+            await i.send_json({'type': 'surrounding', 'message': [{'style': 'info--text', 'message': '又一秒過去了'}, ]})
+            await i.send_json({'type': 'status', 'message': [{'style': 'info--text', 'message': str(datetime.now())}, ]})
 
 
 @app.on_event("startup")
@@ -49,18 +49,20 @@ async def websocket_endpoint(websocket: WebSocket):
             data = await websocket.receive_json()
             console.log(data)
             if data.get('content'):
-                await websocket.send_json({'type': 'caption', 'message': [{'class': '', 'message': f'你說：「{data["content"]}」'}, ]})
-            await websocket.send_json({'type': 'caption', 'message': [{'class': 'primary--text', 'message': 'primary color test'}, ]})
-            await websocket.send_json({'type': 'surrounding', 'message': [{'class': 'primary--text', 'message': 'primary color test'}, ]})
-            await websocket.send_json({'type': 'status', 'message': [{'class': 'primary--text', 'message': 'primary color test'}, ]})
+                await websocket.send_json({'type': 'caption', 'message': [{'style': '', 'message': f'你說：「{data["content"]}」'}, ]})
+            await websocket.send_json({'type': 'caption', 'message': [{'style': 'primary--text', 'message': 'primary style test'}, ]})
+            await websocket.send_json({'type': 'surrounding', 'message': [{'style': 'primary--text', 'message': 'primary style test'}, ]})
+            await websocket.send_json({'type': 'status', 'message': [{'style': 'primary--text', 'message': 'primary style test'}, ]})
             await websocket.send_json({
                 'type': 'target',
                 'buttons': [
                     {
                         'text': 'text1',
                         'id': 'btn1',
-                        'color': 'primary',
+                        'style': 'primary--text',
                         'description': '這個東西，大概是拿來測試用的',
+                        'action': '10m',
+                        'icon': 'mdi-walk',
                         'list': [
                             {'text': 'text', 'value': 'value'},
                             {'text': 'text2', 'value': 'value2'},
@@ -70,7 +72,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     {
                         'text': 'text2',
                         'id': 'btn2',
-                        'color': 'error',
+                        'style': 'error--text',
                         'description': '這個東西，可能只是拿來測試不同的顏色用的',
                         # 'list': [
                         #     {'text': 'text', 'value': 'value'},
@@ -78,15 +80,28 @@ async def websocket_endpoint(websocket: WebSocket):
                         #     {'text': 'text3', 'value': 'value3'},
                         # ]
                     },
+                    {
+                        'text': '上鎖的箱子',
+                        'id': 'btn2',
+                        'style': 'info--text',
+                        'disabled': True,
+                        'description': '順便測試個disabled',
+                        'list': [
+                            {'text': '開啟', 'value': 'value', 'disabled': True},
+                            {'text': 'text2', 'value': 'value2'},
+                            {'text': 'text3', 'value': 'value3'},
+                        ]
+                    },
                 ]
             })
             await websocket.send_json({
                 'type': 'reachable',
                 'buttons': [
+                    
                     {
                         'text': 'text1',
                         'id': 'btn3231',
-                        'color': 'primary',
+                        'style': 'primary--text',
                         'description': '這是測試敘述',
                         'list': [
                             {'text': 'text', 'value': 'value'},
@@ -97,7 +112,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     {
                         'text': 'text2',
                         'id': 'btn22323',
-                        'color': 'info',
+                        'style': 'info--text',
                         'description': '對，應該是測試敘述',
                         'list': [
                             {'text': 'text', 'value': 'value78'},
@@ -111,9 +126,21 @@ async def websocket_endpoint(websocket: WebSocket):
                 'type': 'inventory',
                 'buttons': [
                     {
+                        'text': '上鎖的箱子',
+                        'id': 'btn2',
+                        'style': 'info--text',
+                        'disabled': True,
+                        'description': '順便測試個disabled',
+                        'list': [
+                            {'text': '開啟', 'value': 'value', 'disabled': True},
+                            {'text': 'text2', 'value': 'value2'},
+                            {'text': 'text3', 'value': 'value3'},
+                        ]
+                    },
+                    {
                         'text': 'text1',
                         'id': 'btn3231',
-                        'color': 'primary',
+                        'style': 'primary',
                         'description': '這是測試敘述',
                         'list': [
                             {'text': 'text', 'value': 'value'},
@@ -124,7 +151,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     {
                         'text': 'text2',
                         'id': 'btn22323',
-                        'color': 'info',
+                        'style': 'info',
                         'description': '對，應該是測試敘述',
                         'list': [
                             {'text': 'text', 'value': 'value78'},
