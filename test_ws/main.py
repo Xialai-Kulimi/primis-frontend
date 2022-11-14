@@ -61,6 +61,8 @@ async def websocket_endpoint(websocket: WebSocket):
                         'id': 'btn1',
                         'style': 'primary--text',
                         'description': '這個東西，大概是拿來測試用的',
+                        'action': '10m',
+                        'icon': 'mdi-walk',
                         'list': [
                             {'text': 'text', 'value': 'value'},
                             {'text': 'text2', 'value': 'value2'},
