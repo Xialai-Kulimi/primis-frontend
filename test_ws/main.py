@@ -97,7 +97,7 @@ async def websocket_endpoint(websocket: WebSocket):
             await websocket.send_json({
                 'type': 'reachable',
                 'buttons': [
-                    
+
                     {
                         'text': 'text1',
                         'id': 'btn3231',
@@ -161,6 +161,44 @@ async def websocket_endpoint(websocket: WebSocket):
                     },
                 ]*20
             })
+            if data.get('content') == 'operation':
+                await websocket.send_json({ 
+                    'alert': {
+                        'text': 'asdfas\nfd\ndfasdfasdf',
+                        'style': 'error'
+                    },
+                    'dialog': {
+                        'title': 'asdfas',
+                        'text': 'asdfaasl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndfasdf'
+                    },
+                    'snackbar': {
+                        'text': 'asdfsadfasdfasdfsadf',
+                        'style': 'success'
+                    },
+                    'input': {
+                        'title': "asdfasdfasdf",
+                        'subtitle': 'asdfasdf',
+                        'persistent': True,
+                        'inputs': [
+                            {'type': 'text', 'label': 'pls input text', 'id': 'text1'},
+                            {'type': 'textfield', 'label': 'pls input text',
+                                'id': 'textfield1'},
+                            {'type': 'select', 'label': 'pls input text', 'id': 'select1', 'config': {
+                                'options': [{'text': 'label1', 'value': '1'}, {'text': 'label2', 'value': '2'}]}},
+                            {'type': 'slider', 'label': 'pls input text',
+                                'id': 'slider1', 'config': {'min': 0, 'max': 10}},
+                            {'type': "radio", 'label': "label", 'id': "radio_id", 'config': {'options': [
+                                {'text': 'label1', 'value': '1'}, {'text': 'label2', 'value': '2'}]}},
+                        ]
+                    },
+                    'text': {'title': '123123123', 'subtitle': 'asdfasdf'},
+                    'list': {
+                        'title': "asdfasdf",
+                        'subtitle': "asdfasdf",
+                        'id': "asdfasdfasdfasdfasd f",
+                        'list': [{'text': "123123123", 'style': "primary--text", 'id': "123123123"}, {'text': "123123123", 'style': "primary--text", 'id': "123123123"}, {'text': "關閉", 'style': "error--text", 'id': "123123123"}],
+                    },
+                })
             # await manager.send_personal_message(f"You wrote: {data}", websocket)
             # await manager.broadcast(f"Client #{client_id} says: {data}")
     except WebSocketDisconnect:
