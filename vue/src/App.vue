@@ -33,8 +33,9 @@ export default {
     },
     wsRecv(data) {
       let recv = JSON.parse(data)
-      console.log(recv)
+      // console.log(recv.type)
       if (recv.type === 'operation') {
+        // console.log('op')  
         this.$store.commit("setOperation", recv)
       }
       else if (['caption', 'surrounding', 'status'].includes(recv.type)) {
