@@ -18,7 +18,7 @@
           width="500"
         >
           <template v-slot:activator="{ on, attrs }">
-            <v-list-item v-bind="attrs" v-on="on">
+            <v-list-item v-bind="attrs" v-on="on" :disabled="buttons.disabled">
               <v-list-item-content>
                 <v-list-item-title :class="button.style">{{
                   button.text
@@ -48,6 +48,7 @@
                   v-for="(item, index) in button.list"
                   :key="index"
                   @click="SubmitClick(button.id, item.value)"
+                  :disabled="item.disabled"
                 >
                   <v-list-item-title>{{ item.text }} </v-list-item-title>
                 </v-list-item>

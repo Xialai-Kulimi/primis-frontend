@@ -65,10 +65,11 @@
         {
             text: 'text1',
 			description: 'description',
+            disabled: false, //optional
             id: 'btn1',
             color: 'primary',
             list: [
-                {text: 'text', value: 'value'},
+                {text: 'text', value: 'value', disabled: false, //optional},
                 {text: 'text2', value: 'value2'},
                 {text: 'text3', value: 'value3'},
             ]
