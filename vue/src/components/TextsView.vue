@@ -1,12 +1,12 @@
 <template>
     <v-card elevation="0" :height="height">
         <v-layout column reverse fill-height>
-            <v-container style="padding: 0" v-if="input">
-                <v-text-field flat dense solo hide-details label="說些什麼吧" v-model="input_message" @keyup.enter="SubmitMesssage">
+            <v-form style="padding: 0" v-if="input" @submit.prevent="SubmitMesssage">
+                <v-text-field flat dense solo hide-details label="說些什麼吧" v-model="input_message">
                 </v-text-field>
-            </v-container> 
-            <v-card-text  style="padding-bottom: 0;overflow: auto;" ref="view">
-                <div v-for="(item,i) in messages" :key="i" :class="item.style">{{ item.message }}</div>
+            </v-form>
+            <v-card-text style="padding-bottom: 0;overflow: auto;" ref="view">
+                <div v-for="(item, i) in messages" :key="i" :class="item.style">{{ item.message }}</div>
             </v-card-text>
         </v-layout>
     </v-card>
@@ -41,6 +41,7 @@ export default {
     },
     data: () => {
         return {
+            isTyping: false,
             input_message: ''
         }
     },
