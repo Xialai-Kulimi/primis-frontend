@@ -15,7 +15,7 @@
       {{ local_operation.snackbar.text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="local_operation.snackbar = false">
+        <v-btn text v-bind="attrs" @click="toggle.snackbar = false">
           關閉
         </v-btn>
       </template>
