@@ -140,19 +140,19 @@
           </v-col>
         </v-row> -->
         <v-row dense>
-          <v-col cols="12" sm="8">
-            <BtnsView height="20vh" type="inventory" />
-          </v-col>
-          <v-col cols="12" sm="4">
-            <TextsView height="20vh" type="status" />
-          </v-col>
-        </v-row>
-        <v-row dense>
           <v-col cols="12" sm="6">
             <TextsView height="40vh" type="surrounding" />
           </v-col>
           <v-col cols="12" sm="6">
             <TextsView height="40vh" type="caption" :input="true" />
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col cols="12" sm="4">
+            <TextsView height="20vh" type="status" />
+          </v-col>
+          <v-col cols="12" sm="8">
+            <BtnsView height="20vh" type="inventory" />
           </v-col>
         </v-row>
       </v-card-text>
