@@ -127,10 +127,13 @@
       </v-card-subtitle>
       <v-card-text>
         <v-row dense>
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="4">
             <ListView height="20vh" type="target" />
           </v-col>
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="4">
+            <ListView height="20vh" type="player" />
+          </v-col>
+          <v-col cols="12" sm="4">
             <ListView height="20vh" type="reachable" />
           </v-col>
         </v-row>

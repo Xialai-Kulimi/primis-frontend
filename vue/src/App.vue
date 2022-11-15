@@ -41,7 +41,7 @@ export default {
       else if (['caption', 'surrounding', 'status'].includes(recv.type)) {
         this.$store.commit("pushTexts", recv)
       }
-      else if (['target', 'reachable', 'inventory'].includes(recv.type)) {
+      else if (['target', 'reachable', 'inventory', 'player'].includes(recv.type)) {
         this.$store.commit("setButtons", recv)
       }
     }
