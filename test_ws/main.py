@@ -140,7 +140,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     {
                         'text': 'text1',
                         'id': 'btn3231',
-                        'style': 'primary',
+                        'style': 'primary--text',
                         'description': '這是測試敘述',
                         'list': [
                             {'text': 'text', 'value': 'value'},
@@ -151,7 +151,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     {
                         'text': 'text2',
                         'id': 'btn22323',
-                        'style': 'info',
+                        'style': 'info--text',
                         'description': '對，應該是測試敘述',
                         'list': [
                             {'text': 'text', 'value': 'value78'},

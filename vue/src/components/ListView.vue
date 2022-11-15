@@ -46,8 +46,8 @@
             <v-card-text>
               <v-list>
                 <v-list-item
-                  v-for="(item, index) in button.list"
-                  :key="index"
+                  v-for="(item, index2) in button.list"
+                  :key="index2"
                   @click="SubmitClick(button.id, item.value)"
                   :disabled="item.disabled"
                 >
