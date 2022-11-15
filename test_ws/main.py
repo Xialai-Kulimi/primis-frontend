@@ -123,6 +123,34 @@ async def websocket_endpoint(websocket: WebSocket):
                 ]*20
             })
             await websocket.send_json({
+                'type': 'player',
+                'buttons': [
+
+                    {
+                        'text': 'text1',
+                        'id': 'btn3231',
+                        'style': 'primary--text',
+                        'description': '這是測試敘述',
+                        'list': [
+                            {'text': 'text', 'value': 'value'},
+                            {'text': 'text2', 'value': 'value2'},
+                            {'text': 'text3', 'value': 'value3'},
+                        ]
+                    },
+                    {
+                        'text': 'text2',
+                        'id': 'btn22323',
+                        'style': 'info--text',
+                        'description': '對，應該是測試敘述',
+                        'list': [
+                            {'text': 'text', 'value': 'value78'},
+                            {'text': 'text2', 'value': 'value27878'},
+                            {'text': 'text3', 'value': 'value37878'},
+                        ]
+                    },
+                ]*20
+            })
+            await websocket.send_json({
                 'type': 'inventory',
                 'buttons': [
                     {
