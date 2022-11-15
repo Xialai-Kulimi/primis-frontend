@@ -2,14 +2,12 @@
     <v-card elevation="0" :height="height" style="overflow-x: auto; flex-wrap: wrap;">
         <v-card-text>
             <v-layout row>
-                <v-dialog v-for="(button, index) in buttons" :key="index" v-model="button.dialog" width="500">
+                <v-dialog v-for="(button, index) in buttons" :key="index" width="500">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn v-bind="attrs" v-on="on" outlined :class="button.style+' ma-2'" :disabled="button.disabled" >
                             {{ button.text }}
                         </v-btn>
-                        
                     </template>
-
                     <v-card outlined>
                         <v-card-title :class="button.style">
                             {{ button.text }}
