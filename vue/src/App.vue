@@ -1,6 +1,19 @@
 <template>
   <v-app style="display: fixed">
     <AppBar></AppBar>
+    <v-overlay :value="!wsConnectState">
+      <v-container>
+        <v-card outlined max-width="500">
+          <v-card-title>連線中</v-card-title>
+          <v-card-subtitle>
+            如果遲遲無法連線可以嘗試重新載入此分頁，並且避免同時在多個頁面登入
+          </v-card-subtitle>
+          <v-card-text>
+            <v-progress-linear indeterminate color="primary" size="64"></v-progress-linear>
+          </v-card-text>
+        </v-card>
+      </v-container>
+    </v-overlay>
     <v-main>
       <router-view />
     </v-main>
@@ -10,16 +23,19 @@
 <script>
 import AppBar from '@/components/AppBar';
 import api from '@/plugins/api';
-import {WS} from "@/plugins/ws";
+import { WS } from "@/plugins/ws";
 
 
 export default {
   name: 'App',
-  mixins:[WS],
+  mixins: [WS],
   data: () => ({
     ws: null
   }),
   computed: {
+    wsConnectState() {
+      return this.$store.state.wsStore.connect;
+    },
     user() {
       return this.$store.state.userStore.user;
     },
@@ -56,7 +72,7 @@ export default {
         }
       }
     },
-    '$store.state.wsStore.wsData':function (newValue){
+    '$store.state.wsStore.wsData': function (newValue) {
       this.wsRecv(newValue)
     }
 
