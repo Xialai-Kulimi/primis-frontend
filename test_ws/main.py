@@ -205,6 +205,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         'style': 'success'
                     },
                     'input': {
+                        'id': 'input_asdfasdfasdf',
                         'title': "asdfasdfasdf",
                         'subtitle': 'asdfasdf',
                         'persistent': True,
@@ -224,7 +225,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     'list': {
                         'title': "asdfasdf",
                         'subtitle': "asdfasdf",
-                        'id': "asdfasdfasdfasdfasd f",
+                        'id': "list_asdfasdfasdfasdfasd f",
                         'list': [{'text': "123123123", 'style': "primary--text", 'id': "123123123"}, {'text': "123123123", 'style': "primary--text", 'id': "123123123"}, {'text': "關閉", 'style': "error--text", 'id': "123123123"}],
                     },
                 })

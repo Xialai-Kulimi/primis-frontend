@@ -1,18 +1,9 @@
 <template>
   <v-container>
-    <v-alert
-      v-if="toggle.alert"
-      v-model="toggle.alert"
-      :type="local_operation.alert.style"
-      dismissible
-      outlined
-    >
+    <v-alert v-if="toggle.alert" v-model="toggle.alert" :type="local_operation.alert.style" dismissible outlined>
       {{ local_operation.alert.text }}
     </v-alert>
-    <v-snackbar
-      v-model="toggle.snackbar"
-      :color="local_operation.snackbar.style"
-    >
+    <v-snackbar v-model="toggle.snackbar" :color="local_operation.snackbar.style">
       {{ local_operation.snackbar.text }}
 
       <template v-slot:action="{ attrs }">
@@ -21,82 +12,35 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-dialog v-model="toggle.dialog" max-width="500">
-      <v-card outlined>
-        <v-card-title>{{ local_operation.dialog.title }}</v-card-title>
-        <v-card-text>{{ local_operation.dialog.text }}</v-card-text>
-      </v-card>
-    </v-dialog>
-    <v-dialog
-      :retain-focus="false"
-      :persistent="local_operation.input.persistent"
-      v-model="toggle.input"
-      max-width="500"
-    >
+    <v-dialog :retain-focus="false" :persistent="local_operation.input.persistent" v-model="toggle.input"
+      max-width="500">
       <v-card outlined>
         <v-card-title>{{ local_operation.input.title }}</v-card-title>
         <v-card-subtitle>{{ local_operation.input.subtitle }}</v-card-subtitle>
         <v-form>
-          <v-container
-            v-for="(i, index) in local_operation.input.inputs"
-            :key="index"
-            style="padding-top: 0; padding-bottom: 0"
-          >
-            <v-text-field
-              outlined
-              v-if="i.type === 'text'"
-              :label="i.label"
-              v-model="form_answer[i.id]"
-            ></v-text-field>
-            <v-textarea
-              outlined
-              v-if="i.type === 'textfield'"
-              :label="i.label"
-              v-model="form_answer[i.id]"
-            >
+          <v-container v-for="(i, index) in local_operation.input.inputs" :key="index"
+            style="padding-top: 0; padding-bottom: 0">
+            <v-text-field outlined v-if="i.type === 'text'" :label="i.label" v-model="form_answer[i.id]"></v-text-field>
+            <v-textarea outlined v-if="i.type === 'textfield'" :label="i.label" v-model="form_answer[i.id]">
             </v-textarea>
-            <v-select
-              outlined
-              v-if="i.type === 'select'"
-              :label="i.label"
-              v-model="form_answer[i.id]"
-              :items="i.config.options"
-            ></v-select>
-            <v-slider
-              outlined
-              v-if="i.type === 'slider'"
-              :label="i.label"
-              v-model="form_answer[i.id]"
-              :min="i.config.min"
-              :max="i.config.max"
-              thumb-label
-            ></v-slider>
-            <v-radio-group
-              v-if="i.type === 'radio'"
-              v-model="form_answer[i.id]"
-            >
-              <v-radio
-                v-for="(radio, index2) in i.config.options"
-                :key="index2"
-                :label="radio.text"
-                :value="radio.value"
-              >
+            <v-select outlined v-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
+              :items="i.config.options"></v-select>
+            <v-slider outlined v-if="i.type === 'slider'" :label="i.label" v-model="form_answer[i.id]"
+              :min="i.config.min" :max="i.config.max" thumb-label></v-slider>
+            <v-radio-group v-if="i.type === 'radio'" v-model="form_answer[i.id]">
+              <v-radio v-for="(radio, index2) in i.config.options" :key="index2" :label="radio.text"
+                :value="radio.value">
               </v-radio>
             </v-radio-group>
           </v-container>
         </v-form>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text color="primary" @click="formSubmit"> 送出 </v-btn>
+          <v-btn text color="primary" @click="InputSubmit"> 送出 </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog
-      :retain-focus="false"
-      :persistent="local_operation.list.persistent"
-      v-model="toggle.list"
-      max-width="500"
-    >
+    <v-dialog :retain-focus="false" :persistent="local_operation.list.persistent" v-model="toggle.list" max-width="500">
       <v-card outlined>
         <v-card-title>
           {{ local_operation.list.title }}
@@ -106,17 +50,19 @@
         </v-card-subtitle>
         <v-card-text>
           <v-list>
-            <v-list-item
-              v-for="(item, index) in local_operation.list.list"
-              :key="index"
-              @click="SubmitClick(local_operation.list.id, item.id)"
-            >
-              <v-list-item-title :class="item.style"
-                >{{ item.text }}
+            <v-list-item v-for="(item, index) in local_operation.list.list" :key="index"
+              @click="ListSubmit(local_operation.list.id, item.id)">
+              <v-list-item-title :class="item.style">{{ item.text }}
               </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-card-text>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="toggle.dialog" max-width="500">
+      <v-card outlined>
+        <v-card-title>{{ local_operation.dialog.title }}</v-card-title>
+        <v-card-text>{{ local_operation.dialog.text }}</v-card-text>
       </v-card>
     </v-dialog>
     <v-card outlined>
@@ -204,7 +150,7 @@ export default {
           subtitle: '',
           persistent: false,
           inputs: [
-            
+
           ]
         },
         text: false,
@@ -227,6 +173,7 @@ export default {
         //   style: 'success'
         // },
         // input: {
+        //   id: 'input_isdfasdf'
         //   title: "asdfasdfasdf",
         //   subtitle: 'asdfasdf',
         //   persistent: true,
@@ -249,18 +196,18 @@ export default {
     };
   },
   methods: {
-    formSubmit() {
+    InputSubmit() {
       this.toggle.input = false
       this.$store.commit(
         "pushMessage",
-        JSON.stringify({ type: "form", payload: this.form_answer })
+        JSON.stringify({ type: "input", id: this.local_operation.input.id, payload: this.form_answer })
       );
     },
-    SubmitClick(id, value) {
+    ListSubmit(id, value) {
       this.toggle.list = false
       this.$store.commit(
         "pushMessage",
-        JSON.stringify({ type: "click", payload: { id: id, value: value } })
+        JSON.stringify({ type: "list", id: id, payload: value })
       );
     },
   },
@@ -280,6 +227,26 @@ export default {
           this.local_operation[key] = this.operation[key];
         }
       },
+    },
+    'toggle.input': {
+      handler: function () {
+        if (this.toggle.input == false) {
+          this.$store.commit(
+            "pushMessage",
+            JSON.stringify({ type: "input", id: this.local_operation.input.id, close: true })
+          );
+        }
+      }
+    },
+    'toggle.list': {
+      handler: function () {
+        if (this.toggle.list == false) {
+          this.$store.commit(
+            "pushMessage",
+            JSON.stringify({ type: "list", id: this.local_operation.list.id, close: true })
+          );
+        }
+      }
     },
   },
   components: {
