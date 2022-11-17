@@ -2,6 +2,7 @@
   <v-container>
     <v-alert
       v-if="toggle.alert"
+      v-model="toggle.alert"
       :type="local_operation.alert.style"
       dismissible
       outlined
