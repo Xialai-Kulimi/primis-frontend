@@ -59,7 +59,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="toggle.dialog" max-width="500">
+    <v-dialog :retain-focus="false" v-model="toggle.dialog" max-width="500">
       <v-card outlined>
         <v-card-title>{{ local_operation.dialog.title }}</v-card-title>
         <v-card-text>{{ local_operation.dialog.text }}</v-card-text>
@@ -244,6 +244,16 @@ export default {
           this.$store.commit(
             "pushMessage",
             JSON.stringify({ type: "list", id: this.local_operation.list.id, close: true })
+          );
+        }
+      }
+    },
+    'toggle.dialog': {
+      handler: function () {
+        if (this.toggle.dialog == false) {
+          this.$store.commit(
+            "pushMessage",
+            JSON.stringify({ type: "dialog", close: true })
           );
         }
       }
