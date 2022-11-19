@@ -26,7 +26,7 @@
             <v-select outlined v-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
               :items="i.config.options"></v-select>
             <v-slider outlined v-if="i.type === 'slider'" :label="i.label" v-model="form_answer[i.id]"
-              :min="i.config.min" :max="i.config.max" thumb-label></v-slider>
+              :min="i.config.min" :max="i.config.max" ></v-slider>
             <v-radio-group v-if="i.type === 'radio'" v-model="form_answer[i.id]">
               <v-radio v-for="(radio, index2) in i.config.options" :key="index2" :label="radio.text"
                 :value="radio.value">
