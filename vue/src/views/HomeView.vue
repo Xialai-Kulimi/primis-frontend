@@ -136,6 +136,11 @@ export default {
         input: false,
         list: false,
       },
+      answer: {
+        dialog: false,
+        input: false,
+        list: false,
+      },
       local_operation: {
         alert: {
           text: '',
@@ -201,18 +206,20 @@ export default {
   },
   methods: {
     InputSubmit() {
-      this.toggle.input = false
+      this.answer.input = true
       this.$store.commit(
         "pushMessage",
         JSON.stringify({ type: "input", id: this.local_operation.input.id, payload: this.form_answer })
-      );
-    },
+        );
+        this.toggle.input = false
+      },
     ListSubmit(id, value) {
-      this.toggle.list = false
+      this.answer.list = true
       this.$store.commit(
         "pushMessage",
         JSON.stringify({ type: "list", id: id, payload: value })
       );
+      this.toggle.list = false
     },
   },
   computed: {
@@ -229,12 +236,13 @@ export default {
             this.form_answer = {}
           }
           this.local_operation[key] = this.operation[key];
+          this.answer[key] = false
         }
       },
     },
     'toggle.input': {
       handler: function () {
-        if (this.toggle.input == false) {
+        if (this.toggle.input == false && this.answer.input == false) {
           this.$store.commit(
             "pushMessage",
             JSON.stringify({ type: "input", id: this.local_operation.input.id, close: true })
@@ -244,7 +252,7 @@ export default {
     },
     'toggle.list': {
       handler: function () {
-        if (this.toggle.list == false) {
+        if (this.toggle.list == false && this.answer.list == false) {
           this.$store.commit(
             "pushMessage",
             JSON.stringify({ type: "list", id: this.local_operation.list.id, close: true })
