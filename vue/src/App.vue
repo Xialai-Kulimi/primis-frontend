@@ -80,7 +80,7 @@ export default {
   mounted: async function () {
     let res = await api.request('auth/me')
     // console.log(res)
-    if (!res.data) {
+    if (res.data.text) {
       window.location.replace('/api/auth/login')
     }
     this.set_user(res.data)
