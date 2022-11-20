@@ -28,9 +28,9 @@
                 </v-list-item-subtitle>
               </v-list-item-content>
               <v-spacer></v-spacer>
-              <v-list-item-action-text v-text="button.action"></v-list-item-action-text>
-              <v-list-item-action>
-                <v-btn icon @click.stop.prevent="SubmitClick(button.id, 'default')">
+              <v-list-item-action v-if="button.value">
+                <v-btn text rounded @click.stop.prevent="SubmitClick(button.id, button.value)" class="text-caption" color="grey lighten-1">
+                  {{button.action}}
                   <v-icon color="grey lighten-1">{{button.icon}}</v-icon>
                 </v-btn>
                 
