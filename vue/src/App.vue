@@ -47,20 +47,7 @@ export default {
     set_user(new_user) {
       this.$store.commit("setUser", new_user)
     },
-    wsRecv(data) {
-      let recv = JSON.parse(data)
-      // console.log(recv.type)
-      if (recv.type === 'operation') {
-        // console.log('op')  
-        this.$store.commit("setOperation", recv)
-      }
-      else if (['caption', 'surrounding', 'status'].includes(recv.type)) {
-        this.$store.commit("pushTexts", recv)
-      }
-      else if (['target', 'reachable', 'inventory', 'player'].includes(recv.type)) {
-        this.$store.commit("setButtons", recv)
-      }
-    }
+
   },
   watch: {
     messages: {
@@ -72,10 +59,6 @@ export default {
         }
       }
     },
-    '$store.state.wsStore.wsData': function (newValue) {
-      this.wsRecv(newValue)
-    }
-
   },
   mounted: async function () {
     let res = await api.request('auth/me')
