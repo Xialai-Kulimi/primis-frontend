@@ -50,6 +50,7 @@ async def websocket_endpoint(websocket: WebSocket):
             console.log(data)
             if data.get('content'):
                 await websocket.send_json({'type': 'caption', 'message': [{'style': '', 'message': f'你說：「{data["content"]}」'}, ]})
+                # continue
             await websocket.send_json({'type': 'caption', 'message': [{'style': 'primary--text', 'message': 'primary style test'}, ]})
             await websocket.send_json({'type': 'surrounding', 'message': [{'style': 'primary--text', 'message': 'primary style test'}, ]})
             await websocket.send_json({'type': 'status', 'message': [{'style': 'primary--text', 'message': 'primary style test'}, ]})
@@ -90,6 +91,20 @@ async def websocket_endpoint(websocket: WebSocket):
                         'description': '順便測試個disabled',
                         'list': [
                             {'text': '開啟', 'value': 'value', 'disabled': True},
+                            {'text': 'text2', 'value': 'value2'},
+                            {'text': 'text3', 'value': 'value3'},
+                        ]
+                    },
+                    {
+                        'text': 't',
+                        'id': 'btn1',
+                        'style': 'primary--text',
+                        'description': '',
+                        'action': '10m',
+                        'icon': 'mdi-walk',
+                        'value': 'walk',
+                        'list': [
+                            {'text': 'text', 'value': 'value'},
                             {'text': 'text2', 'value': 'value2'},
                             {'text': 'text3', 'value': 'value3'},
                         ]
