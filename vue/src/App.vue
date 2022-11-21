@@ -101,7 +101,11 @@ html {
 }
 
 .CloisterBlack {
-  font-family: 'CloisterBlack';
+  font-family: 'CloisterBlack' !important;
+}
+
+.large {
+    font-size: 6rem !important;
 }
 
 @font-face {
