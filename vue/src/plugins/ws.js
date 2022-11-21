@@ -8,7 +8,7 @@ export const WS = {
         }
     },
     methods:{
-        ...mapMutations(['setWsData', 'setConnectState']),
+        ...mapMutations(['setWsData', 'setConnectState', 'setOperation', 'pushTexts', 'setButtons']),
         initWebsocket(){
             let url = `wss://${window.location.host}/api/ws`
             this.ws = new WebSocket(url)
@@ -20,7 +20,17 @@ export const WS = {
             this.ws.onerror = (e)=>{console.error("ws connection fail",e);this.setConnectState(false)}
             this.ws.onmessage = (e)=>{
                 let _data = e.data;
-                this.setWsData(_data)
+                let recv = JSON.parse(_data)
+                // console.log(recv.type)
+                if (recv.type === 'operation') {
+                    this.setOperation(recv)
+                }
+                else if (['caption', 'surrounding', 'status'].includes(recv.type)) {
+                    this.pushTexts(recv)
+                }
+                else if (['target', 'reachable', 'inventory', 'player'].includes(recv.type)) {
+                    this.setButtons(recv)
+                }
             }
             this.ws.onclose = ()=>{
                 this.setConnectState(false)
