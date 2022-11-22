@@ -79,13 +79,13 @@
       <v-card-text>
         <v-row dense>
           <v-col cols="12" sm="4">
-            <ListView height="20vh" type="target" />
+            <ListView height="40vh" type="target" />
           </v-col>
           <v-col cols="12" sm="4">
-            <ListView height="20vh" type="player" />
+            <ListView height="40vh" type="player" />
           </v-col>
           <v-col cols="12" sm="4">
-            <ListView height="20vh" type="reachable" />
+            <ListView height="40vh" type="reachable" />
           </v-col>
         </v-row>
         <!-- <v-row dense>
