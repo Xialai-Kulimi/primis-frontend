@@ -81,7 +81,7 @@
         <v-row dense>
           <v-col>
             <v-tabs v-model="tab" >
-              <v-tab  v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-map-marker-alert-outline']" :key="index">
+              <v-tab  v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-sword']" :key="index">
                 <v-icon>{{icon}}</v-icon>
               </v-tab>
             </v-tabs>
