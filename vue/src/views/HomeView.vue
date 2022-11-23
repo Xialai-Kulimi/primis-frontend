@@ -79,7 +79,7 @@
       <!---->
       <v-card-text>
         <v-row dense>
-          <v-col>
+          <v-col cols="12" sm="6">
             <v-tabs v-model="tab" >
               <v-tab  v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-sword']" :key="index">
                 <v-icon>{{icon}}</v-icon>
@@ -91,7 +91,7 @@
               <v-tab-item :transition="false" key="2"><BtnsView :height="left_view_height" type="inventory" /></v-tab-item>
             </v-tabs-items>
           </v-col>
-          <v-col>
+          <v-col cols="12" sm="6">
             <ListView :height="right_text_height" type="reachable" />
             <v-divider></v-divider>
             <v-tabs v-model="sub_tab" >
