@@ -101,8 +101,8 @@
             </v-tabs>
             <v-tabs-items v-model="sub_tab">
               <v-tab-item :transition="false" key="0"><TextsView :height="right_btn_height" type="caption" :input="true" /></v-tab-item>
-              <v-tab-item :transition="false" key="1"><TextsView :height="right_btn_height" type="status" /></v-tab-item>
-              <v-tab-item :transition="false" key="2"><ListView :height="right_btn_height" type="reachable" /></v-tab-item>
+              <v-tab-item :transition="false" key="1"><TextsView :height="right_btn_height" type="surrounding" /></v-tab-item>
+              <!-- <v-tab-item :transition="false" key="2"><ListView :height="right_btn_height" type="reachable" /></v-tab-item> -->
             </v-tabs-items>
           </v-col>
         </v-row>
