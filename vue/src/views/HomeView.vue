@@ -79,7 +79,7 @@
       <!---->
       <v-card-text>
         <v-row dense>
-          <v-col>
+          <v-col cols="12" sm="6">
             <v-tabs v-model="tab">
               <v-tab v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-map-marker-alert-outline']" :key="index">
                 <v-icon>{{ icon }}</v-icon>
@@ -97,7 +97,7 @@
               </v-tab-item>
             </v-tabs-items>
           </v-col>
-          <v-col>
+          <v-col cols="12" sm="6">
             <v-tabs v-model="sub_tab">
               <v-tab v-for="(icon, index) in ['mdi-chat-processing-outline', 'mdi-panorama-outline']" :key="index">
                 <v-icon>{{ icon }}</v-icon>
