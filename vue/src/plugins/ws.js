@@ -13,7 +13,7 @@ export const WS = {
             let url = `ws://${window.location.host}/api/ws`
             this.ws = new WebSocket(url)
             this.ws.onopen = ()=>{
-                this.timeout = 250
+                this.timeout = 2500
                 this.setConnectState(true)
                 console.log("ws connected")
             }
@@ -35,7 +35,7 @@ export const WS = {
             this.ws.onclose = ()=>{
                 this.setConnectState(false)
                 console.log("ws reconnecting...")
-                setTimeout(this.initWebsocket,Math.min(10000,this.timeout+=this.timeout))
+                setTimeout(this.initWebsocket,Math.max(5000,this.timeout+=this.timeout))
             }
         },
         wsSend(data){
