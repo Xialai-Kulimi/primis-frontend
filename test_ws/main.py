@@ -33,11 +33,58 @@ async def main():
         for i in manager.active_connections:
             await i.send_json({'type': 'surrounding', 'message': [{'style': 'info--text', 'message': '又一秒過去了'}, ]})
             await i.send_json({'type': 'status', 'message': [{'style': 'info--text', 'message': str(datetime.now())}, ]})
+            await i.send_json({
+                'type': 'reachable',
+                'buttons': [
 
+                    {
+                        'text': str(datetime.now()),
+                        'id': 'btn3231',
+                        'style': 'primary--text',
+                        'description': '這是測試敘述',
+                        'list': [
+                            {'text': 'text', 'value': 'value'},
+                            {'text': 'text2', 'value': 'value2'},
+                            {'text': 'text3', 'value': 'value3'},
+                        ]
+                    },
+                    {
+                        'text': 'text2',
+                        'id': 'btn22323',
+                        'style': 'info--text',
+                        'description': '對，應該是測試敘述',
+                        'list': [
+                            {'text': 'text', 'value': 'value78'},
+                            {'text': 'text2', 'value': 'value27878'},
+                            {'text': 'text3', 'value': 'value37878'},
+                        ]
+                    },
+                ]*20
+            })
 
 @app.on_event("startup")
 async def startup_event():
     asyncio.create_task(main())
+
+@app.get('/api/auth/me')
+async def login():
+    return {
+            "_id": "409635353893404685",
+            "accent_color": None,
+            "avatar": "a_cd69bf72da89e7dd4e1f039aaf1e6fcc",
+            "avatar_decoration": None,
+            "banner": "5ab8516be12ae9652a5a2918fce35088",
+            "banner_color": None,
+            "create_time": 1668676799.255981,
+            "discriminator": "8775",
+            "flags": 0,
+            "id": "409635353893404685",
+            "locale": "zh-TW",
+            "mfa_enabled": True,
+            "premium_type": 2,
+            "public_flags": 0,
+            "username": "ItisCaleb"
+      }
 
 
 @app.websocket("/api/ws")
@@ -111,34 +158,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     },
                 ]
             })
-            await websocket.send_json({
-                'type': 'reachable',
-                'buttons': [
-
-                    {
-                        'text': 'text1',
-                        'id': 'btn3231',
-                        'style': 'primary--text',
-                        'description': '這是測試敘述',
-                        'list': [
-                            {'text': 'text', 'value': 'value'},
-                            {'text': 'text2', 'value': 'value2'},
-                            {'text': 'text3', 'value': 'value3'},
-                        ]
-                    },
-                    {
-                        'text': 'text2',
-                        'id': 'btn22323',
-                        'style': 'info--text',
-                        'description': '對，應該是測試敘述',
-                        'list': [
-                            {'text': 'text', 'value': 'value78'},
-                            {'text': 'text2', 'value': 'value27878'},
-                            {'text': 'text3', 'value': 'value37878'},
-                        ]
-                    },
-                ]*20
-            })
+            
             await websocket.send_json({
                 'type': 'player',
                 'buttons': [

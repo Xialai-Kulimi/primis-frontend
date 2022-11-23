@@ -26,16 +26,16 @@
             <v-select outlined v-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
               :items="i.config.options"></v-select>
             <v-card-text v-if="i.type === 'slider'">
-              <v-slider outlined  :label="i.label" v-model="form_answer[i.id]"
-              :min="i.config.min" :max="i.config.max" ></v-slider>
+              <v-slider outlined :label="i.label" v-model="form_answer[i.id]" :min="i.config.min" :max="i.config.max">
+              </v-slider>
             </v-card-text>
             <v-card-text v-if="i.type === 'radio'">
-              <v-radio-group  v-model="form_answer[i.id]">
+              <v-radio-group v-model="form_answer[i.id]">
                 <v-radio v-for="(radio, index2) in i.config.options" :key="index2" :label="radio.text"
-                :value="radio.value">
-              </v-radio>
-            </v-radio-group>
-          </v-card-text>
+                  :value="radio.value">
+                </v-radio>
+              </v-radio-group>
+            </v-card-text>
           </v-container>
         </v-form>
         <v-card-actions>
@@ -76,39 +76,45 @@
       <v-card-subtitle v-if="local_operation.text">
         {{ local_operation.text.subtitle }}
       </v-card-subtitle>
+      <!---->
       <v-card-text>
         <v-row dense>
-          <v-col cols="12" sm="4">
-            <ListView height="40vh" type="target" />
+          <v-col>
+            <v-tabs v-model="tab">
+              <v-tab v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-map-marker-alert-outline']" :key="index">
+                <v-icon>{{ icon }}</v-icon>
+              </v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="tab">
+              <v-tab-item :transition="false" key="0">
+                <ListView :height="left_view_height" type="target" />
+              </v-tab-item>
+              <v-tab-item :transition="false" key="1">
+                <ListView :height="left_view_height" type="player" />
+              </v-tab-item>
+              <v-tab-item :transition="false" key="2">
+                <ListView :height="left_view_height" type="reachable" />
+              </v-tab-item>
+            </v-tabs-items>
           </v-col>
-          <v-col cols="12" sm="4">
-            <ListView height="40vh" type="player" />
-          </v-col>
-          <v-col cols="12" sm="4">
-            <ListView height="40vh" type="reachable" />
+          <v-col>
+            <v-tabs v-model="sub_tab">
+              <v-tab v-for="(icon, index) in ['mdi-chat-processing-outline', 'mdi-panorama-outline']" :key="index">
+                <v-icon>{{ icon }}</v-icon>
+              </v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="sub_tab">
+              <v-tab-item :transition="false" key="0">
+                <TextsView :height="right_text_height" type="caption" :input="true" />
+              </v-tab-item>
+              <v-tab-item :transition="false" key="1">
+                <TextsView :height="right_text_height" type="surrounding" />
+              </v-tab-item>
+            </v-tabs-items>
+            <BtnsView :height="right_btn_height" type="inventory" />
           </v-col>
         </v-row>
-        <!-- <v-row dense>
-          <v-col cols="12">
-            <BtnsView height="20vh" type="reachable" />
-          </v-col>
-        </v-row> -->
-        <v-row dense>
-          <v-col cols="12" sm="6">
-            <TextsView height="40vh" type="surrounding" />
-          </v-col>
-          <v-col cols="12" sm="6">
-            <TextsView height="40vh" type="caption" :input="true" />
-          </v-col>
-        </v-row>
-        <v-row dense>
-          <v-col cols="12" sm="4">
-            <TextsView height="20vh" type="status" />
-          </v-col>
-          <v-col cols="12" sm="8">
-            <BtnsView height="20vh" type="inventory" />
-          </v-col>
-        </v-row>
+
       </v-card-text>
     </v-card>
     <!-- <v-row dense>
@@ -128,6 +134,8 @@ export default {
   name: "HomeView",
   data: () => {
     return {
+      tab: null,
+      sub_tab: null,
       form_answer: {},
       toggle: {
         dialog: false,
@@ -210,9 +218,9 @@ export default {
       this.$store.commit(
         "pushMessage",
         JSON.stringify({ type: "input", id: this.local_operation.input.id, payload: this.form_answer })
-        );
-        this.toggle.input = false
-      },
+      );
+      this.toggle.input = false
+    },
     ListSubmit(id, value) {
       this.answer.list = true
       this.$store.commit(
@@ -225,6 +233,33 @@ export default {
   computed: {
     operation() {
       return this.$store.state.userStore.operation;
+    },
+    left_view_height() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 300
+        case 'sm': return 300
+        case 'md': return 800
+        case 'lg': return 800
+        case 'xl': return 800
+      }
+    },
+    right_text_height() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 300
+        case 'sm': return 300
+        case 'md': return 500
+        case 'lg': return 500
+        case 'xl': return 500
+      }
+    },
+    right_btn_height() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 300
+        case 'sm': return 300
+        case 'md': return 300
+        case 'lg': return 300
+        case 'xl': return 300
+      }
     },
   },
   watch: {
