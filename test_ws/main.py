@@ -33,7 +33,34 @@ async def main():
         for i in manager.active_connections:
             await i.send_json({'type': 'surrounding', 'message': [{'style': 'info--text', 'message': '又一秒過去了'}, ]})
             await i.send_json({'type': 'status', 'message': [{'style': 'info--text', 'message': str(datetime.now())}, ]})
+            await i.send_json({
+                'type': 'reachable',
+                'buttons': [
 
+                    {
+                        'text': str(datetime.now()),
+                        'id': 'btn3231',
+                        'style': 'primary--text',
+                        'description': '這是測試敘述',
+                        'list': [
+                            {'text': 'text', 'value': 'value'},
+                            {'text': 'text2', 'value': 'value2'},
+                            {'text': 'text3', 'value': 'value3'},
+                        ]
+                    },
+                    {
+                        'text': 'text2',
+                        'id': 'btn22323',
+                        'style': 'info--text',
+                        'description': '對，應該是測試敘述',
+                        'list': [
+                            {'text': 'text', 'value': 'value78'},
+                            {'text': 'text2', 'value': 'value27878'},
+                            {'text': 'text3', 'value': 'value37878'},
+                        ]
+                    },
+                ]*20
+            })
 
 @app.on_event("startup")
 async def startup_event():
@@ -111,34 +138,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     },
                 ]
             })
-            await websocket.send_json({
-                'type': 'reachable',
-                'buttons': [
-
-                    {
-                        'text': 'text1',
-                        'id': 'btn3231',
-                        'style': 'primary--text',
-                        'description': '這是測試敘述',
-                        'list': [
-                            {'text': 'text', 'value': 'value'},
-                            {'text': 'text2', 'value': 'value2'},
-                            {'text': 'text3', 'value': 'value3'},
-                        ]
-                    },
-                    {
-                        'text': 'text2',
-                        'id': 'btn22323',
-                        'style': 'info--text',
-                        'description': '對，應該是測試敘述',
-                        'list': [
-                            {'text': 'text', 'value': 'value78'},
-                            {'text': 'text2', 'value': 'value27878'},
-                            {'text': 'text3', 'value': 'value37878'},
-                        ]
-                    },
-                ]*20
-            })
+            
             await websocket.send_json({
                 'type': 'player',
                 'buttons': [
