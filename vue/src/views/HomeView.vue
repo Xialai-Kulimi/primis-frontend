@@ -13,29 +13,29 @@
       </template>
     </v-snackbar>
     <v-dialog :retain-focus="false" :persistent="local_operation.input.persistent" v-model="toggle.input"
-      max-width="500">
+              max-width="500">
       <v-card outlined>
         <v-card-title>{{ local_operation.input.title }}</v-card-title>
         <v-card-subtitle>{{ local_operation.input.subtitle }}</v-card-subtitle>
         <v-form>
           <v-container v-for="(i, index) in local_operation.input.inputs" :key="index"
-            style="padding-top: 0; padding-bottom: 0">
+                       style="padding-top: 0; padding-bottom: 0">
             <v-text-field outlined v-if="i.type === 'text'" :label="i.label" v-model="form_answer[i.id]"></v-text-field>
             <v-textarea outlined v-if="i.type === 'textfield'" :label="i.label" v-model="form_answer[i.id]">
             </v-textarea>
             <v-select outlined v-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
-              :items="i.config.options"></v-select>
+                      :items="i.config.options"></v-select>
             <v-card-text v-if="i.type === 'slider'">
               <v-slider outlined  :label="i.label" v-model="form_answer[i.id]"
-              :min="i.config.min" :max="i.config.max" ></v-slider>
+                        :min="i.config.min" :max="i.config.max" ></v-slider>
             </v-card-text>
             <v-card-text v-if="i.type === 'radio'">
               <v-radio-group  v-model="form_answer[i.id]">
                 <v-radio v-for="(radio, index2) in i.config.options" :key="index2" :label="radio.text"
-                :value="radio.value">
-              </v-radio>
-            </v-radio-group>
-          </v-card-text>
+                         :value="radio.value">
+                </v-radio>
+              </v-radio-group>
+            </v-card-text>
           </v-container>
         </v-form>
         <v-card-actions>
@@ -55,7 +55,7 @@
         <v-card-text>
           <v-list>
             <v-list-item v-for="(item, index) in local_operation.list.list" :key="index"
-              @click="ListSubmit(local_operation.list.id, item.id)">
+                         @click="ListSubmit(local_operation.list.id, item.id)">
               <v-list-item-title :class="item.style">{{ item.text }}
               </v-list-item-title>
             </v-list-item>
@@ -76,48 +76,36 @@
       <v-card-subtitle v-if="local_operation.text">
         {{ local_operation.text.subtitle }}
       </v-card-subtitle>
+      <!---->
       <v-card-text>
         <v-row dense>
-          <v-col cols="12" sm="4">
-            <ListView height="400" type="target" />
-            <v-divider></v-divider>
+          <v-col>
+            <v-tabs v-model="tab" >
+              <v-tab v-for="item in ['目標','玩家','物品欄']" :key="item">
+                {{item}}
+              </v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="tab">
+              <v-tab-item :transition="false" key="目標"><ListView height="800" type="target" /></v-tab-item>
+              <v-tab-item :transition="false" key="玩家"><ListView height="800" type="player" /></v-tab-item>
+              <v-tab-item :transition="false" key="物品欄"><BtnsView height="800" type="inventory" /></v-tab-item>
+            </v-tabs-items>
           </v-col>
-          
-          <v-col cols="12" sm="4">
-            <ListView height="400" type="player" />
-            <v-divider></v-divider>
-          </v-col>
-          
-          <v-col cols="12" sm="4">
-            <ListView height="400" type="reachable" />
-            <v-divider></v-divider>
-          </v-col>
-        </v-row>
-        <!-- <v-row dense>
-          <v-col cols="12">
-            <BtnsView height="20vh" type="reachable" />
-          </v-col>
-        </v-row> -->
-        <v-row dense>
-          <v-col cols="12" sm="6">
-            <TextsView height="400" type="surrounding" />
-            <v-divider></v-divider>
-          </v-col>
-          <v-col cols="12" sm="6">
-            <TextsView height="400" type="caption" :input="true" />
-            <v-divider></v-divider>
+          <v-col>
+            <ListView height="500" type="reachable" />
+            <v-tabs v-model="sub_tab" >
+              <v-tab v-for="item in ['聊天室','戰鬥狀態','環境']" :key="item">
+                {{item}}
+              </v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="sub_tab">
+              <v-tab-item :transition="false" key="聊天室"><TextsView height="300" type="caption" :input="true" /></v-tab-item>
+              <v-tab-item :transition="false" key="戰鬥狀態"><TextsView height="300" type="status" /></v-tab-item>
+              <v-tab-item :transition="false" key="環境"><ListView height="300" type="reachable" /></v-tab-item>
+            </v-tabs-items>
           </v-col>
         </v-row>
-        <v-row dense>
-          <v-col cols="12" sm="4">
-            <TextsView height="400" type="status" />
-            <v-divider></v-divider>
-          </v-col>
-          <v-col cols="12" sm="8">
-            <BtnsView height="400" type="inventory" />
-            <v-divider></v-divider>
-          </v-col>
-        </v-row>
+
       </v-card-text>
     </v-card>
     <!-- <v-row dense>
@@ -137,6 +125,8 @@ export default {
   name: "HomeView",
   data: () => {
     return {
+      tab:null,
+      sub_tab:null,
       form_answer: {},
       toggle: {
         dialog: false,
@@ -217,16 +207,16 @@ export default {
     InputSubmit() {
       this.answer.input = true
       this.$store.commit(
-        "pushMessage",
-        JSON.stringify({ type: "input", id: this.local_operation.input.id, payload: this.form_answer })
-        );
-        this.toggle.input = false
-      },
+          "pushMessage",
+          JSON.stringify({ type: "input", id: this.local_operation.input.id, payload: this.form_answer })
+      );
+      this.toggle.input = false
+    },
     ListSubmit(id, value) {
       this.answer.list = true
       this.$store.commit(
-        "pushMessage",
-        JSON.stringify({ type: "list", id: id, payload: value })
+          "pushMessage",
+          JSON.stringify({ type: "list", id: id, payload: value })
       );
       this.toggle.list = false
     },
@@ -253,8 +243,8 @@ export default {
       handler: function () {
         if (this.toggle.input == false && this.answer.input == false) {
           this.$store.commit(
-            "pushMessage",
-            JSON.stringify({ type: "input", id: this.local_operation.input.id, close: true })
+              "pushMessage",
+              JSON.stringify({ type: "input", id: this.local_operation.input.id, close: true })
           );
         }
       }
@@ -263,8 +253,8 @@ export default {
       handler: function () {
         if (this.toggle.list == false && this.answer.list == false) {
           this.$store.commit(
-            "pushMessage",
-            JSON.stringify({ type: "list", id: this.local_operation.list.id, close: true })
+              "pushMessage",
+              JSON.stringify({ type: "list", id: this.local_operation.list.id, close: true })
           );
         }
       }
@@ -273,8 +263,8 @@ export default {
       handler: function () {
         if (this.toggle.dialog == false) {
           this.$store.commit(
-            "pushMessage",
-            JSON.stringify({ type: "dialog", close: true })
+              "pushMessage",
+              JSON.stringify({ type: "dialog", close: true })
           );
         }
       }
