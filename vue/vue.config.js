@@ -8,7 +8,7 @@ module.exports = defineConfig({
     allowedHosts: [".tw"],
     proxy: {
       '/api/auth': {
-        target: 'http://localhost:9002/'
+        target: 'http://localhost:8000/'
       },
       '/api': {
         target: 'http://localhost:8000/'

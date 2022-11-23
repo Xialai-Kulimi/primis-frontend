@@ -66,6 +66,26 @@ async def main():
 async def startup_event():
     asyncio.create_task(main())
 
+@app.get('/api/auth/me')
+async def login():
+    return {
+            "_id": "409635353893404685",
+            "accent_color": None,
+            "avatar": "a_cd69bf72da89e7dd4e1f039aaf1e6fcc",
+            "avatar_decoration": None,
+            "banner": "5ab8516be12ae9652a5a2918fce35088",
+            "banner_color": None,
+            "create_time": 1668676799.255981,
+            "discriminator": "8775",
+            "flags": 0,
+            "id": "409635353893404685",
+            "locale": "zh-TW",
+            "mfa_enabled": True,
+            "premium_type": 2,
+            "public_flags": 0,
+            "username": "ItisCaleb"
+      }
+
 
 @app.websocket("/api/ws")
 async def websocket_endpoint(websocket: WebSocket):
