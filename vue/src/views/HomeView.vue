@@ -245,8 +245,8 @@ export default {
     },
     right_text_height() {
       switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return 500
-        case 'sm': return 500
+        case 'xs': return 300
+        case 'sm': return 300
         case 'md': return 500
         case 'lg': return 500
         case 'xl': return 500
