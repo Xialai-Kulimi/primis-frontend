@@ -79,13 +79,18 @@
       <v-card-text>
         <v-row dense>
           <v-col cols="12" sm="4">
-            <ListView height="40vh" type="target" />
+            <ListView height="400" type="target" />
+            <v-divider></v-divider>
           </v-col>
+          
           <v-col cols="12" sm="4">
-            <ListView height="40vh" type="player" />
+            <ListView height="400" type="player" />
+            <v-divider></v-divider>
           </v-col>
+          
           <v-col cols="12" sm="4">
-            <ListView height="40vh" type="reachable" />
+            <ListView height="400" type="reachable" />
+            <v-divider></v-divider>
           </v-col>
         </v-row>
         <!-- <v-row dense>
@@ -95,18 +100,22 @@
         </v-row> -->
         <v-row dense>
           <v-col cols="12" sm="6">
-            <TextsView height="40vh" type="surrounding" />
+            <TextsView height="400" type="surrounding" />
+            <v-divider></v-divider>
           </v-col>
           <v-col cols="12" sm="6">
-            <TextsView height="40vh" type="caption" :input="true" />
+            <TextsView height="400" type="caption" :input="true" />
+            <v-divider></v-divider>
           </v-col>
         </v-row>
         <v-row dense>
           <v-col cols="12" sm="4">
-            <TextsView height="20vh" type="status" />
+            <TextsView height="400" type="status" />
+            <v-divider></v-divider>
           </v-col>
           <v-col cols="12" sm="8">
-            <BtnsView height="20vh" type="inventory" />
+            <BtnsView height="400" type="inventory" />
+            <v-divider></v-divider>
           </v-col>
         </v-row>
       </v-card-text>
