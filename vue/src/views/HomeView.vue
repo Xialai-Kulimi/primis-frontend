@@ -26,16 +26,16 @@
             <v-select outlined v-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
               :items="i.config.options"></v-select>
             <v-card-text v-if="i.type === 'slider'">
-              <v-slider outlined  :label="i.label" v-model="form_answer[i.id]"
-              :min="i.config.min" :max="i.config.max" ></v-slider>
+              <v-slider outlined :label="i.label" v-model="form_answer[i.id]" :min="i.config.min" :max="i.config.max">
+              </v-slider>
             </v-card-text>
             <v-card-text v-if="i.type === 'radio'">
-              <v-radio-group  v-model="form_answer[i.id]">
+              <v-radio-group v-model="form_answer[i.id]">
                 <v-radio v-for="(radio, index2) in i.config.options" :key="index2" :label="radio.text"
-                :value="radio.value">
-              </v-radio>
-            </v-radio-group>
-          </v-card-text>
+                  :value="radio.value">
+                </v-radio>
+              </v-radio-group>
+            </v-card-text>
           </v-container>
         </v-form>
         <v-card-actions>
@@ -77,22 +77,60 @@
         {{ local_operation.text.subtitle }}
       </v-card-subtitle>
       <v-card-text>
+
+
+
         <v-row dense>
           <v-col cols="12" sm="4">
-            <ListView height="400" type="target" />
-            <v-divider></v-divider>
+            <v-expansion-panels accordion flat value="true">
+
+              <v-expansion-panel>
+                <v-expansion-panel-header>
+
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <ListView height="400" type="target" />
+                  <v-divider></v-divider>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+
           </v-col>
-          
+
           <v-col cols="12" sm="4">
-            <ListView height="400" type="player" />
-            <v-divider></v-divider>
+            <v-expansion-panels accordion flat value="true">
+
+              <v-expansion-panel>
+                <v-expansion-panel-header>
+
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <ListView height="400" type="player" />
+                  <v-divider></v-divider>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </v-col>
-          
+
           <v-col cols="12" sm="4">
-            <ListView height="400" type="reachable" />
-            <v-divider></v-divider>
+            <v-expansion-panels accordion flat value="true">
+
+              <v-expansion-panel>
+                <v-expansion-panel-header>
+
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <ListView height="400" type="reachable" />
+                  <v-divider></v-divider>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
           </v-col>
+
         </v-row>
+        <v-expansion-panels>
+        </v-expansion-panels>
+
         <!-- <v-row dense>
           <v-col cols="12">
             <BtnsView height="20vh" type="reachable" />
@@ -137,6 +175,7 @@ export default {
   name: "HomeView",
   data: () => {
     return {
+
       form_answer: {},
       toggle: {
         dialog: false,
@@ -219,9 +258,9 @@ export default {
       this.$store.commit(
         "pushMessage",
         JSON.stringify({ type: "input", id: this.local_operation.input.id, payload: this.form_answer })
-        );
-        this.toggle.input = false
-      },
+      );
+      this.toggle.input = false
+    },
     ListSubmit(id, value) {
       this.answer.list = true
       this.$store.commit(
