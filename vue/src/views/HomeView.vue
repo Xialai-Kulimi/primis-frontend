@@ -77,36 +77,128 @@
         {{ local_operation.text.subtitle }}
       </v-card-subtitle>
       <!---->
-      <v-card-text>
+      <template v-if="layout==='classic'">
+        <v-card-text>
+        <v-row dense>
+          <v-col cols="12" sm="4">
+            <ListView height="400" type="target" />
+            <v-divider></v-divider>
+          </v-col>
+          
+          <v-col cols="12" sm="4">
+            <ListView height="400" type="player" />
+            <v-divider></v-divider>
+          </v-col>
+          
+          <v-col cols="12" sm="4">
+            <ListView height="400" type="reachable" />
+            <v-divider></v-divider>
+          </v-col>
+        </v-row>
+        <!-- <v-row dense>
+          <v-col cols="12">
+            <BtnsView height="20vh" type="reachable" />
+          </v-col>
+        </v-row> -->
         <v-row dense>
           <v-col cols="12" sm="6">
-            <v-tabs v-model="tab" >
-              <v-tab  v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-sword']" :key="index">
-                <v-icon>{{icon}}</v-icon>
-              </v-tab>
-            </v-tabs>
-            <v-tabs-items v-model="tab">
-              <v-tab-item :transition="false" key="0"><ListView :height="left_view_height" type="target" /></v-tab-item>
-              <v-tab-item :transition="false" key="1"><ListView :height="left_view_height" type="player" /></v-tab-item>
-              <v-tab-item :transition="false" key="2"><BtnsView :height="left_view_height" type="inventory" /></v-tab-item>
-            </v-tabs-items>
+            <TextsView height="400" type="surrounding" />
+            <v-divider></v-divider>
           </v-col>
           <v-col cols="12" sm="6">
-            <ListView :height="right_text_height" type="reachable" />
+            <TextsView height="400" type="caption" :input="true" />
             <v-divider></v-divider>
-            <v-tabs v-model="sub_tab" >
-              <v-tab v-for="(icon, index) in ['mdi-chat-processing-outline', 'mdi-panorama-outline']" :key="index">
-                <v-icon>{{icon}}</v-icon>
-              </v-tab>
-            </v-tabs>
-            <v-tabs-items v-model="sub_tab">
-              <v-tab-item :transition="false" key="0"><TextsView :height="right_btn_height" type="caption" :input="true" /></v-tab-item>
-              <v-tab-item :transition="false" key="1"><TextsView :height="right_btn_height" type="surrounding" /></v-tab-item>
-              <!-- <v-tab-item :transition="false" key="2"><ListView :height="right_btn_height" type="reachable" /></v-tab-item> -->
-            </v-tabs-items>
+          </v-col>
+        </v-row>
+        <v-row dense>
+          <v-col cols="12">
+            <BtnsView height="400" type="inventory" />
           </v-col>
         </v-row>
       </v-card-text>
+      </template>
+      <template v-else-if="layout==='tab-inventory'">
+        <v-card-text>
+        <v-row dense>
+          <v-col cols="12" sm="6">
+            <v-tabs v-model="tab">
+              <v-tab v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-map-marker-alert-outline']" :key="index">
+                <v-icon>{{ icon }}</v-icon>
+              </v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="tab">
+              <v-tab-item :transition="false" key="0">
+                <ListView :height="left_view_height" type="target" />
+              </v-tab-item>
+              <v-tab-item :transition="false" key="1">
+                <ListView :height="left_view_height" type="player" />
+              </v-tab-item>
+              <v-tab-item :transition="false" key="2">
+                <ListView :height="left_view_height" type="reachable" />
+              </v-tab-item>
+            </v-tabs-items>
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-tabs v-model="sub_tab">
+              <v-tab v-for="(icon, index) in ['mdi-chat-processing-outline', 'mdi-panorama-outline']" :key="index">
+                <v-icon>{{ icon }}</v-icon>
+              </v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="sub_tab">
+              <v-tab-item :transition="false" key="0">
+                <TextsView :height="right_text_height" type="caption" :input="true" />
+              </v-tab-item>
+              <v-tab-item :transition="false" key="1">
+                <TextsView :height="right_text_height" type="surrounding" />
+              </v-tab-item>
+            </v-tabs-items>
+            <BtnsView :height="right_btn_height" type="inventory" />
+          </v-col>
+        </v-row>
+      </v-card-text>
+      </template>
+      <template v-else-if="layout==='tab-reachable'">
+        <v-card-text>
+          <v-row dense>
+            <v-col cols="12" sm="6">
+              <v-tabs v-model="tab">
+                <v-tab v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-sword']" :key="index">
+                  <v-icon>{{ icon }}</v-icon>
+                </v-tab>
+              </v-tabs>
+              <v-tabs-items v-model="tab">
+                <v-tab-item :transition="false" key="0">
+                  <ListView :height="left_view_height" type="target" />
+                </v-tab-item>
+                <v-tab-item :transition="false" key="1">
+                  <ListView :height="left_view_height" type="player" />
+                </v-tab-item>
+                <v-tab-item :transition="false" key="2">
+                  <BtnsView :height="left_view_height" type="inventory" />
+                </v-tab-item>
+              </v-tabs-items>
+            </v-col>
+            <v-col cols="12" sm="6">
+              <ListView :height="right_text_height" type="reachable" />
+              <v-divider></v-divider>
+              <v-tabs v-model="sub_tab">
+                <v-tab v-for="(icon, index) in ['mdi-chat-processing-outline', 'mdi-panorama-outline']" :key="index">
+                  <v-icon>{{ icon }}</v-icon>
+                </v-tab>
+              </v-tabs>
+              <v-tabs-items v-model="sub_tab">
+                <v-tab-item :transition="false" key="0">
+                  <TextsView :height="right_btn_height" type="caption" :input="true" />
+                </v-tab-item>
+                <v-tab-item :transition="false" key="1">
+                  <TextsView :height="right_btn_height" type="surrounding" />
+                </v-tab-item>
+                <!-- <v-tab-item :transition="false" key="2"><ListView :height="right_btn_height" type="reachable" /></v-tab-item> -->
+              </v-tabs-items>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </template>
     </v-card>
     <!-- <v-row dense>
       <v-col cols="12">
@@ -125,6 +217,7 @@ export default {
   name: "HomeView",
   data: () => {
     return {
+      layout: 'classic',
       tab: null,
       sub_tab: null,
       form_answer: {},
@@ -305,5 +398,10 @@ export default {
     BtnsView,
     ListView,
   },
+  mounted() {
+    if (localStorage.layout) {
+      this.layout = localStorage.layout;
+    }
+  }
 };
 </script>
