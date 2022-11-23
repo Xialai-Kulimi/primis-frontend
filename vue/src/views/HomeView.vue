@@ -242,6 +242,7 @@ export default {
         case 'lg': return 800
         case 'xl': return 800
       }
+      return 300
     },
     right_text_height() {
       switch (this.$vuetify.breakpoint.name) {
@@ -251,6 +252,7 @@ export default {
         case 'lg': return 500
         case 'xl': return 500
       }
+      return 300
     },
     right_btn_height() {
       switch (this.$vuetify.breakpoint.name) {
@@ -260,6 +262,7 @@ export default {
         case 'lg': return 300
         case 'xl': return 300
       }
+      return 300
     },
   },
   watch: {
