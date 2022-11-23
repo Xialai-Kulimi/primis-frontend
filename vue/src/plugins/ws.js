@@ -9,7 +9,7 @@ export const WS = {
     },
     methods: {
         ...mapMutations(['setWsData', 'setConnectState', 'setOperation', 'pushTexts', 'setButtons']),
-        initWebsocket() {
+        initWebsocket(){
             let url = `ws://${window.location.host}/api/ws`
             this.ws = new WebSocket(url)
             this.ws.onopen = () => {
