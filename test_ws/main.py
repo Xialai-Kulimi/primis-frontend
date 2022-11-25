@@ -191,6 +191,16 @@ async def websocket_endpoint(websocket: WebSocket):
                 'type': 'inventory',
                 'buttons': [
                     {
+                        'text': '道具',
+                        'id': 'btn2',
+                        'style': 'v-btn--block',
+                        'disabled': True,
+                        'description': '',
+                        'list': [
+                            
+                        ]
+                    },
+                    {
                         'text': '上鎖的箱子',
                         'id': 'btn2',
                         'style': 'info--text',
