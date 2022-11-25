@@ -10,7 +10,7 @@ export const WS = {
     methods: {
         ...mapMutations(['setWsData', 'setConnectState', 'setOperation', 'pushTexts', 'setButtons']),
         initWebsocket(){
-            let url = `ws://${window.location.host}/api/ws`
+            let url = `wss://${window.location.host}/api/ws`
             this.ws = new WebSocket(url)
             this.ws.onopen = () => {
                 this.timeout = 2500
