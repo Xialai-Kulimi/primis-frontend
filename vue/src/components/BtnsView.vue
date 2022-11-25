@@ -14,10 +14,10 @@
                 </v-card-text>
             </v-card>
         </v-dialog>
-        <v-card-text>
+        <v-card-text style="overflow-x: hidden">
             <v-layout row v-if="buttons.length != 0">
 
-                <v-btn v-for="(button, index) in buttons" :key="index" outlined :class="button.style + ' ma-2'"
+                <v-btn v-for="(button, index) in buttons" :key="index" :class="button.style + ' ma-2'"
                     :disabled="button.disabled" @click="OpenDialog(button)">
                     {{ button.text }}
                 </v-btn>
