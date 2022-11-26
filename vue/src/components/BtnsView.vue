@@ -38,7 +38,8 @@ export default {
     methods: {
         SubmitClick(id, value) {
             this.$store.commit("pushMessage", JSON.stringify({ type: 'click', payload: { id: id, value: value } }))
-            // console.log(id, value)
+            this.dialog = false
+            // console.log(id, value)\
         },
         OpenDialog(button) {
             this.dialog_button = structuredClone(button)
