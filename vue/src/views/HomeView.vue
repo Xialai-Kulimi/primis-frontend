@@ -21,21 +21,22 @@
           <v-container v-for="(i, index) in local_operation.input.inputs" :key="index"
             style="padding-top: 0; padding-bottom: 0">
             <v-text-field outlined v-if="i.type === 'text'" :label="i.label" v-model="form_answer[i.id]"></v-text-field>
-            <v-textarea outlined v-if="i.type === 'textfield'" :label="i.label" v-model="form_answer[i.id]">
+            <v-textarea outlined v-else-if="i.type === 'textfield'" :label="i.label" v-model="form_answer[i.id]">
             </v-textarea>
-            <v-select outlined v-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
+            <v-select outlined v-else-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
               :items="i.config.options"></v-select>
-            <v-card-text v-if="i.type === 'slider'">
+            <v-container v-else-if="i.type === 'slider'">
               <v-slider outlined :label="i.label" v-model="form_answer[i.id]" :min="i.config.min" :max="i.config.max">
               </v-slider>
-            </v-card-text>
-            <v-card-text v-if="i.type === 'radio'">
+            </v-container>
+            <v-container v-else-if="i.type === 'radio'">
               <v-radio-group v-model="form_answer[i.id]">
+                <v-subheader>{{i.label}}</v-subheader>
                 <v-radio v-for="(radio, index2) in i.config.options" :key="index2" :label="radio.text"
                   :value="radio.value">
                 </v-radio>
               </v-radio-group>
-            </v-card-text>
+            </v-container>
           </v-container>
         </v-form>
         <v-card-actions>
