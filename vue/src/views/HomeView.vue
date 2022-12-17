@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-alert v-if="toggle.alert" v-model="toggle.alert" :type="local_operation.alert.style" dismissible outlined>
+    <v-alert v-if="toggle.alert && local_operation.alert.text" v-model="toggle.alert" :type="local_operation.alert.style" outlined>
       {{ local_operation.alert.text }}
     </v-alert>
     <v-snackbar v-model="toggle.snackbar" :color="local_operation.snackbar.style">

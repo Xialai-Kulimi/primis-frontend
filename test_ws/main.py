@@ -62,29 +62,88 @@ async def main():
                 ]*20
             })
 
+
 @app.on_event("startup")
 async def startup_event():
     asyncio.create_task(main())
 
+
 @app.get('/api/auth/me')
 async def login():
     return {
-            "_id": "409635353893404685",
-            "accent_color": None,
-            "avatar": "a_cd69bf72da89e7dd4e1f039aaf1e6fcc",
-            "avatar_decoration": None,
-            "banner": "5ab8516be12ae9652a5a2918fce35088",
-            "banner_color": None,
-            "create_time": 1668676799.255981,
-            "discriminator": "8775",
-            "flags": 0,
-            "id": "409635353893404685",
-            "locale": "zh-TW",
-            "mfa_enabled": True,
-            "premium_type": 2,
-            "public_flags": 0,
-            "username": "ItisCaleb"
-      }
+        "_id": "409635353893404685",
+        "accent_color": None,
+        "avatar": "a_cd69bf72da89e7dd4e1f039aaf1e6fcc",
+        "avatar_decoration": None,
+        "banner": "5ab8516be12ae9652a5a2918fce35088",
+        "banner_color": None,
+        "create_time": 1668676799.255981,
+        "discriminator": "8775",
+        "flags": 0,
+        "id": "409635353893404685",
+        "locale": "zh-TW",
+        "mfa_enabled": True,
+        "premium_type": 2,
+        "public_flags": 0,
+        "username": "ItisCaleb"
+    }
+
+
+async def test_operation(websocket: WebSocket):
+    await websocket.send_json({
+        'type': 'operation',
+        'alert': {
+            'text': 'asdfas\nfd\ndfasdfasdf',
+            'style': 'error'
+        },
+        'dialog': {
+            'title': 'asdfas',
+            'text': 'asdfaasl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndfasdf'
+        },
+        'snackbar': {
+            'text': 'asdfsadfasdfasdfsadf',
+            'style': 'success'
+        },
+        'input': {
+            'id': 'input_asdfasdfasdf',
+            'title': "asdfasdfasdf",
+            'subtitle': 'asdfasdf',
+                        'persistent': True,
+                        'inputs': [
+                            {'type': 'text', 'label': 'pls input text', 'id': 'text1'},
+                            {'type': 'textfield', 'label': 'pls input text',
+                                'id': 'textfield1'},
+                            {'type': 'select', 'label': 'pls input text', 'id': 'select1', 'config': {
+                                'options': [{'text': 'label1', 'value': '1'}, {'text': 'label2', 'value': '2'}]}},
+                            {'type': 'slider', 'label': 'pls input text',
+                                'id': 'slider1', 'config': {'min': 0, 'max': 10}},
+                            {'type': "radio", 'label': "label", 'id': "radio_id", 'config': {'options': [
+                                {'text': 'label1', 'value': '1'}, {'text': 'label2', 'value': '2'}]}},
+                        ]
+        },
+        'text': {'title': '123123123', 'subtitle': 'asdfasdf'},
+        'list': {
+            'title': "asdfasdf",
+            'subtitle': "asdfasdf",
+                        'id': "list_asdfasdfasdfasdfasd f",
+                        'list': [{'text': "123123123", 'style': "primary--text", 'id': "123123123"}, {'text': "123123123", 'style': "primary--text", 'id': "123123123"}, {'text': "關閉", 'style': "error--text", 'id': "123123123"}],
+        },
+    })
+
+async def empty_alert(websocket: WebSocket):
+    await websocket.send_json({
+        'type': 'operation',
+        'alert': {
+            'text': '',
+        },
+    })
+
+async def handle_test_btn(websocket: WebSocket, payload: dict):
+    value = payload.get('value')
+    if value == 'operation':
+        await test_operation(websocket=websocket)
+    elif value == 'empty-alert':
+        await empty_alert(websocket=websocket)
 
 
 @app.websocket("/api/ws")
@@ -98,6 +157,11 @@ async def websocket_endpoint(websocket: WebSocket):
             if data.get('content'):
                 await websocket.send_json({'type': 'caption', 'message': [{'style': '', 'message': f'你說：「{data["content"]}」'}, ]})
                 # continue
+            if data.get('type') == 'click':
+                if payload := data.get('payload'):
+                    if payload.get('id') == 'test-btn':
+                        await handle_test_btn(websocket=websocket, payload=payload)
+
             await websocket.send_json({'type': 'caption', 'message': [{'style': 'primary--text', 'message': 'primary style test'}, ]})
             await websocket.send_json({'type': 'surrounding', 'message': [{'style': 'primary--text', 'message': 'primary style test'}, ]})
             await websocket.send_json({'type': 'status', 'message': [{'style': 'primary--text', 'message': 'primary style test'}, ]})
@@ -122,7 +186,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         'text': 'text2',
                         'id': 'btn2',
                         'style': 'error--text',
-                        
+
                         'description': '這個東西，可能只是拿來測試不同的顏色用的',
                         # 'list': [
                         #     {'text': 'text', 'value': 'value'},
@@ -158,7 +222,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     },
                 ]
             })
-            
+
             await websocket.send_json({
                 'type': 'player',
                 'buttons': [
@@ -197,7 +261,18 @@ async def websocket_endpoint(websocket: WebSocket):
                         'disabled': True,
                         'description': '',
                         'list': [
-                            
+
+                        ]
+                    },
+                    {
+                        'text': 'test 測試功能列表',
+                        'id': 'test-btn',
+                        'style': 'primary--text',
+                        'description': '測試功能用的按鈕',
+                        'list': [
+                            {'text': 'operation', 'value': 'operation'},
+                            {'text': 'empty alert(should close alert)', 'value': 'empty-alert'},
+                            {'text': 'text3', 'value': 'value3'},
                         ]
                     },
                     {
@@ -237,45 +312,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 ]*20
             })
             if data.get('content') == 'operation':
-                await websocket.send_json({
-                    'type': 'operation',
-                    'alert': {
-                        'text': 'asdfas\nfd\ndfasdfasdf',
-                        'style': 'error'
-                    },
-                    'dialog': {
-                        'title': 'asdfas',
-                        'text': 'asdfaasl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndfasdf'
-                    },
-                    'snackbar': {
-                        'text': 'asdfsadfasdfasdfsadf',
-                        'style': 'success'
-                    },
-                    'input': {
-                        'id': 'input_asdfasdfasdf',
-                        'title': "asdfasdfasdf",
-                        'subtitle': 'asdfasdf',
-                        'persistent': True,
-                        'inputs': [
-                            {'type': 'text', 'label': 'pls input text', 'id': 'text1'},
-                            {'type': 'textfield', 'label': 'pls input text',
-                                'id': 'textfield1'},
-                            {'type': 'select', 'label': 'pls input text', 'id': 'select1', 'config': {
-                                'options': [{'text': 'label1', 'value': '1'}, {'text': 'label2', 'value': '2'}]}},
-                            {'type': 'slider', 'label': 'pls input text',
-                                'id': 'slider1', 'config': {'min': 0, 'max': 10}},
-                            {'type': "radio", 'label': "label", 'id': "radio_id", 'config': {'options': [
-                                {'text': 'label1', 'value': '1'}, {'text': 'label2', 'value': '2'}]}},
-                        ]
-                    },
-                    'text': {'title': '123123123', 'subtitle': 'asdfasdf'},
-                    'list': {
-                        'title': "asdfasdf",
-                        'subtitle': "asdfasdf",
-                        'id': "list_asdfasdfasdfasdfasd f",
-                        'list': [{'text': "123123123", 'style': "primary--text", 'id': "123123123"}, {'text': "123123123", 'style': "primary--text", 'id': "123123123"}, {'text': "關閉", 'style': "error--text", 'id': "123123123"}],
-                    },
-                })
+                await test_operation(websocket=websocket)
             # await manager.send_personal_message(f"You wrote: {data}", websocket)
             # await manager.broadcast(f"Client #{client_id} says: {data}")
     except WebSocketDisconnect:
