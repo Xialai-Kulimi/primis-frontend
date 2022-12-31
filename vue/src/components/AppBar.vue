@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card outlined style="padding-right: 10px">
+    <v-card outlined style="padding-right: 10px;padding-left: 10px">
       <v-layout row align-center>
         <v-card-title class="primary--text">
           <pre>PRIMIS</pre>
