@@ -67,9 +67,9 @@ export default {
   mixins: [WS],
   data: () => ({
     ws: null,
-    left_drawer: false,
+    left_drawer: null,
 
-    right_drawer: false,
+    right_drawer: null,
 
     items: [
       { title: 'Home', icon: 'mdi-home-city' },
