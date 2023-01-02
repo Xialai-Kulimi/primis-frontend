@@ -3,15 +3,17 @@
     <AppBar></AppBar>
     <v-overlay :value="!wsConnectState">
       <v-container>
-        <v-card outlined max-width="500">
-          <v-card-title>連線中</v-card-title>
-          <v-card-subtitle>
-            如果遲遲無法連線可以嘗試重新載入此分頁，並且避免同時在多個頁面登入
-          </v-card-subtitle>
-          <v-card-text>
-            <v-progress-linear indeterminate color="primary" size="64"></v-progress-linear>
-          </v-card-text>
-        </v-card>
+        <v-alert text color="primary" class="mb-0" tile>
+
+          <v-card-title>
+            連線中
+          </v-card-title>
+          <v-card-subtitle>如果遲遲無法連線可以嘗試重新載入此分頁，並且避免同時在多個頁面登入。</v-card-subtitle>
+
+          <v-btn color="primary" text block>立即重新連線</v-btn>
+          
+        </v-alert>
+        <v-progress-linear indeterminate color="primary" size="64"></v-progress-linear>
       </v-container>
     </v-overlay>
     <v-main>
