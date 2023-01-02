@@ -1,24 +1,13 @@
 <template>
-  <v-card
-    elevation="0"
-    :height="height"
-    style="overflow-x: auto; flex-wrap: wrap"
-  >
+  <v-card elevation="0" :height="height" style="overflow-x: auto; flex-wrap: wrap">
     <v-dialog v-model="dialog" v-if="dialog" :key="index" width="500">
       <v-card outlined>
-        <v-card-title
-          :class="dialog_button.style"
-          v-text="dialog_button.text"
-        ></v-card-title>
+        <v-card-title :class="dialog_button.style" v-text="dialog_button.text"></v-card-title>
         <v-card-subtitle>{{ dialog_button.description }}</v-card-subtitle>
         <v-card-text>
           <v-list>
-            <v-list-item
-              v-for="(item, index2) in dialog_button.list"
-              :key="index2"
-              @click="SubmitClick(dialog_button.id, item.value)"
-              :disabled="item.disabled"
-            >
+            <v-list-item v-for="(item, index2) in dialog_button.list" :key="index2"
+              @click="SubmitClick(dialog_button.id, item.value)" :disabled="item.disabled">
               <v-list-item-title>{{ item.text }} </v-list-item-title>
             </v-list-item>
           </v-list>
@@ -26,20 +15,12 @@
       </v-card>
     </v-dialog>
     <v-card-text>
-      <v-lazy
-        transition="fade-transition"
-        :options="{
-          threshold: 0.5,
-        }"
-      >
+      <v-lazy transition="fade-transition" :options="{
+  threshold: 0.5,
+}">
         <v-row v-if="buttons.length != 0">
-          <v-btn
-            v-for="(button, index) in buttons"
-            :key="index"
-            :class="button.style + ' ma-1'"
-            :disabled="button.disabled"
-            @click="OpenDialog(button)"
-          >
+          <v-btn v-for="(button, index) in buttons" :key="index" :class="button.style + ' ma-1'"
+            :disabled="button.disabled" @click="OpenDialog(button)">
             {{ button.text }}
           </v-btn>
         </v-row>
@@ -76,6 +57,6 @@ export default {
       dialog_button: {},
     };
   },
-  mounted: () => {},
+  mounted: () => { },
 };
 </script>

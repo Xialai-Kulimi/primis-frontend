@@ -3,7 +3,8 @@
     <v-row dense>
       <v-col cols="12" sm="6">
         <v-tabs v-model="tab">
-          <v-tab v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-map-marker-alert-outline']" :key="index">
+          <v-tab v-for="(icon, index) in ['mdi-walk', 'mdi-account-multiple-outline', 'mdi-map-marker-alert-outline']"
+            :key="index">
             <v-icon>{{ icon }}</v-icon>
           </v-tab>
         </v-tabs>
@@ -45,17 +46,17 @@ import BtnsView from "@/components/BtnsView";
 import ListView from "@/components/ListView";
 export default {
   name: "InventoryHome",
-  components:{TextsView,BtnsView,ListView},
-  data:()=>{
-    return{
-      tab:null,
-      sub_tab:null
+  components: { TextsView, BtnsView, ListView },
+  data: () => {
+    return {
+      tab: null,
+      sub_tab: null
     }
   },
-  props:{
-    right_btn_height:Number,
-    left_view_height:Number,
-    right_text_height:Number
+  props: {
+    right_btn_height: Number,
+    left_view_height: Number,
+    right_text_height: Number
   }
 }
 </script>

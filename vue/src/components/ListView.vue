@@ -17,16 +17,16 @@
       </v-card>
     </v-dialog>
     <v-lazy transition="fade-transition" :options="{
-      threshold: 0.5,
-    }">
+  threshold: 0.5,
+}">
       <v-list v-if="buttons.length !== 0" flat>
 
         <v-list-item v-for="(button, index) in buttons" @click="OpenDialog(button)" :disabled="button.disabled"
-          :key="index" >
+          :key="index">
           <v-list-item-content>
             <v-list-item-title :class="button.style">{{
-                button.text
-            }}</v-list-item-title>
+    button.text
+}}</v-list-item-title>
             <v-list-item-subtitle>
               {{ button.description }}
             </v-list-item-subtitle>
@@ -44,7 +44,7 @@
 
       </v-list>
     </v-lazy>
-    
+
   </v-card>
 </template>
 <script>

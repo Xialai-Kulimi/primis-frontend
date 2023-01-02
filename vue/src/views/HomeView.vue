@@ -1,6 +1,7 @@
 <template>
   <v-container>
-    <v-alert v-if="toggle.alert && local_operation.alert.text" v-model="toggle.alert" :type="local_operation.alert.style" outlined>
+    <v-alert v-if="toggle.alert && local_operation.alert.text" v-model="toggle.alert"
+      :type="local_operation.alert.style" outlined>
       {{ local_operation.alert.text }}
     </v-alert>
     <v-snackbar v-model="toggle.snackbar" :color="local_operation.snackbar.style">
@@ -31,7 +32,7 @@
             </v-container>
             <v-container v-else-if="i.type === 'radio'">
               <v-radio-group v-model="form_answer[i.id]">
-                <v-subheader>{{i.label}}</v-subheader>
+                <v-subheader>{{ i.label }}</v-subheader>
                 <v-radio v-for="(radio, index2) in i.config.options" :key="index2" :label="radio.text"
                   :value="radio.value">
                 </v-radio>
@@ -78,11 +79,11 @@
         {{ local_operation.text.subtitle }}
       </v-card-subtitle>
       <!---->
-      <ClassicHome v-if="layout==='classic'"></ClassicHome>
-      <InventoryHome v-else-if="layout==='tab-inventory'" :right_btn_height="right_btn_height" :right_text_height="right_text_height"
-                     :left_view_height="left_view_height"></InventoryHome>
-      <ReachableHome v-else-if="layout==='tab-reachable'" :right_btn_height="right_btn_height" :right_text_height="right_text_height"
-                     :left_view_height="left_view_height"></ReachableHome>
+      <ClassicHome v-if="layout === 'classic'"></ClassicHome>
+      <InventoryHome v-else-if="layout === 'tab-inventory'" :right_btn_height="right_btn_height"
+        :right_text_height="right_text_height" :left_view_height="left_view_height"></InventoryHome>
+      <ReachableHome v-else-if="layout === 'tab-reachable'" :right_btn_height="right_btn_height"
+        :right_text_height="right_text_height" :left_view_height="left_view_height"></ReachableHome>
     </v-card>
     <!-- <v-row dense>
       <v-col cols="12">

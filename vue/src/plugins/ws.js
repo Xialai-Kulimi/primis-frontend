@@ -9,7 +9,7 @@ export const WS = {
     },
     methods: {
         ...mapMutations(['setWsData', 'setConnectState', 'setOperation', 'pushTexts', 'setButtons']),
-        initWebsocket(){
+        initWebsocket() {
             // if ws is CONNECTING or OPEN then don't initialize ws
             if (this.ws && (this.ws.readyState == 0 || this.ws.readyState == 1)) {
                 return

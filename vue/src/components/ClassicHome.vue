@@ -45,7 +45,7 @@ import BtnsView from "@/components/BtnsView";
 import ListView from "@/components/ListView";
 export default {
   name: "ClassicHome",
-  components:{TextsView,BtnsView,ListView},
+  components: { TextsView, BtnsView, ListView },
 }
 </script>
 
