@@ -1,6 +1,6 @@
 <template>
   <v-app style="display: fixed">
-
+    <DisconnectOverlay></DisconnectOverlay>
     <v-app-bar app>
 
       <v-btn v-if="!left_drawer" icon @click.stop="left_drawer = !left_drawer">
@@ -18,21 +18,6 @@
 
     </v-navigation-drawer>
 
-    <v-overlay :value="!wsConnectState">
-      <v-container>
-        <v-alert text color="primary" class="mb-0" tile>
-
-          <v-card-title>
-            連線中
-          </v-card-title>
-          <v-card-subtitle>如果遲遲無法連線可以嘗試重新載入此分頁，並且避免同時在多個頁面登入。</v-card-subtitle>
-
-          <v-btn color="primary" text block>立即重新連線</v-btn>
-
-        </v-alert>
-        <v-progress-linear indeterminate color="primary" size="64"></v-progress-linear>
-      </v-container>
-    </v-overlay>
     <v-main>
       <router-view />
 
@@ -75,7 +60,7 @@
 import AppBar from '@/components/AppBar';
 import api from '@/plugins/api';
 import { WS } from "@/plugins/ws";
-
+import DisconnectOverlay from '@/components/DisconnectOverlay';
 
 export default {
   name: 'App',
@@ -129,7 +114,7 @@ export default {
     this.set_user(res.data)
     this.initWebsocket()
   },
-  components: { AppBar }
+  components: { AppBar, DisconnectOverlay }
 };
 </script>
 <style>
