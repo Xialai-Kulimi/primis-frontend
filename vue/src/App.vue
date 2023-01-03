@@ -1,15 +1,14 @@
 <template>
   <v-app style="display: fixed">
     <DisconnectOverlay></DisconnectOverlay>
-    <v-app-bar app>
+    <v-app-bar app v-if="!left_drawer || !right_drawer">
 
       <v-btn v-if="!left_drawer" icon @click.stop="left_drawer = !left_drawer">
-        <v-icon>mdi-chevron-right</v-icon>
+        <v-icon>mdi-menu</v-icon>
       </v-btn>
-
-      <AppBar></AppBar>
+      <v-spacer></v-spacer>
       <v-btn v-if="!right_drawer" icon @click.stop="right_drawer = !right_drawer">
-        <v-icon>mdi-chevron-left</v-icon>
+        <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
 
     </v-app-bar>
@@ -17,6 +16,10 @@
     <v-navigation-drawer app v-model="left_drawer">
 
     </v-navigation-drawer>
+
+    <v-app-bar app>
+      <AppBar></AppBar>
+    </v-app-bar>
 
     <v-main>
       <router-view />
