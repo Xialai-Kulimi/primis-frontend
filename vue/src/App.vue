@@ -1,8 +1,8 @@
 <template>
   <v-app style="display: fixed">
     <DisconnectOverlay></DisconnectOverlay>
-    <v-app-bar app v-if="!left_drawer || !right_drawer">
-
+    <v-app-bar app clipped-right clipped-left>
+      
       <v-btn v-if="!left_drawer" icon @click.stop="left_drawer = !left_drawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -10,24 +10,12 @@
       <v-btn v-if="!right_drawer" icon @click.stop="right_drawer = !right_drawer">
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
-
+      <template v-slot:extension>
+        <AppBar></AppBar>
+      </template>
     </v-app-bar>
 
-    <v-navigation-drawer app v-model="left_drawer">
-
-    </v-navigation-drawer>
-
-    <v-app-bar app>
-      <AppBar></AppBar>
-    </v-app-bar>
-
-    <v-main>
-      <router-view />
-
-
-
-    </v-main>
-    <v-navigation-drawer app v-model="right_drawer" right>
+    <v-navigation-drawer app v-model="left_drawer" clipped>
       <template v-slot:prepend>
         <v-list-item two-line>
           <v-list-item-avatar>
@@ -54,8 +42,18 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+    </v-navigation-drawer>
+
+    <v-navigation-drawer app v-model="right_drawer" right clipped>
+
 
     </v-navigation-drawer>
+
+    <v-main>
+      <router-view />
+
+    </v-main>
+
   </v-app>
 </template>
 
