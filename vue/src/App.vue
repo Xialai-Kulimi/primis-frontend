@@ -2,7 +2,7 @@
   <v-app style="display: fixed">
     <DisconnectOverlay></DisconnectOverlay>
     <v-app-bar app clipped-right clipped-left>
-      
+
       <v-btn v-if="!left_drawer" icon @click.stop="left_drawer = !left_drawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -16,20 +16,11 @@
     </v-app-bar>
 
     <v-navigation-drawer app v-model="left_drawer" clipped>
-      <template v-slot:prepend>
-        <v-list-item two-line>
-          <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/women/81.jpg">
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title>Jane Smith</v-list-item-title>
-            <v-list-item-subtitle>Logged In</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+      <template v-slot:append>
+        <UserInfo></UserInfo>
       </template>
 
-      <v-divider></v-divider>
+      <!-- <v-divider></v-divider> -->
 
       <v-list dense>
         <v-list-item v-for="item in items" :key="item.title">
@@ -62,6 +53,7 @@ import AppBar from '@/components/AppBar';
 import api from '@/plugins/api';
 import { WS } from "@/plugins/ws";
 import DisconnectOverlay from '@/components/DisconnectOverlay';
+import UserInfo from '@/components/UserInfo';
 
 export default {
   name: 'App',
@@ -115,7 +107,7 @@ export default {
     this.set_user(res.data)
     this.initWebsocket()
   },
-  components: { AppBar, DisconnectOverlay }
+  components: { AppBar, DisconnectOverlay, UserInfo }
 };
 </script>
 <style>
