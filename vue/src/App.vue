@@ -7,9 +7,7 @@
         <v-icon>mdi-menu</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-      <!-- <v-btn v-if="!right_drawer" icon @click.stop="right_drawer = !right_drawer">
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn> -->
+
       <template v-slot:extension>
         <AppBar></AppBar>
       </template>
@@ -17,32 +15,12 @@
 
     <v-navigation-drawer app v-model="left_drawer" clipped>
       <template v-slot:append>
-        <UserInfo></UserInfo>
+        <LeftSideBarAppend></LeftSideBarAppend>
       </template>
-
-      <!-- <v-divider></v-divider> -->
-
-      <v-list dense>
-        <v-list-item v-for="item in items" :key="item.title">
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
     </v-navigation-drawer>
-<!-- 
-    <v-navigation-drawer app v-model="right_drawer" right clipped>
-
-
-    </v-navigation-drawer> -->
 
     <v-main>
       <router-view />
-
     </v-main>
 
   </v-app>
@@ -53,7 +31,7 @@ import AppBar from '@/components/AppBar';
 import api from '@/plugins/api';
 import { WS } from "@/plugins/ws";
 import DisconnectOverlay from '@/components/DisconnectOverlay';
-import UserInfo from '@/components/UserInfo';
+import LeftSideBarAppend from '@/components/LeftSideBarAppend';
 
 export default {
   name: 'App',
@@ -64,11 +42,7 @@ export default {
 
     right_drawer: null,
 
-    items: [
-      { title: 'Home', icon: 'mdi-home-city' },
-      { title: 'My Account', icon: 'mdi-account' },
-      { title: 'Users', icon: 'mdi-account-group-outline' },
-    ],
+ 
   }),
   computed: {
     wsConnectState() {
@@ -107,7 +81,7 @@ export default {
     this.set_user(res.data)
     this.initWebsocket()
   },
-  components: { AppBar, DisconnectOverlay, UserInfo }
+  components: { AppBar, DisconnectOverlay, LeftSideBarAppend }
 };
 </script>
 <style>
