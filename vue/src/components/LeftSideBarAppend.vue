@@ -1,23 +1,24 @@
 <template>
     <v-list>
         <UserInfo></UserInfo>
+        
         <v-divider></v-divider>
-        <v-list-item>
+
+        <v-list-item @click="logout">
             <v-list-item-icon>
                 <v-icon>mdi-logout-variant</v-icon>
             </v-list-item-icon>
-
             <v-list-item-content>
                 <v-list-item-title>登出</v-list-item-title>
             </v-list-item-content>
         </v-list-item>
+
         <v-divider></v-divider>
 
-        <v-list-item>
+        <v-list-item @click="setting">
             <v-list-item-icon>
                 <v-icon>mdi-cog-outline</v-icon>
             </v-list-item-icon>
-
             <v-list-item-content>
                 <v-list-item-title>設定</v-list-item-title>
             </v-list-item-content>
@@ -33,7 +34,11 @@ export default {
     components: { UserInfo },
     data: () => ({
         
-    })
+    }),
+    methods: {
+        logout: function () {},
+        setting: function () {}
+    }
 
 };
 </script>

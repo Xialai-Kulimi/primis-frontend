@@ -1,19 +1,33 @@
 <template>
   <v-app style="display: fixed">
     <DisconnectOverlay></DisconnectOverlay>
-    <v-app-bar app clipped-right clipped-left>
-
-      <v-btn v-if="!left_drawer" icon @click.stop="left_drawer = !left_drawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-      <v-spacer></v-spacer>
-
-      <template v-slot:extension>
-        <AppBar></AppBar>
+    <!-- <v-app-bar app clipped-left>
+      <template v-if="!left_drawer">
+        <v-btn icon @click.stop="left_drawer = !left_drawer">
+          <v-icon>mdi-menu</v-icon>
+        </v-btn>
+        <v-app-bar-title class="CloisterBlack primary--text">
+          <pre class="primary--text">PRIMIS</pre>
+        </v-app-bar-title>
       </template>
-    </v-app-bar>
+      <template v-else>      
+        <v-app-bar-title class="primary--text">
+          <pre>PRIMIS</pre>
+        </v-app-bar-title>
+      </template>
+      
+      
+    </v-app-bar> -->
 
-    <v-navigation-drawer app v-model="left_drawer" clipped>
+    <v-navigation-drawer app v-model="left_drawer" color="#121212">
+      <template v-slot:prepend>
+        <v-card-title >
+          <router-link to="/" style="text-decoration: none;">
+            <pre class="primary--text">PRIMIS</pre>  
+          </router-link>
+        </v-card-title>
+      </template>
+        
       <template v-slot:append>
         <LeftSideBarAppend></LeftSideBarAppend>
       </template>
@@ -22,12 +36,13 @@
     <v-main>
       <router-view />
     </v-main>
+    
 
   </v-app>
 </template>
 
 <script>
-import AppBar from '@/components/AppBar';
+// import AppBar from '@/components/AppBar';
 import api from '@/plugins/api';
 import { WS } from "@/plugins/ws";
 import DisconnectOverlay from '@/components/DisconnectOverlay';
@@ -42,7 +57,7 @@ export default {
 
     right_drawer: null,
 
- 
+
   }),
   computed: {
     wsConnectState() {
@@ -81,7 +96,7 @@ export default {
     this.set_user(res.data)
     this.initWebsocket()
   },
-  components: { AppBar, DisconnectOverlay, LeftSideBarAppend }
+  components: { DisconnectOverlay, LeftSideBarAppend }
 };
 </script>
 <style>

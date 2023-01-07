@@ -1,20 +1,20 @@
 <template>
-    <v-lazy>
-        <v-list-item>
 
-            <v-list-item-avatar>
-                <img src="https://randomuser.me/api/portraits/women/81.jpg">
-            </v-list-item-avatar>
+    <v-list-item @click="edit_user_config">
 
-            <v-list-item-content>
-                <v-list-item-title>Jane Smith</v-list-item-title>
-                <v-list-item-subtitle>Logged In</v-list-item-subtitle>
-            </v-list-item-content>
-            <!-- <v-list-item-action>
+        <v-list-item-icon class="text-h4">
+            <v-container class="CloisterBlack pa-0 text-center">P</v-container>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+            <v-list-item-title>Jane Smith</v-list-item-title>
+            
+        </v-list-item-content>
+        <!-- <v-list-item-action>
                 <v-btn icon><v-icon>mdi-dots-vertical</v-icon></v-btn>
             </v-list-item-action> -->
-        </v-list-item>
-    </v-lazy>
+    </v-list-item>
+
 </template>
 <script>
 
@@ -22,6 +22,9 @@
 export default {
 
     name: 'UserInfo',
+    methods: {
+        edit_user_config: function () {}
+    }
 
 };
 </script>
