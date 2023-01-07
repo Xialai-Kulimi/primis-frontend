@@ -7,9 +7,9 @@
         <v-icon>mdi-menu</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn v-if="!right_drawer" icon @click.stop="right_drawer = !right_drawer">
+      <!-- <v-btn v-if="!right_drawer" icon @click.stop="right_drawer = !right_drawer">
         <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      </v-btn> -->
       <template v-slot:extension>
         <AppBar></AppBar>
       </template>
@@ -34,11 +34,11 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
+<!-- 
     <v-navigation-drawer app v-model="right_drawer" right clipped>
 
 
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
 
     <v-main>
       <router-view />
