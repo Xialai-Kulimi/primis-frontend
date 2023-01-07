@@ -18,16 +18,18 @@
       
       
     </v-app-bar> -->
-
+    <v-btn v-if="!left_drawer" @click="left_drawer = !left_drawer" elevation="2" fab fixed left bottom color="#121212">
+      <v-icon>mdi-menu</v-icon>
+    </v-btn>
     <v-navigation-drawer app v-model="left_drawer" color="#121212">
       <template v-slot:prepend>
-        <v-card-title >
+        <v-card-title>
           <router-link to="/" style="text-decoration: none;">
-            <pre class="primary--text">PRIMIS</pre>  
+            <pre class="primary--text">PRIMIS</pre>
           </router-link>
         </v-card-title>
       </template>
-        
+
       <template v-slot:append>
         <LeftSideBarAppend></LeftSideBarAppend>
       </template>
@@ -36,7 +38,7 @@
     <v-main>
       <router-view />
     </v-main>
-    
+
 
   </v-app>
 </template>
