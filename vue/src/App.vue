@@ -23,11 +23,24 @@
     </v-btn>
     <v-navigation-drawer app v-model="left_drawer" color="#121212">
       <template v-slot:prepend>
-        <v-card-title>
-          <router-link to="/" style="text-decoration: none;">
-            <pre class="primary--text">PRIMIS</pre>
-          </router-link>
-        </v-card-title>
+        <v-list dense>
+          <v-list-item :ripple="false" @click="$router.push('/')">
+            <v-list-content>
+              <v-card-title>
+                
+                  <pre class="primary--text">PRIMIS</pre>
+                
+              </v-card-title>
+            </v-list-content>
+          </v-list-item>
+          <v-list-item :ripple="false" to="/about">
+            <v-list-content>
+              <v-card-title>
+                關於
+              </v-card-title>
+            </v-list-content>
+          </v-list-item>
+        </v-list>
       </template>
 
       <template v-slot:append>
@@ -123,5 +136,9 @@ html {
 @font-face {
   font-family: 'CloisterBlack';
   src: url('./assets/CloisterBlack.ttf');
+}
+
+router-link {
+  text-decoration: none;
 }
 </style>

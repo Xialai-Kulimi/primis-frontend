@@ -1,6 +1,6 @@
 <template>
 
-    <v-list-item @click="edit_user_config">
+    <v-list-item @click="edit_user_config" :ripple="false">
 
         <v-list-item-icon class="text-h4">
             <v-container class="CloisterBlack pa-0 text-center primary--text">K</v-container>

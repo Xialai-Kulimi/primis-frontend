@@ -4,7 +4,7 @@
         
         <v-divider></v-divider>
 
-        <v-list-item @click="logout">
+        <v-list-item @click="logout" :ripple="false">
             <v-list-item-icon>
                 <v-icon color="primary">mdi-logout-variant</v-icon>
             </v-list-item-icon>
@@ -15,7 +15,7 @@
 
         <v-divider></v-divider>
 
-        <v-list-item @click="setting">
+        <v-list-item @click="setting" :ripple="false">
             <v-list-item-icon>
                 <v-icon color="primary">mdi-cog-outline</v-icon>
             </v-list-item-icon>
