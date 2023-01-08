@@ -25,23 +25,30 @@
       <template v-slot:prepend>
         <v-list dense>
           <v-list-item :ripple="false" @click="$router.push('/')">
-            <v-list-content>
+            <v-list-item-content>
               <v-card-title>
-                
-                  <pre class="primary--text">PRIMIS</pre>
-                
+
+                <pre class="primary--text">PRIMIS</pre>
+
               </v-card-title>
-            </v-list-content>
+            </v-list-item-content>
           </v-list-item>
           <v-list-item :ripple="false" to="/about">
-            <v-list-content>
+            <v-list-item-content>
               <v-card-title>
                 關於
               </v-card-title>
-            </v-list-content>
+            </v-list-item-content>
           </v-list-item>
         </v-list>
       </template>
+
+      <div v-if="!$auth.loading">
+        <!-- show login when not authenticated -->
+        <button v-if="!$auth.isAuthenticated" @click="login">Log in</button>
+        <!-- show logout when authenticated -->
+        <button v-if="$auth.isAuthenticated" @click="logout">Log out</button>
+      </div>
 
       <template v-slot:append>
         <LeftSideBarAppend></LeftSideBarAppend>
@@ -89,6 +96,15 @@ export default {
     set_user(new_user) {
       this.$store.commit("setUser", new_user)
     },
+    login() {
+      this.$auth.loginWithRedirect();
+    },
+    // Log the user out
+    logout() {
+      this.$auth.logout({
+        returnTo: window.location.origin
+      });
+    }
 
   },
   watch: {
