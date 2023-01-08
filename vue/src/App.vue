@@ -43,13 +43,6 @@
         </v-list>
       </template>
 
-      <div v-if="!$auth.loading">
-        <!-- show login when not authenticated -->
-        <button v-if="!$auth.isAuthenticated" @click="login">Log in</button>
-        <!-- show logout when authenticated -->
-        <button v-if="$auth.isAuthenticated" @click="logout">Log out</button>
-      </div>
-
       <template v-slot:append>
         <LeftSideBarAppend></LeftSideBarAppend>
       </template>
@@ -95,15 +88,6 @@ export default {
   methods: {
     set_user(new_user) {
       this.$store.commit("setUser", new_user)
-    },
-    login() {
-      this.$auth.loginWithRedirect();
-    },
-    // Log the user out
-    logout() {
-      this.$auth.logout({
-        returnTo: window.location.origin
-      });
     }
 
   },

@@ -3,11 +3,11 @@
     <v-list-item @click="edit_user_config" :ripple="false">
 
         <v-list-item-icon class="text-h4">
-            <v-container class="CloisterBlack pa-0 text-center primary--text">K</v-container>
+            <v-container class="CloisterBlack pa-0 text-center primary--text">{{ $auth.user.name[0] }}</v-container>
         </v-list-item-icon>
 
         <v-list-item-content>
-            <v-list-item-title>Kulimi</v-list-item-title>
+            <v-list-item-title v-text="$auth.user.name"></v-list-item-title>
             
         </v-list-item-content>
         <!-- <v-list-item-action>
