@@ -15,22 +15,24 @@
           </v-list-item-content>
         </v-list-item>
       </template>
-      <template v-else>
-        <v-list-item @click="login" :ripple="false">
-          <v-list-item-icon>
-            <v-icon color="primary">mdi-logout-variant</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>登入</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </template>
+      <v-dialog v-model="login_overlay" persistent max-width="500">
+        <v-card outlined>
+          <v-banner>
+            <v-icon slot="icon" color="primary" size="36">
+              mdi-account-question-outline
+            </v-icon>
+            未登入！需要帳戶資訊進行進一步識別。
+
+            <template v-slot:actions>
+              <v-btn color="primary" text @click="login"> 登入 </v-btn>
+            </template>
+          </v-banner>
+        </v-card>
+      </v-dialog>
 
       <v-divider></v-divider>
     </template>
-    <template v-else>
-        <ListItemIconLoader></ListItemIconLoader>
-    </template>
+    <template v-else> </template>
 
     <v-list-item @click="setting" :ripple="false">
       <v-list-item-icon>
@@ -44,12 +46,14 @@
 </template>
 <script>
 import UserInfo from "@/components/UserInfo";
-import ListItemIconLoader from "@/components/ListItemIconLoader";
 
 export default {
   name: "LeftSideBarAppend",
-  components: { UserInfo, ListItemIconLoader },
-  data: () => ({}),
+  components: { UserInfo },
+  data: () => ({
+    login_overlay: false,
+  }),
+
   methods: {
     setting: function () {},
     login() {
@@ -60,6 +64,13 @@ export default {
       this.$auth.logout({
         returnTo: window.location.origin,
       });
+    },
+  },
+  watch: {
+    "$auth.loading": function () {
+      if (!this.$auth.isAuthenticated) {
+        this.login_overlay = true;
+      }
     },
   },
 };

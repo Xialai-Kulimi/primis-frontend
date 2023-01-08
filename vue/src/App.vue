@@ -18,7 +18,16 @@
       
       
     </v-app-bar> -->
-    <v-btn v-if="!left_drawer" @click="left_drawer = !left_drawer" elevation="2" fab fixed left bottom color="#121212">
+    <v-btn
+      v-if="!left_drawer"
+      @click="left_drawer = !left_drawer"
+      elevation="2"
+      fab
+      fixed
+      left
+      bottom
+      color="#121212"
+    >
       <v-icon>mdi-menu</v-icon>
     </v-btn>
     <v-navigation-drawer app v-model="left_drawer" color="#121212">
@@ -27,17 +36,13 @@
           <v-list-item :ripple="false" @click="$router.push('/')">
             <v-list-item-content>
               <v-card-title>
-
                 <pre class="primary--text">PRIMIS</pre>
-
               </v-card-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :ripple="false" to="/about">
             <v-list-item-content>
-              <v-card-title>
-                關於
-              </v-card-title>
+              <v-card-title> 關於 </v-card-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -51,72 +56,53 @@
     <v-main>
       <router-view />
     </v-main>
-
-
   </v-app>
 </template>
 
 <script>
 // import AppBar from '@/components/AppBar';
-import api from '@/plugins/api';
+// import api from '@/plugins/api';
 import { WS } from "@/plugins/ws";
-import DisconnectOverlay from '@/components/DisconnectOverlay';
-import LeftSideBarAppend from '@/components/LeftSideBarAppend';
+import DisconnectOverlay from "@/components/DisconnectOverlay";
+import LeftSideBarAppend from "@/components/LeftSideBarAppend";
 
 export default {
-  name: 'App',
+  name: "App",
   mixins: [WS],
   data: () => ({
     ws: null,
     left_drawer: null,
-
-    right_drawer: null,
-
-
   }),
   computed: {
-    wsConnectState() {
-      return this.$store.state.wsStore.connect;
-    },
-    user() {
-      return this.$store.state.userStore.user;
-    },
     messages() {
       return this.$store.state.userStore.messages;
-    }
+    },
   },
   methods: {
     set_user(new_user) {
-      this.$store.commit("setUser", new_user)
-    }
-
+      this.$store.commit("setUser", new_user);
+    },
   },
   watch: {
     messages: {
       handler: function () {
         if (this.messages.length > 0) {
-          let message = this.messages.shift()
-          this.$store.commit("shiftMessage")
-          this.wsSend(message)
+          let message = this.messages.shift();
+          this.$store.commit("shiftMessage");
+          this.wsSend(message);
         }
-      }
+      },
     },
   },
   mounted: async function () {
-    let res = await api.request('auth/me')
-    // console.log(res)
-    if (res.data.text) {
-      window.location.replace('/api/auth/login')
-    }
-    this.set_user(res.data)
-    this.initWebsocket()
+    this.initWebsocket();
   },
-  components: { DisconnectOverlay, LeftSideBarAppend }
+  components: { DisconnectOverlay, LeftSideBarAppend },
 };
 </script>
 <style>
 * {
-  font-family: '微軟正黑體';
+  font-family: "微軟正黑體";
   white-space: pre-line;
 }
 
@@ -126,7 +112,7 @@ html {
 }
 
 .CloisterBlack {
-  font-family: 'CloisterBlack' !important;
+  font-family: "CloisterBlack" !important;
 }
 
 .large {
@@ -134,8 +120,8 @@ html {
 }
 
 @font-face {
-  font-family: 'CloisterBlack';
-  src: url('./assets/CloisterBlack.ttf');
+  font-family: "CloisterBlack";
+  src: url("./assets/CloisterBlack.ttf");
 }
 
 router-link {
