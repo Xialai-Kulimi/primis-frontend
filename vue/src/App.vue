@@ -1,23 +1,6 @@
 <template>
   <v-app style="display: fixed">
     <DisconnectOverlay></DisconnectOverlay>
-    <!-- <v-app-bar app clipped-left>
-      <template v-if="!left_drawer">
-        <v-btn icon @click.stop="left_drawer = !left_drawer">
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-        <v-app-bar-title class="CloisterBlack primary--text">
-          <pre class="primary--text">PRIMIS</pre>
-        </v-app-bar-title>
-      </template>
-      <template v-else>      
-        <v-app-bar-title class="primary--text">
-          <pre>PRIMIS</pre>
-        </v-app-bar-title>
-      </template>
-      
-      
-    </v-app-bar> -->
     <v-btn
       v-if="!left_drawer"
       @click="left_drawer = !left_drawer"
@@ -60,8 +43,6 @@
 </template>
 
 <script>
-// import AppBar from '@/components/AppBar';
-// import api from '@/plugins/api';
 import { WS } from "@/plugins/ws";
 import DisconnectOverlay from "@/components/DisconnectOverlay";
 import LeftSideBarAppend from "@/components/LeftSideBarAppend";
@@ -74,25 +55,13 @@ export default {
     left_drawer: null,
   }),
   computed: {
-    messages() {
-      return this.$store.state.userStore.messages;
-    },
+    
   },
   methods: {
-    set_user(new_user) {
-      this.$store.commit("setUser", new_user);
-    },
+    
   },
   watch: {
-    messages: {
-      handler: function () {
-        if (this.messages.length > 0) {
-          let message = this.messages.shift();
-          this.$store.commit("shiftMessage");
-          this.wsSend(message);
-        }
-      },
-    },
+    
   },
   mounted: async function () {
     this.initWebsocket();
