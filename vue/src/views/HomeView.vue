@@ -1,13 +1,15 @@
 <template>
   <v-container>
-    
+        <BarArea></BarArea>
     <v-card outlined>
-
+      <NormalArea></NormalArea>
     </v-card>
   </v-container>
 </template>
 
 <script>
+import BarArea from "@/components/main/BarArea";
+import NormalArea from "@/components/main/BarArea";
 export default {
   name: "HomeView",
   data: () => {
@@ -24,7 +26,7 @@ export default {
     // },
   },
   watch: {},
-  components: {},
+  components: {BarArea, NormalArea},
   mounted() {
     window.addEventListener("click", (event) => {
       let { target } = event;
