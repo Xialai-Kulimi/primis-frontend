@@ -1,10 +1,21 @@
 <template>
   <v-container>
-    <v-alert v-if="toggle.alert && local_operation.alert.text" v-model="toggle.alert"
-      :type="local_operation.alert.style" outlined>
+    {{ $route.params.pathMatch }}
+    <a href="/asdfasdfasdfasdf/">asdfasdf</a>||
+    <a href="/asdfasdfasdfasdfasdfasdf/">asdfasdffasdfasdf</a>
+
+    <v-alert
+      v-if="toggle.alert && local_operation.alert.text"
+      v-model="toggle.alert"
+      :type="local_operation.alert.style"
+      outlined
+    >
       {{ local_operation.alert.text }}
     </v-alert>
-    <v-snackbar v-model="toggle.snackbar" :color="local_operation.snackbar.style">
+    <v-snackbar
+      v-model="toggle.snackbar"
+      :color="local_operation.snackbar.style"
+    >
       {{ local_operation.snackbar.text }}
 
       <template v-slot:action="{ attrs }">
@@ -13,28 +24,60 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-dialog :retain-focus="false" :persistent="local_operation.input.persistent" v-model="toggle.input"
-      max-width="500">
+    <v-dialog
+      :retain-focus="false"
+      :persistent="local_operation.input.persistent"
+      v-model="toggle.input"
+      max-width="500"
+    >
       <v-card outlined>
         <v-card-title>{{ local_operation.input.title }}</v-card-title>
         <v-card-subtitle>{{ local_operation.input.subtitle }}</v-card-subtitle>
         <v-form>
-          <v-container v-for="(i, index) in local_operation.input.inputs" :key="index"
-            style="padding-top: 0; padding-bottom: 0">
-            <v-text-field outlined v-if="i.type === 'text'" :label="i.label" v-model="form_answer[i.id]"></v-text-field>
-            <v-textarea outlined v-else-if="i.type === 'textfield'" :label="i.label" v-model="form_answer[i.id]">
+          <v-container
+            v-for="(i, index) in local_operation.input.inputs"
+            :key="index"
+            style="padding-top: 0; padding-bottom: 0"
+          >
+            <v-text-field
+              outlined
+              v-if="i.type === 'text'"
+              :label="i.label"
+              v-model="form_answer[i.id]"
+            ></v-text-field>
+            <v-textarea
+              outlined
+              v-else-if="i.type === 'textfield'"
+              :label="i.label"
+              v-model="form_answer[i.id]"
+            >
             </v-textarea>
-            <v-select outlined v-else-if="i.type === 'select'" :label="i.label" v-model="form_answer[i.id]"
-              :items="i.config.options"></v-select>
+            <v-select
+              outlined
+              v-else-if="i.type === 'select'"
+              :label="i.label"
+              v-model="form_answer[i.id]"
+              :items="i.config.options"
+            ></v-select>
             <v-container v-else-if="i.type === 'slider'">
-              <v-slider outlined :label="i.label" v-model="form_answer[i.id]" :min="i.config.min" :max="i.config.max">
+              <v-slider
+                outlined
+                :label="i.label"
+                v-model="form_answer[i.id]"
+                :min="i.config.min"
+                :max="i.config.max"
+              >
               </v-slider>
             </v-container>
             <v-container v-else-if="i.type === 'radio'">
               <v-radio-group v-model="form_answer[i.id]">
                 <v-subheader>{{ i.label }}</v-subheader>
-                <v-radio v-for="(radio, index2) in i.config.options" :key="index2" :label="radio.text"
-                  :value="radio.value">
+                <v-radio
+                  v-for="(radio, index2) in i.config.options"
+                  :key="index2"
+                  :label="radio.text"
+                  :value="radio.value"
+                >
                 </v-radio>
               </v-radio-group>
             </v-container>
@@ -46,7 +89,12 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog :retain-focus="false" :persistent="local_operation.list.persistent" v-model="toggle.list" max-width="500">
+    <v-dialog
+      :retain-focus="false"
+      :persistent="local_operation.list.persistent"
+      v-model="toggle.list"
+      max-width="500"
+    >
       <v-card outlined>
         <v-card-title>
           {{ local_operation.list.title }}
@@ -56,9 +104,13 @@
         </v-card-subtitle>
         <v-card-text>
           <v-list>
-            <v-list-item v-for="(item, index) in local_operation.list.list" :key="index"
-              @click="ListSubmit(local_operation.list.id, item.id)">
-              <v-list-item-title :class="item.style">{{ item.text }}
+            <v-list-item
+              v-for="(item, index) in local_operation.list.list"
+              :key="index"
+              @click="ListSubmit(local_operation.list.id, item.id)"
+            >
+              <v-list-item-title :class="item.style"
+                >{{ item.text }}
               </v-list-item-title>
             </v-list-item>
           </v-list>
@@ -80,10 +132,18 @@
       </v-card-subtitle>
       <!---->
       <ClassicHome v-if="layout === 'classic'"></ClassicHome>
-      <InventoryHome v-else-if="layout === 'tab-inventory'" :right_btn_height="right_btn_height"
-        :right_text_height="right_text_height" :left_view_height="left_view_height"></InventoryHome>
-      <ReachableHome v-else-if="layout === 'tab-reachable'" :right_btn_height="right_btn_height"
-        :right_text_height="right_text_height" :left_view_height="left_view_height"></ReachableHome>
+      <InventoryHome
+        v-else-if="layout === 'tab-inventory'"
+        :right_btn_height="right_btn_height"
+        :right_text_height="right_text_height"
+        :left_view_height="left_view_height"
+      ></InventoryHome>
+      <ReachableHome
+        v-else-if="layout === 'tab-reachable'"
+        :right_btn_height="right_btn_height"
+        :right_text_height="right_text_height"
+        :left_view_height="left_view_height"
+      ></ReachableHome>
     </v-card>
     <!-- <v-row dense>
       <v-col cols="12">
@@ -102,7 +162,7 @@ export default {
   name: "HomeView",
   data: () => {
     return {
-      layout: 'classic',
+      layout: "classic",
       tab: null,
       sub_tab: null,
       form_answer: {},
@@ -120,24 +180,22 @@ export default {
       },
       local_operation: {
         alert: {
-          text: '',
-          style: ''
+          text: "",
+          style: "",
         },
         dialog: {
-          title: '',
-          text: ''
+          title: "",
+          text: "",
         },
         snackbar: {
-          text: '',
-          style: ''
+          text: "",
+          style: "",
         },
         input: {
           title: "",
-          subtitle: '',
+          subtitle: "",
           persistent: false,
-          inputs: [
-
-          ]
+          inputs: [],
         },
         text: false,
         list: {
@@ -182,21 +240,28 @@ export default {
     };
   },
   methods: {
+    handle_link_click(path) {
+      console.log('handle '+ path);
+    },
     InputSubmit() {
-      this.answer.input = true
+      this.answer.input = true;
       this.$store.commit(
         "pushMessage",
-        JSON.stringify({ type: "input", id: this.local_operation.input.id, payload: this.form_answer })
+        JSON.stringify({
+          type: "input",
+          id: this.local_operation.input.id,
+          payload: this.form_answer,
+        })
       );
-      this.toggle.input = false
+      this.toggle.input = false;
     },
     ListSubmit(id, value) {
-      this.answer.list = true
+      this.answer.list = true;
       this.$store.commit(
         "pushMessage",
         JSON.stringify({ type: "list", id: id, payload: value })
       );
-      this.toggle.list = false
+      this.toggle.list = false;
     },
   },
   computed: {
@@ -205,69 +270,92 @@ export default {
     },
     left_view_height() {
       switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return 300
-        case 'sm': return 300
-        case 'md': return 800
-        case 'lg': return 800
-        case 'xl': return 800
+        case "xs":
+          return 300;
+        case "sm":
+          return 300;
+        case "md":
+          return 800;
+        case "lg":
+          return 800;
+        case "xl":
+          return 800;
       }
-      return 300
+      return 300;
     },
     right_text_height() {
       switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return 300
-        case 'sm': return 300
-        case 'md': return 500
-        case 'lg': return 500
-        case 'xl': return 500
+        case "xs":
+          return 300;
+        case "sm":
+          return 300;
+        case "md":
+          return 500;
+        case "lg":
+          return 500;
+        case "xl":
+          return 500;
       }
-      return 300
+      return 300;
     },
     right_btn_height() {
       switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return 300
-        case 'sm': return 300
-        case 'md': return 300
-        case 'lg': return 300
-        case 'xl': return 300
+        case "xs":
+          return 300;
+        case "sm":
+          return 300;
+        case "md":
+          return 300;
+        case "lg":
+          return 300;
+        case "xl":
+          return 300;
       }
-      return 300
+      return 300;
     },
   },
   watch: {
     operation: {
       handler: function () {
         for (let key in this.operation) {
-          this.toggle[key] = true
+          this.toggle[key] = true;
           if (key === "input") {
-            this.form_answer = {}
+            this.form_answer = {};
           }
           this.local_operation[key] = this.operation[key];
-          this.answer[key] = false
+          this.answer[key] = false;
         }
       },
     },
-    'toggle.input': {
+    "toggle.input": {
       handler: function () {
         if (this.toggle.input == false && this.answer.input == false) {
           this.$store.commit(
             "pushMessage",
-            JSON.stringify({ type: "input", id: this.local_operation.input.id, close: true })
+            JSON.stringify({
+              type: "input",
+              id: this.local_operation.input.id,
+              close: true,
+            })
           );
         }
-      }
+      },
     },
-    'toggle.list': {
+    "toggle.list": {
       handler: function () {
         if (this.toggle.list == false && this.answer.list == false) {
           this.$store.commit(
             "pushMessage",
-            JSON.stringify({ type: "list", id: this.local_operation.list.id, close: true })
+            JSON.stringify({
+              type: "list",
+              id: this.local_operation.list.id,
+              close: true,
+            })
           );
         }
-      }
+      },
     },
-    'toggle.dialog': {
+    "toggle.dialog": {
       handler: function () {
         if (this.toggle.dialog == false) {
           this.$store.commit(
@@ -275,18 +363,29 @@ export default {
             JSON.stringify({ type: "dialog", close: true })
           );
         }
-      }
+      },
     },
   },
   components: {
     ClassicHome,
     InventoryHome,
-    ReachableHome
+    ReachableHome,
   },
   mounted() {
     if (localStorage.layout) {
       this.layout = localStorage.layout;
     }
-  }
+    window.addEventListener("click", (event) => {
+      let { target } = event;
+      while (target && target.tagName !== "A") target = target.parentNode;
+  
+      if (target && target.matches("a:not([href*='://'])") && target.href) {
+        const url = new URL(target.href);
+        const to = url.pathname;
+        handle_link_click(to)
+        event.preventDefault();
+      }
+    });
+  },
 };
 </script>
