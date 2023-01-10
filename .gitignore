@@ -26,3 +26,4 @@ venv
 *.pyc
 
 .idea
+vue/auth_config.json

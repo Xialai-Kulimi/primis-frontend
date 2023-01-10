@@ -5,6 +5,5 @@ import wsStore from "@/store/wsStore";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    modules:{userStore,wsStore}
+    modules: { userStore, wsStore }
 })
-

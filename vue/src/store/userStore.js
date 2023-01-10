@@ -17,7 +17,7 @@ export default {
             target: [],
         },
         config: {
-            max_line: 130,
+            max_line: 50000,
             shift_number: 10,
         },
     },

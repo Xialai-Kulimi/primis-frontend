@@ -1,19 +1,41 @@
 <template>
   <v-app style="display: fixed">
-    <AppBar></AppBar>
-    <v-overlay :value="!wsConnectState">
-      <v-container>
-        <v-card outlined max-width="500">
-          <v-card-title>連線中</v-card-title>
-          <v-card-subtitle>
-            如果遲遲無法連線可以嘗試重新載入此分頁，並且避免同時在多個頁面登入
-          </v-card-subtitle>
-          <v-card-text>
-            <v-progress-linear indeterminate color="primary" size="64"></v-progress-linear>
-          </v-card-text>
-        </v-card>
-      </v-container>
-    </v-overlay>
+    <DisconnectOverlay></DisconnectOverlay>
+    <v-btn
+      v-if="!left_drawer"
+      @click="left_drawer = !left_drawer"
+      elevation="2"
+      fab
+      fixed
+      left
+      bottom
+      color="#121212"
+    >
+      <v-icon>mdi-menu</v-icon>
+    </v-btn>
+    <v-navigation-drawer app v-model="left_drawer" color="#121212">
+      <template v-slot:prepend>
+        <v-list dense>
+          <v-list-item :ripple="false" @click="$router.push('/')">
+            <v-list-item-content>
+              <v-card-title>
+                <pre class="primary--text">PRIMIS</pre>
+              </v-card-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :ripple="false" to="/about">
+            <v-list-item-content>
+              <v-card-title> 關於 </v-card-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </template>
+
+      <template v-slot:append>
+        <LeftSideBarAppend></LeftSideBarAppend>
+      </template>
+    </v-navigation-drawer>
+
     <v-main>
       <router-view />
     </v-main>
@@ -21,60 +43,35 @@
 </template>
 
 <script>
-import AppBar from '@/components/AppBar';
-import api from '@/plugins/api';
 import { WS } from "@/plugins/ws";
-
+import DisconnectOverlay from "@/components/DisconnectOverlay";
+import LeftSideBarAppend from "@/components/LeftSideBarAppend";
 
 export default {
-  name: 'App',
+  name: "App",
   mixins: [WS],
   data: () => ({
-    ws: null
+    ws: null,
+    left_drawer: null,
   }),
   computed: {
-    wsConnectState() {
-      return this.$store.state.wsStore.connect;
-    },
-    user() {
-      return this.$store.state.userStore.user;
-    },
-    messages() {
-      return this.$store.state.userStore.messages;
-    }
+    
   },
   methods: {
-    set_user(new_user) {
-      this.$store.commit("setUser", new_user)
-    },
-
+    
   },
   watch: {
-    messages: {
-      handler: function () {
-        if (this.messages.length > 0) {
-          let message = this.messages.shift()
-          this.$store.commit("shiftMessage")
-          this.wsSend(message)
-        }
-      }
-    },
+    
   },
   mounted: async function () {
-    let res = await api.request('auth/me')
-    // console.log(res)
-    if (res.data.text) {
-      window.location.replace('/api/auth/login')
-    }
-    this.set_user(res.data)
-    this.initWebsocket()
+    this.initWebsocket();
   },
-  components: { AppBar }
+  components: { DisconnectOverlay, LeftSideBarAppend },
 };
 </script>
 <style>
 * {
-  font-family: '微軟正黑體';
+  font-family: "微軟正黑體";
   white-space: pre-line;
 }
 
@@ -84,15 +81,19 @@ html {
 }
 
 .CloisterBlack {
-  font-family: 'CloisterBlack' !important;
+  font-family: "CloisterBlack" !important;
 }
 
 .large {
-    font-size: 6rem !important;
+  font-size: 6rem !important;
 }
 
 @font-face {
-  font-family: 'CloisterBlack';
-  src: url('./assets/CloisterBlack.ttf');
+  font-family: "CloisterBlack";
+  src: url("./assets/CloisterBlack.ttf");
+}
+
+router-link {
+  text-decoration: none;
 }
 </style>

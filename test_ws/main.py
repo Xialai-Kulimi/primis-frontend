@@ -49,6 +49,17 @@ async def main():
                         ]
                     },
                     {
+                        'text': str(datetime.now()),
+                        'id': 'btn3231',
+                        'style': 'warning--text',
+                        'description': '這是測試敘述',
+                        'list': [
+                            {'text': 'text', 'value': 'value'},
+                            {'text': 'text2', 'value': 'value2'},
+                            {'text': 'text3', 'value': 'value3'},
+                        ]
+                    },
+                    {
                         'text': 'text2',
                         'id': 'btn22323',
                         'style': 'info--text',
