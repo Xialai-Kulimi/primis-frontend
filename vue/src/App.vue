@@ -1,40 +1,7 @@
 <template>
   <v-app style="display: fixed">
     <DisconnectOverlay></DisconnectOverlay>
-    <v-btn
-      v-if="!left_drawer"
-      @click="left_drawer = !left_drawer"
-      elevation="2"
-      fab
-      fixed
-      left
-      bottom
-      color="#121212"
-    >
-      <v-icon>mdi-menu</v-icon>
-    </v-btn>
-    <v-navigation-drawer app v-model="left_drawer" color="#121212">
-      <template v-slot:prepend>
-        <v-list dense>
-          <v-list-item :ripple="false" @click="$router.push('/')">
-            <v-list-item-content>
-              <v-card-title>
-                <pre class="primary--text">PRIMIS</pre>
-              </v-card-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item :ripple="false" to="/about">
-            <v-list-item-content>
-              <v-card-title> 關於 </v-card-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </template>
-
-      <template v-slot:append>
-        <LeftSideBarAppend></LeftSideBarAppend>
-      </template>
-    </v-navigation-drawer>
+    <LeftDrawer></LeftDrawer>
 
     <v-main>
       <router-view />
@@ -45,7 +12,7 @@
 <script>
 import { WS } from "@/plugins/ws";
 import DisconnectOverlay from "@/components/DisconnectOverlay";
-import LeftSideBarAppend from "@/components/LeftSideBarAppend";
+import LeftDrawer from "@/components/LeftDrawer";
 
 export default {
   name: "App",
@@ -66,7 +33,7 @@ export default {
   mounted: async function () {
     this.initWebsocket();
   },
-  components: { DisconnectOverlay, LeftSideBarAppend },
+  components: { DisconnectOverlay, LeftDrawer },
 };
 </script>
 <style>
