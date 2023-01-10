@@ -69,7 +69,7 @@ export default {
   watch: {
     "$auth.loading": function () {
       if (!this.$auth.isAuthenticated) {
-        this.login_overlay = true;
+        // this.login_overlay = true;
       }
     },
   },
