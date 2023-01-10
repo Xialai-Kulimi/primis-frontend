@@ -19,17 +19,7 @@ export default {
   mixins: [WS],
   data: () => ({
     ws: null,
-    left_drawer: null,
   }),
-  computed: {
-    
-  },
-  methods: {
-    
-  },
-  watch: {
-    
-  },
   mounted: async function () {
     this.initWebsocket();
   },
