@@ -1,6 +1,6 @@
 <template>
   <v-container>
-        <BarArea></BarArea>
+    <BarArea></BarArea>
     <v-card outlined>
       <NormalArea></NormalArea>
     </v-card>
@@ -26,7 +26,7 @@ export default {
     // },
   },
   watch: {},
-  components: {BarArea, NormalArea},
+  components: { BarArea, NormalArea },
   mounted() {
     window.addEventListener("click", (event) => {
       let { target } = event;
