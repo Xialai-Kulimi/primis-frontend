@@ -5,6 +5,11 @@
 
     <v-main>
       <router-view />
+      <v-layout justify-center>
+        <router-link to="/about" class="grey--text text--darken-3">
+          關於 PRIMIS
+        </router-link>
+      </v-layout>
     </v-main>
   </v-app>
 </template>
