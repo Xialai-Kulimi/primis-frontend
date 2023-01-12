@@ -1,6 +1,6 @@
 <template>
   <v-card-text>
-    <div v-for="i in 30" :key="i">{{ i }} test {{ list_name }} text</div>
+    <div v-for="i in 50" :key="i">{{ i }} test {{ list_name }} text</div>
   </v-card-text>
 </template>
 <script>
