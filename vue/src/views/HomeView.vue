@@ -1,17 +1,17 @@
 <template>
   <v-container class="pa-0">
-    <BarArea area_name="header"></BarArea>
-
-    <NormalArea area_name="body"></NormalArea>
-
-    <BottomArea area_name="footer"></BottomArea>
+    <v-card outlined>
+      <CellList list_name="header"></CellList>
+      <v-divider></v-divider>
+      <CellList list_name="body"></CellList>
+      <v-divider></v-divider>
+      <CellList list_name="footer"></CellList>
+    </v-card>
   </v-container>
 </template>
 
 <script>
-import BarArea from "@/components/main/BarArea";
-import NormalArea from "@/components/main/NormalArea";
-import BottomArea from "@/components/main/BottomArea";
+import CellList from "@/components/main/CellList";
 
 export default {
   name: "HomeView",
@@ -29,7 +29,7 @@ export default {
     // },
   },
   watch: {},
-  components: { BottomArea, BarArea, NormalArea },
+  components: { CellList },
   mounted() {
     window.addEventListener("click", (event) => {
       let { target } = event;
