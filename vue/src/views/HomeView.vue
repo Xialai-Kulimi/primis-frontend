@@ -1,11 +1,17 @@
 <template>
   <v-container class="pa-0">
     <v-card outlined>
-      <CellList list_name="header"></CellList>
+      <v-responsive class="pa-0 overflow-auto" max-height="30vh">
+        <CellList list_name="header"></CellList>
+      </v-responsive>
       <v-divider></v-divider>
-      <CellList list_name="body"></CellList>
+      <v-responsive class="pa-0 overflow-auto" max-height="100vh">
+        <CellList list_name="body"></CellList>
+      </v-responsive>
       <v-divider></v-divider>
-      <CellList list_name="footer"></CellList>
+      <v-responsive class="pa-0 overflow-auto" max-height="100vh">
+        <CellList list_name="footer"></CellList>
+      </v-responsive>
     </v-card>
   </v-container>
 </template>
