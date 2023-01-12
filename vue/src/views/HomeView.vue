@@ -35,8 +35,10 @@ export default {
       if (target && target.matches("a:not([href*='://'])") && target.href) {
         const url = new URL(target.href);
         const to = url.pathname;
-        this.handle_link_click(to);
-        event.preventDefault();
+        if (to.startsWith('/api/')){
+          this.handle_link_click(to);
+          event.preventDefault();
+        }
       }
     });
   },
