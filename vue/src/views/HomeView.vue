@@ -1,15 +1,18 @@
 <template>
-  <v-container>
-    <BarArea></BarArea>
-    <v-card outlined>
-      <NormalArea></NormalArea>
-    </v-card>
+  <v-container class="pa-0">
+    <BarArea area_name="header"></BarArea>
+
+    <NormalArea area_name="body"></NormalArea>
+
+    <BottomArea area_name="footer"></BottomArea>
   </v-container>
 </template>
 
 <script>
 import BarArea from "@/components/main/BarArea";
-import NormalArea from "@/components/main/BarArea";
+import NormalArea from "@/components/main/NormalArea";
+import BottomArea from "@/components/main/BottomArea";
+
 export default {
   name: "HomeView",
   data: () => {
@@ -26,7 +29,7 @@ export default {
     // },
   },
   watch: {},
-  components: { BarArea, NormalArea },
+  components: { BottomArea, BarArea, NormalArea },
   mounted() {
     window.addEventListener("click", (event) => {
       let { target } = event;
@@ -35,7 +38,7 @@ export default {
       if (target && target.matches("a:not([href*='://'])") && target.href) {
         const url = new URL(target.href);
         const to = url.pathname;
-        if (to.startsWith('/api/')){
+        if (to.startsWith("/api/")) {
           this.handle_link_click(to);
           event.preventDefault();
         }
