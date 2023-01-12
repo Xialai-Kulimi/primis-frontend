@@ -1,17 +1,19 @@
 <template>
-  <v-app style="display: fixed">
-    <DisconnectOverlay></DisconnectOverlay>
-    <LeftDrawer></LeftDrawer>
+  <v-fade-transition appear>
+    <v-app style="display: fixed">
+      <DisconnectOverlay></DisconnectOverlay>
+      <LeftDrawer></LeftDrawer>
 
-    <v-main>
-      <router-view />
-      <v-layout justify-center>
-        <router-link to="/about" class="grey--text text--darken-3">
-          關於 PRIMIS
-        </router-link>
-      </v-layout>
-    </v-main>
-  </v-app>
+      <v-main>
+        <router-view />
+        <v-layout justify-center>
+          <router-link to="/about" class="grey--text text--darken-3">
+            關於 PRIMIS
+          </router-link>
+        </v-layout>
+      </v-main>
+    </v-app>
+  </v-fade-transition>
 </template>
 
 <script>
